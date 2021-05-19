@@ -15,8 +15,4 @@ public class WebApplicationController {
         return "Hello World";
     }
 
-
-
-
-
 }
