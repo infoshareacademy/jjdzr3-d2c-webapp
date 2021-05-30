@@ -12,5 +12,4 @@ public class WebApplicationController {
     public String getDemo() {
         return "Hello World";
     }
-
 }
