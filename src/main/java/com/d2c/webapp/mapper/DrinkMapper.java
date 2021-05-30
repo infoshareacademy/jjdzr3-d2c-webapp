@@ -1,15 +1,11 @@
-
 package com.d2c.webapp.mapper;
 
 import com.infoshareademy.data.DrinkDAO;
-import com.infoshareademy.domain.Category;
 import com.infoshareademy.domain.Drink;
 import org.springframework.stereotype.Component;
 
 @Component
 public class DrinkMapper {
-
-
 
     public static DrinkDAO toDao(Drink drink) {
         DrinkDAO dao = new DrinkDAO();

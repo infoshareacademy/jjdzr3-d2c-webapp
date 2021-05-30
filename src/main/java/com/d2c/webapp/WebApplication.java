@@ -11,7 +11,3 @@ public class WebApplication {
         System.out.println("It works");
     }
     }
-
-
-
-

@@ -4,8 +4,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.awt.*;
-
 @Controller
 public class WebApplicationController {
 
@@ -14,5 +12,4 @@ public class WebApplicationController {
     public String getDemo() {
         return "Hello World";
     }
-
 }
