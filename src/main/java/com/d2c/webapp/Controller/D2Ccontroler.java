@@ -24,9 +24,7 @@ public class D2Ccontroler {
     public String getAllDrinks () {
         Map<Integer, String> menuMap = new HashMap<>();
         DrinkParser drinkParser = new DrinkParser();
-        DrinkRepository drinkRepository = (DrinkRepository) drinkParser.readFileIntoDrinkRepository();
         List<Drink> drinks = drinkParser.readFileIntoDrinkRepository().getDrinks();
-
         return drinks.toString();
     }
 
@@ -35,10 +33,10 @@ public class D2Ccontroler {
     public String getMenu() {
         Map<Integer, String> menuMap = new HashMap<>();
         DrinkParser drinkParser = new DrinkParser();
-        DrinkRepository drinkRepository = (DrinkRepository) drinkParser.readFileIntoDrinkRepository();
+        DrinkRepository drinkRepository = drinkParser.readFileIntoDrinkRepository();
         List<Drink> drinks = drinkParser.readFileIntoDrinkRepository().getDrinks();
         Menu menu = new Menu();
-        menu.menu(drinkParser, (com.infoshareademy.domain.DrinkRepository) drinkRepository, drinks);
+        menu.menu(drinkParser, drinkRepository, drinks);
         return "Menu";
     }
 
