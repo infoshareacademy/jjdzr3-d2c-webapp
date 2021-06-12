@@ -4,33 +4,33 @@ import com.infoshareademy.Filter;
 import com.infoshareademy.Menu;
 import com.infoshareademy.Search;
 import com.infoshareademy.data.DrinkParser;
-import com.infoshareademy.domain.Drink;
-import com.infoshareademy.domain.DrinkRepository;
+import com.infoshareademy.domain.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
-@RestController
+import java.util.*;
+
+@Controller
 @RequestMapping("/d2c")
 public class D2Ccontroler {
 
     private static Logger logger = LoggerFactory.getLogger(D2Ccontroler.class);
 
     @GetMapping("/allDrinks")
-    @ResponseBody
-    public String getAllDrinks () {
+    public String getAllDrinks (Model model) {
         Map<Integer, String> menuMap = new HashMap<>();
         DrinkParser drinkParser = new DrinkParser();
         List<Drink> drinks = drinkParser.readFileIntoDrinkRepository().getDrinks();
-        return drinks.toString();
+        model.addAttribute("listOfDrinks", drinks);
+
+        return "/allDrinks.html";
     }
 
     @GetMapping("/menu")
-    @ResponseBody
-    public String getMenu() {
+    public String getMenu(Model model) {
         Map<Integer, String> menuMap = new HashMap<>();
         DrinkParser drinkParser = new DrinkParser();
         DrinkRepository drinkRepository = drinkParser.readFileIntoDrinkRepository();
@@ -40,11 +40,13 @@ public class D2Ccontroler {
         return "Menu";
     }
 
-    @GetMapping("/search")
-    @ResponseBody
-    public String getSearch() {
-        Search search;
-        return "Search";
+    @GetMapping("search")
+    public String getSearch(Model model, @RequestParam(name="item") String item) {
+        DrinkParser drinkParser = new DrinkParser();
+        DrinkRepository drinkRepository = drinkParser.readFileIntoDrinkRepository();
+        List<Drink> drinks = Search.searchItemsForQuery(drinkRepository, item);
+        model.addAttribute("listOfDrinks", drinks);
+        return "/search.html";
     }
 
     @GetMapping("/filters")
