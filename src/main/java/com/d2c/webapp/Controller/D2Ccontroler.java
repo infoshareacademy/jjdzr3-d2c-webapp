@@ -41,11 +41,15 @@ public class D2Ccontroler {
     }
 
     @GetMapping("search")
-    public String getSearch(Model model, @RequestParam(name="item") String item) {
+    public String getSearch(Model model, @RequestParam(name="input") String item) {
         DrinkParser drinkParser = new DrinkParser();
         DrinkRepository drinkRepository = drinkParser.readFileIntoDrinkRepository();
         List<Drink> drinks = Search.searchItemsForQuery(drinkRepository, item);
-        model.addAttribute("listOfDrinks", drinks);
+        if (drinks.isEmpty()) {
+            model.addAttribute("noDrinksFound", "No drinks found for given criteria: input too short or no drink available");
+        } {
+            model.addAttribute("listOfDrinks", drinks);
+        }
         return "/search.html";
     }
 
