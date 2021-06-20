@@ -1,18 +1,106 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
-    <meta name="description" content=""/>
-    <meta name="author" content=""/>
-    <title th:text="#{index.tab}">ISA Thymeleaf</title>
+    <meta charset="UTF-8">
+    <title>Bartender's Handybook</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
+
 </head>
 <body>
-<header>
-    <div>
-        <div th:text="#{index.title}">It's Nice To Meet You</div>
-        <div th:text="#{index.subtitle}">Welcome To Our Studio!</div>
+
+<!--Nav Bar Start-->
+<div th:insert="style/navbar :: navbar "/>
+<!--Nav Bar End-->
+<!--Jumbotron  Start-->
+<div
+        class="container bg-image p-4 text-center shadow-1-strong rounded mb-5 text-white "
+        style="background-position: center; background-repeat: no-repeat; background-image: url('https://i.imgur.com/hOBus3o.jpg'); background-size: 1400px " >
+    <h1 class="mb-3 h2" style="color: black">Jumbotron</h1>
+    <p style="color: black; font-weight: bolder; align-self: center; padding-left: 250px;
+    padding-right: 250px;">
+        Muddle mint leaves with sugar and lime juice. Add a splash of soda water and fill the glass with cracked ice. Pour the rum and top with soda water. Garnish and serve with straw.",
+
+    </p>
+    <div class="input-group mb-3" style="justify-content: center">
+        <input type="text" class="form-control1" placeholder="Drink Name" aria-label="Drink Name" aria-describedby="button-addon2">
+        <button class="btn btn-outline-secondary" type="button" id="button-addon2">Check</button>
     </div>
-</header>
+
+</div>
+<!--Jumbotron  End-->
+
+<!-- Start Features #1 up to Features #3-->
+<div class="container marketing">
+
+    <!-- Three columns of text below the carousel -->
+    <div class="row">
+        <div class="col-lg-4">
+            <img src="https://64.media.tumblr.com/tumblr_lao9w1WHXd1qa8q3yo1_400.jpg" width="140" height="140" >
+            <h2>Mana Potion Drink</h2>
+            <p>An exhilarating blend of 42 Below Vodka, apple pressé and the bluest of Blue Curacao’s, all shaken with fresh lime and charged with sparkling white wine served straight up.</p>
+            <p><a class="btn btn-secondary" href="#">View details »</a></p>
+        </div><!-- /.col-lg-4 -->
+        <div class="col-lg-4">
+            <img src="https://cocktail.review.com.np/images/drink-image.svg" width="140" height="140" >
+            <h2>Melya</h2>
+            <p>Brew espresso. In a coffee mug, place 1 teaspoon of unsweetened powdered cocoa, then cover a teaspoon with honey and drizzle it into the cup. Stir while the coffee brews,  this is the fun part. The cocoa seems to coat the honey without mixing, so you get a dusty, sticky mass that looks as though it will never mix. Then all at once, presto! It looks like dark chocolate sauce. Pour hot espresso over the honey,stirring to dissolve. Serve with cream.</p>
+            <p><a class="btn btn-secondary" href="#">View details »</a></p>
+        </div><!-- /.col-lg-4 -->
+        <div class="col-lg-4">
+            <img src="https://www.gimmesomeoven.com/wp-content/uploads/2018/05/How-To-Make-A-Mojito-Recipe-Cocktail-Fresh-Honey-3.jpg" width="140" height="140" >
+            <h2>Mojito</h2>
+            <p>Muddle mint leaves with sugar and lime juice. Add a splash of soda water and fill the glass with cracked ice. Pour the rum and top with soda water. Garnish and serve with straw.",
+            </p>
+            <p><a class="btn btn-secondary" href="#">View details »</a></p>
+        </div><!-- /.col-lg-4 -->
+    </div><!-- /.row -->
+
+
+
+</div>
+<!--End Features #1 up to Features #3-->
+
+
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
+<div th:insert="style/navbar :: footer "/>
+
+</div>
+<!--
+<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad eos similique vel! At error eum exercitationem expedita in, iusto laboriosam, odio omnis placeat quibusdam quisquam quod temporibus unde, veniam voluptate.</p>
+<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi debitis doloribus error facilis inventore nihil similique. Ab cum ea eaque fuga id inventore, nam nemo nihil officiis, provident repellendus saepe?</p>
+<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A amet animi aperiam consequatur deleniti distinctio eaque error fuga inventore iure laborum nam nobis placeat quasi, quibusdam sed sit tenetur veritatis!</p>
+<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquid amet atque cupiditate deserunt eligendi eum fugit id iusto laboriosam laudantium, nihil nulla obcaecati odio pariatur perspiciatis, quia quo soluta, vitae!</p>
+<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maiores maxime quisquam repellendus velit. Alias aliquid animi aspernatur dolorum ex facilis fugiat, minima necessitatibus odio officia pariatur praesentium quae quaerat repudiandae!</p>
+
+-->
+
+
+
+
+
+
+
+
+<table class="table table-hover">
+    ...
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 </body>
 </html>

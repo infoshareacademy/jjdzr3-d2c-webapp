@@ -8,6 +8,8 @@ import com.infoshareademy.domain.Drink;
 import com.infoshareademy.domain.DrinkRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import java.util.HashMap;
 import java.util.List;
@@ -53,4 +55,11 @@ public class D2Ccontroler {
         Filter filter;
         return "filters";
     }
+
+/*    @GetMapping("/index")
+    @ResponseBody
+    public String index(Model model) {
+        return "index.html";
+    }*/
+
 }
