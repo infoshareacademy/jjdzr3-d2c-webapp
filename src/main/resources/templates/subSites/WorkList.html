@@ -19,9 +19,17 @@
 <div th:insert="style/navbar :: navbar "/>
 <!--Drink Table Start -->
 
-<div style="align-self: center; text-align: -webkit-center;justify-content: center; margin-right: 100px; margin-left: 100px; margin-top: 20px; margin-bottom: 30px">
+<div style="align-self: center; text-align: -webkit-center;justify-content: center; margin-right: 100px; margin-left: 100px; margin-top: 20px; margin-bottom: 30px"
+
+>
+    <!--Tabela Start-->
+    <!--
+    <div th:each="drink: ${Drinks}">
+
+    -->
+
     <table class="tg">
-        <div th:each="drink: ${Drinks}"> <!--Loop-->
+        <div th:each="drink: ${Drinks}">
             <thead style="size: 1024px">
             <tr>
                 <th class="tg-0pky" colspan="3" rowspan="2" width="140" height="100"><img src="https://64.media.tumblr.com/tumblr_lao9w1WHXd1qa8q3yo1_400.jpg" width="140" height="140" ></th>
@@ -42,6 +50,7 @@
                     <br>
                     <span>Measure: </span>
                     <span style="height: 20px" th:text="${drink.getIngredients().get(0).getMeasure}"/>
+
                 </span>
                 </th>
                 <th class="tg-0pky" style="width: 186px; height: 87px; ">
@@ -52,6 +61,7 @@
                     <br>
                     <span>Measure: </span>
                     <span style="height: 20px" th:text="${drink.getIngredients().get(1).getMeasure}"/>
+
                 </span>
                 </th>
                 <th class="tg-0pky" style="width: 186px; height: 87px; ">
@@ -62,6 +72,7 @@
                     <br>
                     <span>Measure: </span>
                     <span style="height: 20px" th:text="${drink.getIngredients().get(2).getMeasure}"/>
+
                 </span>
                 </th>
                 <th class="tg-0pky" style="width: 186px; height: 87px; ">
@@ -87,6 +98,16 @@
                 </span>
                 </th>
             </tr>
+            <!--        <tr>
+                       <td class="tg-0pky" colspan="6" width="140" height="20" >
+               &lt;!&ndash;
+                           <p th:height="20px" th:text="${drink.getPreparationInstruction()}"/>
+                           &ndash;&gt;
+                           <a href="/">Instruction Details</a>
+
+
+                       </td>
+                    </tr>-->
             </thead>
 
         </div>
