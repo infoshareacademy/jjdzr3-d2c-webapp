@@ -59,4 +59,11 @@ public class D2Ccontroler {
         Filter filter;
         return "filters";
     }
+
+/*    @GetMapping("/index")
+    @ResponseBody
+    public String index(Model model) {
+        return "index.html";
+    }*/
+
 }
