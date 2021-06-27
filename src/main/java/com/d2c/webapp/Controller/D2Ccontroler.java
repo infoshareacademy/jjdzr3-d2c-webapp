@@ -9,8 +9,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.*;
 
 @Controller
@@ -40,7 +42,7 @@ public class D2Ccontroler {
         return "Menu";
     }
 
-    @GetMapping("search")
+    @RequestMapping("search")
     public String getSearch(Model model, @RequestParam(name="input") String item) {
         DrinkParser drinkParser = new DrinkParser();
         DrinkRepository drinkRepository = drinkParser.readFileIntoDrinkRepository();
@@ -53,17 +55,18 @@ public class D2Ccontroler {
         return "/search.html";
     }
 
+
     @GetMapping("/filters")
     @ResponseBody
-    public String getFilters() {
-        Filter filter;
+    public String getFilters(Model model, @RequestParam(name="input") String item) {
+//        Filter filter;
+        Filter drinkFilter = new Filter();
+//        drinkFilter.filter();
+
+
+
+
+
         return "filters";
     }
-
-/*    @GetMapping("/index")
-    @ResponseBody
-    public String index(Model model) {
-        return "index.html";
-    }*/
-
 }
