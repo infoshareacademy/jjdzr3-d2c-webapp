@@ -28,13 +28,23 @@
     </p>
     <div class="row" style="justify-content: center; text-align: start">
         <div class="col-lg-4">
-            <div th:action="@{/search}" th:object="${param}" method="get" class="input-group mb-3"
-                 style="justify-content: center">
-                <input type="text" class="form-control1" placeholder="Drink Name" aria-label="Drink Name"
-                       th:value="search"
-                       aria-describedby="button-addon2">
-                <button class="btn btn-outline-secondary" type="button" id="button-addon2">Check</button>
-            </div>
+
+<form th:action="@{/d2c/search}">
+    <input type="text" name="input" th:value="${drinks}" required/>
+    &nbsp;
+    <input type="submit" value="Search" />
+    &nbsp;
+
+
+</form>
+
+<!--            <div th:action="${search}" th:object="${}" method="get" class="input-group mb-3"-->
+<!--                 style="justify-content: center">-->
+<!--                <input type="text" class="form-control1" placeholder="Drink Name" aria-label="Drink Name"-->
+
+<!--                       aria-describedby="button-addon2">-->
+<!--                <button class="btn btn-outline-secondary" type="button" id="button-addon2">Check</button>-->
+<!--            </div>-->
         </div>
         <div class="accordion col-lg-4" id="accordionExample" style="background: none; width: fit-content; max-height: min-content">
             <div class="accordion-item">
