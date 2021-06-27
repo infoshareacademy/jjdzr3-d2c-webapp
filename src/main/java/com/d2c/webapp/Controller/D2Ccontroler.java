@@ -45,10 +45,29 @@ public class D2Ccontroler {
     }
 
     @RequestMapping("/search")
-    public String getSearch(Model model, @RequestParam(name = "input", required = true) String item) {
+    public String getSearch(Model model,
+                            @RequestParam(name = "input", required = true) String item,
+                            @RequestParam(name = "type", required = false) Type type,
+                            @RequestParam(name = "glassType", required = false) GlassType glassType,
+                            @RequestParam(name = "category", required = false)  Category category
+                            ) {
         DrinkParser drinkParser = new DrinkParser();
         DrinkRepository drinkRepository = drinkParser.readFileIntoDrinkRepository();
         List<Drink> drinks = Search.searchItemsForQuery(drinkRepository, item);
+
+        if (type != null) {
+            drinks = Filter.filterByType(drinks, type);
+        }
+
+        if (glassType != null) {
+            drinks = Filter.filterByGlassType(drinks, glassType);
+        }
+
+        if (category != null) {
+            drinks = Filter.filterByCategory(drinks, category);
+        }
+
+
         if (drinks.isEmpty()) {
             model.addAttribute("noDrinksFound", "No drinks found for given criteria: input too short or no drink available");
         }
@@ -59,76 +78,22 @@ public class D2Ccontroler {
     }
 
 
-//    @RequestMapping("/filters")
-//    @ResponseBody
-//    public String index(
-//            @RequestParam(value = "type", required = false) String type,
-//            @RequestParam(value = "glassType", required = false) String glassType,
-//            @RequestParam(value = "drinkType", required = false) String drinkType,
-//            Model model
-//    ) {
-//        DrinkParser drinkParser = new DrinkParser();
-//        DrinkRepository drinkRepository = drinkParser.readFileIntoDrinkRepository();
-//        List<Drink> drinks = drinkRepository.getDrinks();
+//    private static List<Drink> filterByType(List<Drink> drinks, Type type) {
+//        return drinks.stream()
+//                .filter(drink -> drink.getDrinkType() == type)
+//                .collect(Collectors.toList());
+//    }
 //
-//        if (type != null) {
-//            if (Type.ALKOHOL_FREE.toString().equalsIgnoreCase(type)) {
-//                drinks = drinks.stream()
-//                        .filter(drink -> drink.getDrinkType() == Type.ALKOHOL_FREE)
-//                        .collect(Collectors.toList());
-//            } else if (Type.ALKOHOL.toString().equalsIgnoreCase(type)) {
-//                drinks = drinks.stream()
-//                        .filter(drink -> drink.getDrinkType() == Type.ALKOHOL)
-//                        .collect(Collectors.toList());
-//            }
-//        }
+//    private static List<Drink> filterByGlassType(List<Drink> drinks, GlassType glassType) {
+//        return drinks.stream()
+//                .filter(drink -> drink.getGlassType() == glassType)
+//                .collect(Collectors.toList());
+//    }
 //
-//        if (glassType != null) {
-//            if (GlassType.COCKTAIL.getLabel().equalsIgnoreCase(glassType)) {
-//                drinks = drinks.stream()
-//                        .filter(drink -> drink.getGlassType() == GlassType.COCKTAIL)
-//                        .collect(Collectors.toList());
-//            } else if (GlassType.SHOT.getLabel().equalsIgnoreCase(glassType)) {
-//                drinks = drinks.stream()
-//                        .filter(drink -> drink.getGlassType() == GlassType.SHOT)
-//                        .collect(Collectors.toList());
-//            } else if (GlassType.OLD_FASHIONED.getLabel().equalsIgnoreCase(glassType)) {
-//                drinks = drinks.stream()
-//                        .filter(drink -> drink.getGlassType() == GlassType.OLD_FASHIONED)
-//                        .collect(Collectors.toList());
-//            } else if (GlassType.COLLINS.getLabel().equalsIgnoreCase(glassType)) {
-//                drinks = drinks.stream()
-//                        .filter(drink -> drink.getGlassType() == GlassType.COLLINS)
-//                        .collect(Collectors.toList());
-//            }
-//        }
-//
-//        if (drinkType != null) {
-//
-//        }
-//
-//        model.addAttribute("listOfDrinks", drinks);
-//
-//        return "search.html";
+//    private static List<Drink> filterByCategory(List<Drink> drinks, Category category) {
+//        return drinks.stream()
+//                .filter(drink -> drink.getDrinkCategory() == category)
+//                .collect(Collectors.toList());
 //    }
 
-//    public String getFilters(Model model, @RequestParam("input") String item, @Param("sort") String sort) {
-//        DrinkParser drinkParser = new DrinkParser();
-//        Filter drinkFilter = new Filter();
-//        DrinkRepository drinkRepository = drinkParser.readFileIntoDrinkRepository();
-//        List<Drink> drinks = Search.searchItemsForQuery(drinkRepository, item);
-//        Drink drink = new Drink();
-
-
-//        if (drink.getDrinkType().equals(Type.ALKOHOL))
-//            model.addAttribute("listOfDrinks", drinks);
-//              model.addAttribute("sort", sort);
-//        model.getAttribute()
-//
-//
-//        drinkFilter.filter(drinks, menuMap);
-
-
-//        return drinks.toString();
-//}
 }
