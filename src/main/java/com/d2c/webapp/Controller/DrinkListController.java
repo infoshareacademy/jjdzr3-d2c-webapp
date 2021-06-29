@@ -31,4 +31,10 @@ public class DrinkListController {
         return "subSites/showAllDrinks2";
     }
 
+    @GetMapping(value = "/worklist")
+    public String getWorkList(Model model) {
+        List<Drink> drinkList = drinkService.getDrinkList();
+        model.addAttribute("Drinks", drinkList);
+        return "subSites/WorkList";
+    }
 }
