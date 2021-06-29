@@ -95,6 +95,14 @@
 
 </div>
 
+
+<div th:if="${drinkPage.totalPages > 0}" class="pagination"
+     th:each="pageNumber : ${pageNumbers}">
+    <a th:href="@{/showAllDrinks2(size=${drinkPage.size}, page=${pageNumber})}"
+       th:text=${pageNumber}
+       th:class="${pageNumber==drinkPage.number + 1} ? active"></a>
+</div>
+
 <div th:insert="style/navbar :: footer "/>
 </body>
 </html>
