@@ -14,45 +14,17 @@
             font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;}
         .tg .tg-0pky{border-color:inherit;text-align:left;vertical-align:top}
     </style>
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" >
-
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.0/bootstrap-table.min.css">
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-
-    <script src="//code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
-
-    <script src="//code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="crossorigin="anonymous"></script>
-
-    <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.0/bootstrap-table.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.11.0/locale/bootstrap-table-en-US.min.js"></script>
-    <script>
-        $('#goalsListTable').bootstrapTable({
-            pagination: true,
-            pageSize: 10, //your page size here
-            pageList: [25, 50, 75, 100]//list of page sizes
-        });
-    </script>
-
-
 </head>
 <body>
 <div th:insert="style/navbar :: navbar "/>
 <!--Drink Table Start -->
 
-<div style="align-self: center; text-align: -webkit-center;justify-content: center; margin-right: 100px; margin-left: 100px; margin-top: 20px; margin-bottom: 30px"
-
->
-    <!--Tabela Start-->
-    <!--
-    <div th:each="drink: ${Drinks}">
-
-    -->
-
-    <table class="tg" id="goalsListTable">
-        <div th:each="drink: ${Drinks}">
+<div style="align-self: center; text-align: -webkit-center;justify-content: center; margin-right: 100px; margin-left: 100px; margin-top: 20px; margin-bottom: 30px">
+    <table class="tg">
+        <div th:each="drink: ${Drinks}"> <!--Loop-->
             <thead style="size: 1024px">
             <tr>
-                <th class="tg-0pky" colspan="3" rowspan="2" width="140" height="100"><img src="https://64.media.tumblr.com/tumblr_lao9w1WHXd1qa8q3yo1_400.jpg" width="140" height="140" ></th>
+                <th class="tg-0pky" colspan="3" rowspan="2" width="140" height="100"><img th:src="${drink.getDrinkImg()}" width="140" height="140" ></th>
                 <th class="tg-0pky" style="width: 186px; height: 31px; "><nobr>Drink ID:<p style="height: 10px" th:text="${drink.getDrinkId()}"/></nobr></th>
                 <th class="tg-0pky" style="width: 186px; height: 31px; "><nobr>Name:<p style="height: 10px" th:text="${drink.getDrinkName()}"/></nobr></th>
                 <th class="tg-0pky" style="width: 186px; height: 31px; "><nobr>Category:<p style="height: 10px" th:text="${drink.getDrinkCategory().getLabel()}"/></nobr></th>
@@ -70,7 +42,6 @@
                     <br>
                     <span>Measure: </span>
                     <span style="height: 20px" th:text="${drink.getIngredients().get(0).getMeasure}"/>
-
                 </span>
                 </th>
                 <th class="tg-0pky" style="width: 186px; height: 87px; ">
@@ -81,7 +52,6 @@
                     <br>
                     <span>Measure: </span>
                     <span style="height: 20px" th:text="${drink.getIngredients().get(1).getMeasure}"/>
-
                 </span>
                 </th>
                 <th class="tg-0pky" style="width: 186px; height: 87px; ">
@@ -92,7 +62,6 @@
                     <br>
                     <span>Measure: </span>
                     <span style="height: 20px" th:text="${drink.getIngredients().get(2).getMeasure}"/>
-
                 </span>
                 </th>
                 <th class="tg-0pky" style="width: 186px; height: 87px; ">
@@ -118,16 +87,6 @@
                 </span>
                 </th>
             </tr>
-            <!--        <tr>
-                       <td class="tg-0pky" colspan="6" width="140" height="20" >
-               &lt;!&ndash;
-                           <p th:height="20px" th:text="${drink.getPreparationInstruction()}"/>
-                           &ndash;&gt;
-                           <a href="/">Instruction Details</a>
-
-
-                       </td>
-                    </tr>-->
             </thead>
 
         </div>
