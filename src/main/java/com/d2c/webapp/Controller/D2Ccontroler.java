@@ -2,12 +2,12 @@ package com.d2c.webapp.Controller;
 
 import com.infoshareademy.Filter;
 import com.infoshareademy.Menu;
-import com.infoshareademy.Search;
 import com.infoshareademy.data.DrinkParser;
 import com.infoshareademy.domain.*;
+import management.AddDrink;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.data.repository.query.Param;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.*;
 import java.util.stream.Collectors;
+
+import static com.infoshareademy.Search.*;
 
 @Controller
 @RequestMapping("/d2c")
@@ -33,6 +35,15 @@ public class D2Ccontroler {
         return "/allDrinks.html";
     }
 
+    @PostMapping("/AddDrink")
+    public String addDrink(@ModelAttribute(name = "drinkId") String drinkId, Model model) {
+        model.addAttribute(new Drink());
+        model.addAttribute("drinkId", drinkId);
+        return "redirect:/allDrinks";
+    }
+
+
+
     @GetMapping("/menu")
     public String getMenu(Model model) {
         Map<Integer, String> menuMap = new HashMap<>();
@@ -44,6 +55,7 @@ public class D2Ccontroler {
         return "Menu";
     }
 
+
     @RequestMapping("/search")
     public String getSearch(Model model,
                             @RequestParam(name = "input", required = true) String item,
@@ -53,7 +65,7 @@ public class D2Ccontroler {
                             ) {
         DrinkParser drinkParser = new DrinkParser();
         DrinkRepository drinkRepository = drinkParser.readFileIntoDrinkRepository();
-        List<Drink> drinks = Search.searchItemsForQuery(drinkRepository, item);
+        List<Drink> drinks = searchItemsForQuery(drinkRepository, item);
 
         if (type != null) {
             drinks = Filter.filterByType(drinks, type);
@@ -78,22 +90,22 @@ public class D2Ccontroler {
     }
 
 
-//    private static List<Drink> filterByType(List<Drink> drinks, Type type) {
-//        return drinks.stream()
-//                .filter(drink -> drink.getDrinkType() == type)
-//                .collect(Collectors.toList());
-//    }
-//
-//    private static List<Drink> filterByGlassType(List<Drink> drinks, GlassType glassType) {
-//        return drinks.stream()
-//                .filter(drink -> drink.getGlassType() == glassType)
-//                .collect(Collectors.toList());
-//    }
-//
-//    private static List<Drink> filterByCategory(List<Drink> drinks, Category category) {
-//        return drinks.stream()
-//                .filter(drink -> drink.getDrinkCategory() == category)
-//                .collect(Collectors.toList());
-//    }
+    private static List<Drink> filterByType(List<Drink> drinks, Type type) {
+        return drinks.stream()
+                .filter(drink -> drink.getDrinkType() == type)
+                .collect(Collectors.toList());
+    }
+
+    private static List<Drink> filterByGlassType(List<Drink> drinks, GlassType glassType) {
+        return drinks.stream()
+                .filter(drink -> drink.getGlassType() == glassType)
+                .collect(Collectors.toList());
+    }
+
+    private static List<Drink> filterByCategory(List<Drink> drinks, Category category) {
+        return drinks.stream()
+                .filter(drink -> drink.getDrinkCategory() == category)
+                .collect(Collectors.toList());
+    }
 
 }

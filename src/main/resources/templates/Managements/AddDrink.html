@@ -8,13 +8,113 @@
 
 </head>
 <body>
-<div th:insert="style/navbar :: navbar "/>
+<!--<div th:insert="style/navBar :: navbar "></div>-->
 
 
 
+
+
+<div
+        class="container bg-image p-4 text-center shadow-1-strong rounded mb-5 text-white "
+        style="background-position: center; background-repeat: no-repeat; background-color: lightblue; background-size: 1400px ">
+    <h1 class="mb-3 h2" style="color: black">Create your new drink</h1>
+
+
+    <form th:action="@{/AddDrink}" th:object="${drink}" method="post">
+        <label for="drinkId"  class="form-label">DrinkId</label>
+        <input type = "text" id="drinkId" class="form-control" placeholder="Enter id" th:field="*{drinkId}" > drinkId</input>
+
+        <label for="drinkName" class="form-label">Drink name</label>
+        <textarea class="form-control" id="drinkName" rows="1" ></textarea>
+
+        <label for="drinkCategory" class="form-label">Choose drink category</label>
+        <input class="form-control" list="drinkCategoryList" id="drinkCategory" placeholder="Category to search...">
+        <datalist id="drinkCategoryList">
+            <option value="Coffee / Tea">
+            <option value="Cocktail">
+            <option value="Ordinary Drink">
+            <option value="Punch / Party Drink">
+            <option value="Shot">
+        </datalist>
+        <label for="glassType" class="form-label">Choose glass to drink</label>
+        <input class="form-control" list="glassTypeList" id="glassType" placeholder="Category to search...">
+        <datalist id="glassTypeList">
+            <option value="Cocktail glass">
+            <option value="Shot glass">
+            <option value="Old-fashioned glass">
+            <option value="Collins glass">
+            <option value="Highball glass">
+            <option value="Irish coffee cup">
+            <option value="Copper Mug">
+            <option value="Coffee Mug">
+            <option value="Punch bowl">
+            <option value="Pint glass">
+            <option value="Champagne flute">
+        </datalist>
+        <label for="recipe" class="form-label">Recipe</label>
+        <textarea class="form-control" id="recipe" rows="3"></textarea>
+
+        <label for="type" class="form-label">Choose type of drink - alcohol or alkohol free</label>
+        <input class="form-control" list="typeList" id="type" placeholder="Category to search...">
+        <datalist id="typeList">
+            <option value="Non alcoholic">
+            <option value="Alcoholic">
+        </datalist>
+
+        <label for="glassType" class="form-label">Choose how many ingredients would you want to add</label>
+        <div class="form-check form-check-inline">
+            <input class="form-check form-check-inline" type="checkbox" id="inlineCheckbox1" name="nazwa" value="wartość" placeholder="1" onclick="document.getElementById('identyfikator').style.display = this.checked ? 'block' : 'none'; this.form.elements['nazwa1'].disabled = !this.checked">
+            <label class="form-check-label" for="inlineCheckbox1">1</label>
+            <div id="identyfikator" style="display: none">
+                <input type="text" name="nazwa1" disabled>
+            </div>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check form-check-inline" type="checkbox" id="inlineCheckbox2" name="nazwa" value="wartość" placeholder="2" onclick="document.getElementById('identyfikator2').style.display = this.checked ? 'block' : 'none'; this.form.elements['nazwa2'].disabled = this.form.elements['nazwa3'].disabled = !this.checked">
+            <label class="form-check-label" for="inlineCheckbox2">2</label>
+            <div id="identyfikator2" style="display: none">
+                <input type="text" name="nazwa2" disabled>
+                <input type="text" name="nazwa3" disabled>
+            </div>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check form-check-inline" type="checkbox" id="inlineCheckbox3" name="nazwa" value="wartość" placeholder="3" onclick="document.getElementById('identyfikator3').style.display = this.checked ? 'block' : 'none'; this.form.elements['nazwa4'].disabled = this.form.elements['nazwa5'].disabled = this.form.elements['nazwa6'].disabled =!this.checked">
+            <label class="form-check-label" for="inlineCheckbox3">3</label>
+            <div id="identyfikator3" style="display: none">
+                <input type="text" name="nazwa4" disabled>
+                <input type="text" name="nazwa5" disabled>
+                <input type="text" name="nazwa6" disabled>
+            </div>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check form-check-inline" type="checkbox" id="inlineCheckbox4" name="nazwa" value="wartość" placeholder="4" onclick="document.getElementById('identyfikator4').style.display = this.checked ? 'block' : 'none'; this.form.elements['nazwa7'].disabled = this.form.elements['nazwa8'].disabled = this.form.elements['nazwa9'].disabled = this.form.elements['nazwa10'].disabled=!this.checked">
+            <label class="form-check-label" for="inlineCheckbox4">4</label>
+            <div id="identyfikator4" style="display: none">
+                <input type="text" name="nazwa7" disabled>
+                <input type="text" name="nazwa8" disabled>
+                <input type="text" name="nazwa9" disabled>
+                <input type="text" name="nazwa10" disabled>
+            </div>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check form-check-inline" type="checkbox" id="inlineCheckbox5" name="nazwa" value="wartość" placeholder="5" onclick="document.getElementById('identyfikator5').style.display = this.checked ? 'block' : 'none'; this.form.elements['nazwa11'].disabled = this.form.elements['nazwa12'].disabled = this.form.elements['nazwa13'].disabled = this.form.elements['nazwa14'].disabled = this.form.elements['nazwa15'].disabled=!this.checked">
+            <label class="form-check-label" for="inlineCheckbox5">5</label>
+            <div id="identyfikator5" style="display: none">
+                <input type="text" name="nazwa11" disabled>
+                <input type="text" name="nazwa12" disabled>
+                <input type="text" name="nazwa13" disabled>
+                <input type="text" name="nazwa14" disabled>
+                <input type="text" name="nazwa15" disabled>
+            </div>
+        </div>
+
+
+        <button type="submit" value="Wyślij">Submit</button>
+    </form>
+</div>
 <p>Space for Txt :)</p>
 
 
-<div th:insert="style/navbar :: footer "/>
+<!--<div th:insert="style/navBar :: footer "></div>-->
 </body>
 </html>
