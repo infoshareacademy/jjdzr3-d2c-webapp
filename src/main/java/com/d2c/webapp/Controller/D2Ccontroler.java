@@ -4,16 +4,12 @@ import com.infoshareademy.Filter;
 import com.infoshareademy.Menu;
 import com.infoshareademy.data.DrinkParser;
 import com.infoshareademy.domain.*;
-import management.AddDrink;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -23,29 +19,54 @@ import static com.infoshareademy.Search.*;
 @RequestMapping("/d2c")
 public class D2Ccontroler {
 
+
+
     private static Logger logger = LoggerFactory.getLogger(D2Ccontroler.class);
 
+
     @GetMapping("/allDrinks")
-    public String getAllDrinks(Model model) {
+    @ResponseBody
+    public String getAllDrinks () {
         Map<Integer, String> menuMap = new HashMap<>();
         DrinkParser drinkParser = new DrinkParser();
         List<Drink> drinks = drinkParser.readFileIntoDrinkRepository().getDrinks();
-        model.addAttribute("listOfDrinks", drinks);
-
-        return "/allDrinks.html";
+        return drinks.toString();
     }
 
-    @PostMapping("/AddDrink")
-    public String addDrink(@ModelAttribute(name = "drinkId") String drinkId, Model model) {
-        model.addAttribute(new Drink());
-        model.addAttribute("drinkId", drinkId);
+
+    @RequestMapping(value = "/singleDrink/{name}", method = RequestMethod.GET)
+    public String getDrink(Model model, @PathVariable String name){
+
+
+        model.addAttribute("singleDrink", getDrink(name));
+        return "singleDrink";
+    }
+
+    private Optional<Drink> getDrink(String name) {
+        DrinkParser drinkParser = new DrinkParser();
+        DrinkRepository drinkRepository = drinkParser.readNewDataBase();
+        List<Drink> filteredDrinks = drinkRepository.getDrinks()
+                .stream()
+                .filter(a -> a.getDrinkName().toLowerCase().contains(name))
+                .collect(Collectors.toList());
+        return  filteredDrinks.stream().findFirst();
+    }
+    @GetMapping ("/AddDrink")
+    public String addSingleDrink(Model model){
+        model.addAttribute("drink", new Drink());
+        return "Managements/AddDrink";
+    }
+    @PostMapping("singleDrink")
+    public String addDrink(@ModelAttribute Drink drink) {
+
+
         return "redirect:/allDrinks";
     }
 
 
-
     @GetMapping("/menu")
-    public String getMenu(Model model) {
+    @ResponseBody
+    public String getMenu() {
         Map<Integer, String> menuMap = new HashMap<>();
         DrinkParser drinkParser = new DrinkParser();
         DrinkRepository drinkRepository = drinkParser.readFileIntoDrinkRepository();
@@ -54,7 +75,6 @@ public class D2Ccontroler {
         menu.menu(drinkParser, drinkRepository, drinks);
         return "Menu";
     }
-
 
     @RequestMapping("/search")
     public String getSearch(Model model,

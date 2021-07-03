@@ -36,14 +36,19 @@ public class SubController {
         return "subSites/Favorites";
     }
 
-    @GetMapping(value = "/showAllDrinks")
-    public String getShowAllDrinks() {
-        return "subSites/showAllDrinks";
-    }
+//    @GetMapping(value = "/showAllDrinks")
+//    public String getShowAllDrinks() {
+//        return "subSites/showAllDrinks";
+//    }
 
     @GetMapping(value = "/Search")
     public String getSearch() {
         return "subSites/Search";
+    }
+
+    @GetMapping(value = "/singleDrink")
+    public String getDrink() {
+        return "singleDrink";
     }
 
 }

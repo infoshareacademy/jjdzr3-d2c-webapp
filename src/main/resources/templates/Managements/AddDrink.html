@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Add Drink</title>
@@ -8,27 +8,23 @@
 
 </head>
 <body>
-<!--<div th:insert="style/navBar :: navbar "></div>-->
-
-
-
-
-
+<div th:insert="style/navbar :: navbar "></div>
 <div
         class="container bg-image p-4 text-center shadow-1-strong rounded mb-5 text-white "
         style="background-position: center; background-repeat: no-repeat; background-color: lightblue; background-size: 1400px ">
     <h1 class="mb-3 h2" style="color: black">Create your new drink</h1>
 
 
-    <form th:action="@{/AddDrink}" th:object="${drink}" method="post">
+    <form th:action="@{/singleDrink}" th:object="${drink}" method="post">
         <label for="drinkId"  class="form-label">DrinkId</label>
-        <input type = "text" id="drinkId" class="form-control" placeholder="Enter id" th:field="*{drinkId}" > drinkId</input>
+<!--        th:field="*{drinkId}"-->
+        <input type = "text" id="drinkId" class="form-control" placeholder="Enter id" th:field="*{drinkId}" >
 
         <label for="drinkName" class="form-label">Drink name</label>
-        <textarea class="form-control" id="drinkName" rows="1" ></textarea>
+        <input type = "text" class="form-control" id="drinkName"  placeholder="Enter name"  th:field="*{drinkName}"  >
 
         <label for="drinkCategory" class="form-label">Choose drink category</label>
-        <input class="form-control" list="drinkCategoryList" id="drinkCategory" placeholder="Category to search...">
+        <input class="form-control" list="drinkCategoryList" id="drinkCategory" placeholder="Category to search..." th:field="*{drinkCategory}"  >
         <datalist id="drinkCategoryList">
             <option value="Coffee / Tea">
             <option value="Cocktail">
@@ -37,7 +33,7 @@
             <option value="Shot">
         </datalist>
         <label for="glassType" class="form-label">Choose glass to drink</label>
-        <input class="form-control" list="glassTypeList" id="glassType" placeholder="Category to search...">
+        <input class="form-control" list="glassTypeList" id="glassType" placeholder="Category to search..." th:field="*{glassCategory}">
         <datalist id="glassTypeList">
             <option value="Cocktail glass">
             <option value="Shot glass">
@@ -52,10 +48,10 @@
             <option value="Champagne flute">
         </datalist>
         <label for="recipe" class="form-label">Recipe</label>
-        <textarea class="form-control" id="recipe" rows="3"></textarea>
+        <input class="form-control" id="recipe" rows="3"  th:field="*{preparationInstruction}">
 
         <label for="type" class="form-label">Choose type of drink - alcohol or alkohol free</label>
-        <input class="form-control" list="typeList" id="type" placeholder="Category to search...">
+        <input class="form-control" list="typeList" id="type" placeholder="Category to search..." th:field="*{drinkType}" >
         <datalist id="typeList">
             <option value="Non alcoholic">
             <option value="Alcoholic">
@@ -63,7 +59,7 @@
 
         <label for="glassType" class="form-label">Choose how many ingredients would you want to add</label>
         <div class="form-check form-check-inline">
-            <input class="form-check form-check-inline" type="checkbox" id="inlineCheckbox1" name="nazwa" value="wartość" placeholder="1" onclick="document.getElementById('identyfikator').style.display = this.checked ? 'block' : 'none'; this.form.elements['nazwa1'].disabled = !this.checked">
+            <input class="form-check form-check-inline" type="checkbox" id="inlineCheckbox1" name="nazwa" value="wartość" placeholder="1" onclick="document.getElementById('identyfikator').style.display = this.checked ? 'block' : 'none'; this.form.elements['nazwa1'].disabled = !this.checked" rows="1"  >
             <label class="form-check-label" for="inlineCheckbox1">1</label>
             <div id="identyfikator" style="display: none">
                 <input type="text" name="nazwa1" disabled>
@@ -73,12 +69,12 @@
             <input class="form-check form-check-inline" type="checkbox" id="inlineCheckbox2" name="nazwa" value="wartość" placeholder="2" onclick="document.getElementById('identyfikator2').style.display = this.checked ? 'block' : 'none'; this.form.elements['nazwa2'].disabled = this.form.elements['nazwa3'].disabled = !this.checked">
             <label class="form-check-label" for="inlineCheckbox2">2</label>
             <div id="identyfikator2" style="display: none">
-                <input type="text" name="nazwa2" disabled>
+                <input type="text" name="nazwa2" disabled >
                 <input type="text" name="nazwa3" disabled>
             </div>
         </div>
         <div class="form-check form-check-inline">
-            <input class="form-check form-check-inline" type="checkbox" id="inlineCheckbox3" name="nazwa" value="wartość" placeholder="3" onclick="document.getElementById('identyfikator3').style.display = this.checked ? 'block' : 'none'; this.form.elements['nazwa4'].disabled = this.form.elements['nazwa5'].disabled = this.form.elements['nazwa6'].disabled =!this.checked">
+            <input class="form-check form-check-inline" type="checkbox" id="inlineCheckbox3" name="nazwa" value="wartość" placeholder="3" rows="1" onclick="document.getElementById('identyfikator3').style.display = this.checked ? 'block' : 'none'; this.form.elements['nazwa4'].disabled = this.form.elements['nazwa5'].disabled = this.form.elements['nazwa6'].disabled =!this.checked">
             <label class="form-check-label" for="inlineCheckbox3">3</label>
             <div id="identyfikator3" style="display: none">
                 <input type="text" name="nazwa4" disabled>
@@ -115,6 +111,11 @@
 <p>Space for Txt :)</p>
 
 
-<!--<div th:insert="style/navBar :: footer "></div>-->
+<div th:insert="style/navbar :: footer "></div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+
 </body>
 </html>
