@@ -18,34 +18,18 @@
 <body>
 <div th:insert="style/navbar :: navbar "/>
 
-<div aria-label="Page navigation example">
-    <ul class="pagination">
-        <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-        <li class="page-item"><a class="page-link" href="#">1</a></li>
-        <li class="page-item"><a class="page-link" href="#">2</a></li>
-        <li class="page-item"><a class="page-link" href="#">3</a></li>
-        <li class="page-item"><a class="page-link" href="#">Next</a></li>
-    </ul>
-</div>
 
-<div aria-label="Page navigation example">
-    <ul class="pagination">
-        <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-        <div th:if="${drinkPage.totalPages > 0}" class="pagination"
-             th:each="pageNumber : ${pageNumbers}">
-        <li th:class="page-item" >    <a th:href="@{/showAllDrinks2(size=${drinkPage.size}, page=${pageNumber})}"
-                                         th:class="${pageNumber==drinkPage.number + 1} ? active"><p th:class="page-item" th:text="${pageNumber}"></p></a></li>
 
-        </div>
-        <li class="page-item"><a class="page-link" href="#">Next</a></li>
-    </ul>
-</div>
+
 
 
 <!--Drink Table Start -->
+<div class="container" style="    padding-top: 50px;">
+
 
 <div style="align-self: center; text-align: -webkit-center;justify-content: center; margin-right: 100px; margin-left: 100px; margin-top: 20px; margin-bottom: 30px">
     <table class="tg">
+
         <div th:each="drink, iStat : ${drinkPage.content}"> <!--Loop-->
             <thead style="size: 1024px">
             <tr>
@@ -119,7 +103,43 @@
     <!--Tabela End-->
 
 </div>
+    <div class="row">
 
+        <div class="col-sm-3" th:height="20" style="height: 20px; padding-left: 110px;"> <!--Per Page-->
+
+            <div aria-label="Page navigation example">
+                <ul class="pagination">
+                    <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+                    <div th:if="${drinkPage.totalPages > 0}" class="pagination"
+                         th:each="pageNumber : ${pageNumbers}">
+                        <li th:class="page-item" >    <a class="page-link" th:href="@{/showAllDrinks2(size=${drinkPage.size}, page=${pageNumber})}"
+                                                         th:class="${pageNumber==drinkPage.number + 1} ? active"><p th:class="page-link" th:text="${pageNumber}"></p></a></li>
+
+                    </div>
+                    <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                </ul>
+            </div>
+        </div> <!--Per Page End-->
+
+        <div class="col-sm-3" height="20" style="border-right-width: 100px;padding-right: 0px;width: 612px;padding-left: 650px;height: 0px; align-self: end"></div>
+        <div class="col-sm-3" th:height="20">
+            <div class="item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Per Page
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <li><a class="dropdown-item" th:href="@{/showAllDrinks2(size=5, page=1)}"
+                           th:class="${pageNumber==drinkPage.number + 1} ? active">5</a></li>
+                    <li><a class="dropdown-item" th:href="@{/showAllDrinks2(size=10, page=1)}"
+                           th:class="${pageNumber==drinkPage.number + 1} ? active">10</a></li>
+                    <!--<li><hr class="dropdown-divider"></li>-->
+                    <li><a class="dropdown-item" th:href="@{/showAllDrinks2(size=15, page=1)}"
+                           th:class="${pageNumber==drinkPage.number + 1} ? active">15 </a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
 <!--Drink Table End -->
 <div th:insert="style/navbar :: footer "/>
 </body>

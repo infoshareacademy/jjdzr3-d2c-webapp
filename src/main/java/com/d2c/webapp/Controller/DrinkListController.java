@@ -38,9 +38,10 @@ public class DrinkListController {
 /*        List<Drink> drinkList = drinkService.getDrinkList();
         model.addAttribute("Drinks", drinkList);*/
         int currentPage = page.orElse(1);
-        int pageSize = size.orElse(5);
-
-        Page<Drink> drinkPage = drinkService.findPaginated(PageRequest.of(currentPage-1,pageSize));
+        int pageSize5 = size.orElse(5);
+        int pageSize10 = size.orElse(10);
+        int pageSize15 = size.orElse(15);
+        Page<Drink> drinkPage = drinkService.findPaginated(PageRequest.of(currentPage-1,pageSize5));
 
         model.addAttribute("drinkPage", drinkPage);
 
@@ -59,4 +60,9 @@ public class DrinkListController {
         model.addAttribute("Drinks", drinkList);
         return "subSites/WorkList";
     }
+
+    // TODO Paginacja i ostylizowanie jej  https://frontbackend.com/thymeleaf/spring-boot-bootstrap-thymeleaf-pagination-jpa-liquibase-h2
+    // TODO Ostylizowanie wyniku Search
+    // TODO Próba podłączenia przyciksów filtracyjnych do filtrowania
+
 }
