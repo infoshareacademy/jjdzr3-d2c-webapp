@@ -34,11 +34,18 @@ public class D2Ccontroler {
     }
 
 
-    @RequestMapping(value = "/singleDrink/{name}", method = RequestMethod.GET)
-    public String getDrink(Model model, @PathVariable String name){
+    @RequestMapping(value = "/singleDrink")
+    public String getDrink(Model model, @RequestParam("name") String name){
 
+        DrinkParser drinkParser = new DrinkParser();
+        DrinkRepository drinkRepository = drinkParser.readNewDataBase();
+        List<Drink> filteredDrinks = drinkRepository.getDrinks()
+                .stream()
+                .filter(a -> a.getDrinkName().toLowerCase().contains(name))
+                .collect(Collectors.toList());
 
-        model.addAttribute("singleDrink", getDrink(name));
+        Drink drink = filteredDrinks.get(0);
+        model.addAttribute("drink", drink);
         return "singleDrink";
     }
 
