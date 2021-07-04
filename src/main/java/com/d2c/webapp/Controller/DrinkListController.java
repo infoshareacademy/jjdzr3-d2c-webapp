@@ -35,6 +35,7 @@ public class DrinkListController {
     public String getShowAllDrinks2(
             Model model, @RequestParam("page")Optional<Integer>page, @RequestParam("size") Optional<Integer>size) {
         int currentPage = page.orElse(1);
+        int lastVisablePageFromCurrentPage = page.get()+10;
         int pageSize5 = size.orElse(5);
         Page<Drink> drinkPage = drinkService.findPaginated(PageRequest.of(currentPage-1,pageSize5));
 
@@ -47,6 +48,25 @@ public class DrinkListController {
         }
 
         return "subSites/showAllDrinks2";
+    }
+    @GetMapping(value = "/showAllDrinks3")
+    public String getShowAllDrinks3(
+            Model model, @RequestParam("page")Optional<Integer>page, @RequestParam("size") Optional<Integer>size) {
+        int currentPage = page.orElse(1);
+       /* int lastVisablePageFromCurrentPage = page.get()+10;*/
+        int pageSize1 = size.orElse(1);
+        int sizePagination = 10;
+        Page<Drink> drinkPage = drinkService.findPaginated(PageRequest.of(currentPage-1,pageSize1));
+
+        model.addAttribute("drinkPage", drinkPage);
+
+        int totalPages = drinkPage.getTotalPages();
+        if (totalPages>0){
+            List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPages).boxed().collect(Collectors.toList());
+            model.addAttribute("pageNumbers", pageNumbers);
+        }
+        model.addAttribute("customers", drinkService.findPaginated(PageRequest.of(currentPage, sizePagination)));
+        return "subSites/showAllDrinks3";
     }
 
 
