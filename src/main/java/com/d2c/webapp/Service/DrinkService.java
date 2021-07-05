@@ -1,3 +1,4 @@
+/*
 package com.d2c.webapp.Service;
 
 
@@ -18,6 +19,7 @@ import java.util.List;
 public class DrinkService {
 
     private List<Drink> drinkList;
+
 
     public List<Drink> getDrinkList() {
         this.drinkList = new ArrayList<>();
@@ -48,3 +50,4 @@ public class DrinkService {
     }
 
 }
+*/
