@@ -20,8 +20,8 @@
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
 
-
     <link th:href="@{/webjars/bootstrap/3.3.7-1/css/bootstrap.min.css}" rel="stylesheet"/>
+
 
 
     <!--Problematyczne-->
@@ -140,33 +140,7 @@
         </div>
         <!--Per Page End-->
         <!--Pagination Start-->
-
-        <div th:if="${persons.totalPages != 1}" class="form-group col-md-11 pagination-container" >
-            <ul class="pagination">
-                <li th:class="${persons.number == 0} ? disabled">
-                    <a class="pageLink" th:href="@{/showAllDrinks3(size=${drinkPage.size}, page=1)}">&laquo;</a>
-                </li>
-
-
-
-                <li th:class="${persons.number == 0} ? disabled">
-                    <a class="pageLink" th:href="@{/showAllDrinks3(size=${drinkPage.size}, page=${persons.number})}">&larr;</a>
-                </li>
-                <li th:class="${persons.number == (page - 1)} ? 'active pointer-disabled'"
-                    th:each="page : ${#numbers.sequence(pager.startPage, pager.endPage)}">
-                    <a class="pageLink" th:href="@{/showAllDrinks3(size=${drinkPage.size}, page=${page})}"
-                       th:text="${page}"></a>
-                </li>
-                <li th:class="${persons.number + 1 == persons.totalPages} ? disabled">
-                    <a class="pageLink"
-                       th:href="@{/showAllDrinks3(size=${drinkPage.size}, page=${persons.number + 2})}">&rarr;</a>
-                </li>
-                <li th:class="${persons.number + 1 == persons.totalPages} ? disabled">
-                    <a class="pageLink"
-                       th:href="@{/showAllDrinks3(size=${drinkPage.size}, page=${persons.totalPages})}">&raquo;</a>
-                </li>
-            </ul>
-        </div>
+        <div th:insert="style/Pagination :: pagination "/>
         <!--Pagination End-->
     </div>
 </div>
