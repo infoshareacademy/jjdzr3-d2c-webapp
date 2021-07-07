@@ -14,7 +14,14 @@
             font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;}
         .tg .tg-0pky{border-color:inherit;text-align:left;vertical-align:top}
     </style>
-    <link th:href="@{/webjars/bootstrap/3.3.7-1/css/bootstrap.min.css}" rel="stylesheet"/> <!--Problem-->
+
+
+    <!--Problematyczne-->
+
+    <link th:href="@{/webjars/bootstrap/3.3.7-1/css/bootstrap.min.css}" rel="stylesheet"/>
+
+
+    <!--Problematyczne-->
     <link th:href="@{/css/style.css}" rel="stylesheet"/>
 </head>
 <body>
@@ -109,6 +116,7 @@
 
     </div>
     <div class="row">
+        <!--Per Page Start-->
         <div class="form-group col-md-1 page-select">
             <div class="col-sm-3" th:height="20">
                 <div class="item dropdown">
@@ -127,7 +135,10 @@
                 </div>
             </div>
         </div>
-        <div th:if="${persons.totalPages != 1}" class="form-group col-md-11 pagination-container">
+        <!--Per Page End-->
+        <!--Pagination Start-->
+
+        <div th:if="${persons.totalPages != 1}" class="form-group col-md-11 pagination-container" >
             <ul class="pagination">
                 <li th:class="${persons.number == 0} ? disabled">
                     <a class="pageLink" th:href="@{/showAllDrinks3(size=${drinkPage.size}, page=1)}">&laquo;</a>
@@ -153,6 +164,7 @@
                 </li>
             </ul>
         </div>
+        <!--Pagination End-->
     </div>
 </div>
 
