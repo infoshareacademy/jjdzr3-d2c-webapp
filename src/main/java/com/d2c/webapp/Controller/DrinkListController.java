@@ -27,8 +27,6 @@ public class DrinkListController {
      @Autowired
     DrinkService drinkService;
 
-
-
     @GetMapping(value = "/showAllDrinks")
     public ModelAndView getShowAllDrinks3(
             Model model, @RequestParam("page")Optional<Integer>page, @RequestParam("size") Optional<Integer>size) {
@@ -58,8 +56,6 @@ public class DrinkListController {
         modelAndView.addObject("pager", pager);
         return modelAndView;
     }
-
-
     // TODO Paginacja i ostylizowanie jej  https://frontbackend.com/thymeleaf/spring-boot-bootstrap-thymeleaf-pagination-jpa-liquibase-h2
     // TODO Ostylizowanie wyniku Search
     // TODO Próba podłączenia przyciksów filtracyjnych do filtrowania
