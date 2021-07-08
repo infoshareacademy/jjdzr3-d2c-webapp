@@ -13,27 +13,17 @@
             font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;}
         .tg .tg-0pky{border-color:inherit;text-align:left;vertical-align:top}
     </style>
-
-
     <!--Problematyczne-->
-
-
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
-
 
     <link th:href="@{/webjars/bootstrap/3.3.7-1/css/bootstrap.min.css}" rel="stylesheet"/>
 
-
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
     <!--Problematyczne-->
     <link th:href="@{/css/style.css}" rel="stylesheet"/>
 </head>
 <body>
 <div th:insert="style/navbar :: navbar "/>
-
-
 <div class="container" style="    padding-top: 50px;">
-
-
     <div style="align-self: center; text-align: -webkit-center;justify-content: center; margin-right: 100px; margin-left: 100px; margin-top: 20px; margin-bottom: 30px">
         <table class="tg">
 
@@ -88,7 +78,6 @@
                     <br>
                     <span>Measure: </span>
                     <span style="height: 20px" th:text="${drink.getIngredients().get(3).getMeasure}"/>
-
                 </span>
                     </th>
                     <th class="tg-0pky" style="width: 186px; height: 87px; ">
@@ -99,31 +88,24 @@
                     <br>
                     <span>Measure: </span>
                     <span style="height: 20px" th:text="${drink.getIngredients().get(4).getMeasure}"/>
-
                 </span>
                     </th>
                 </tr>
                 </thead>
-
             </div>
         </table>
         <!--Tabela End-->
-
     </div>
+<!-- Containter upper Footer Start-->
 
 <div class="container">
-    <div class="row">
 
-    </div>
-    <div class="row">
-
-    </div>
     <div class="row">
         <!--Per Page Start-->
         <div class="form-group col-md-1 page-select">
             <div class="col-sm-3" th:height="20">
                 <div class="item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="border-left-width: 50px; padding-left: 100px;">
                         Per Page
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -141,28 +123,25 @@
         <!--Per Page End-->
         <!--Pagination Start-->
 
-        <div th:if="${persons.totalPages != 1}" class="form-group col-md-11 pagination-container" >
+        <div th:if="${persons.totalPages != 1}" class="form-group col-md-11 pagination-container" style="padding-left: 770px;">
             <ul class="pagination">
                 <li th:class="${persons.number == 0} ? disabled">
-                    <a class="pageLink" th:href="@{/showAllDrinks3(size=${drinkPage.size}, page=1)}">&laquo;</a>
+                    <a p th:class="page-link" th:href="@{/showAllDrinks3(size=${drinkPage.size}, page=1)}">&laquo;</a>
                 </li>
-
-
-
                 <li th:class="${persons.number == 0} ? disabled">
-                    <a class="pageLink" th:href="@{/showAllDrinks3(size=${drinkPage.size}, page=${persons.number})}">&larr;</a>
+                    <a p th:class="page-link" th:href="@{/showAllDrinks3(size=${drinkPage.size}, page=${persons.number})}">&larr;</a>
                 </li>
                 <li th:class="${persons.number == (page - 1)} ? 'active pointer-disabled'"
                     th:each="page : ${#numbers.sequence(pager.startPage, pager.endPage)}">
-                    <a class="pageLink" th:href="@{/showAllDrinks3(size=${drinkPage.size}, page=${page})}"
+                    <a p th:class="page-link" th:href="@{/showAllDrinks3(size=${drinkPage.size}, page=${page})}"
                        th:text="${page}"></a>
                 </li>
                 <li th:class="${persons.number + 1 == persons.totalPages} ? disabled">
-                    <a class="pageLink"
+                    <a p th:class="page-link"
                        th:href="@{/showAllDrinks3(size=${drinkPage.size}, page=${persons.number + 2})}">&rarr;</a>
                 </li>
                 <li th:class="${persons.number + 1 == persons.totalPages} ? disabled">
-                    <a class="pageLink"
+                    <a p th:class="page-link"
                        th:href="@{/showAllDrinks3(size=${drinkPage.size}, page=${persons.totalPages})}">&raquo;</a>
                 </li>
             </ul>
@@ -172,7 +151,7 @@
 </div>
 
 </div>
-<!--Drink Table End -->
+<!-- Containter upper Footer End-->
 <div th:insert="style/navbar :: footer "/>
 </body>
 </html>
