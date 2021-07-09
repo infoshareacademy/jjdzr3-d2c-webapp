@@ -3,14 +3,16 @@ package com.d2c.webapp.Controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
+
+
 @Controller
 public class SubController {
-
+// userController User/Login
     @GetMapping(value = "/login")
     public String getLogin() {
         return "Managements/login";
     }
-
+    // userController User/Sign-Up
     @GetMapping(value = "/Sign-Up")
     public String getSignUp() {
         return "Managements/Sign-Up";
@@ -36,14 +38,15 @@ public class SubController {
         return "subSites/Favorites";
     }
 
-    @GetMapping(value = "/showAllDrinks")
-    public String getShowAllDrinks() {
-        return "subSites/showAllDrinks";
-    }
-
     @GetMapping(value = "/Search")
     public String getSearch() {
         return "subSites/Search";
     }
+
+
+
+
+
+
 
 }
