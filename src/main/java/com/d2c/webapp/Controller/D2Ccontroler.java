@@ -1,5 +1,6 @@
 package com.d2c.webapp.Controller;
 
+import com.d2c.webapp.Service.DrinkService;
 import com.infoshareademy.Filter;
 import com.infoshareademy.Menu;
 import com.infoshareademy.Search;
@@ -7,6 +8,7 @@ import com.infoshareademy.data.DrinkParser;
 import com.infoshareademy.domain.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,6 +21,9 @@ import java.util.stream.Collectors;
 @Controller
 @RequestMapping("/d2c")
 public class D2Ccontroler {
+
+    @Autowired
+    DrinkService drinkService;
 
     private static Logger logger = LoggerFactory.getLogger(D2Ccontroler.class);
 
@@ -52,9 +57,9 @@ public class D2Ccontroler {
                             ) {
         DrinkParser drinkParser = new DrinkParser();
         DrinkRepository drinkRepository = drinkParser.readFileIntoDrinkRepository();
-        List<Drink> drinks = new ArrayList<>();
+        List<Drink> drinks = drinkService.getDrinkList();
         if (item!= null) {
-            drinks.addAll(Search.searchItemsForQuery(drinkRepository, item));
+            drinks = Search.searchItemsForQuery(drinkRepository, item);
         }
         if (type != null) {
             drinks = Filter.filterByType(drinks, type);

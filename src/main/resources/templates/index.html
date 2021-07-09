@@ -60,7 +60,7 @@
                      data-bs-parent="#accordionExample">
                     <div class="accordion-body" style="justify-content: start">
                         <code>
-                            <form th:action="@{/d2c/search}">TYPE:
+                            <form th:action="@{/d2c/search}" th:href="@{/d2c/search}" action="/d2c/search.html">TYPE:
                                 <div class="form-check form-check-inline">
                                     <input class="form-check-input" type="radio" name="RadioOptions" id="typeRadio1">
                                     <label class="form-check-label" for="typeRadio1">ALKOHOL FREE</label>
@@ -75,7 +75,7 @@
                                 <div class="form-check form-check-inline">
                                     <input class="form-check-input" type="radio" name="RadioOptions2"
                                            id="glassTypeRadio1"
-                                           value="option1" >
+                                           value="option1">
                                     <label class="form-check-label" for="glassTypeRadio1">COCKTAIL</label>
                                 </div>
                                 <div class="form-check form-check-inline">
@@ -139,10 +139,10 @@
                                     <label class="form-check-label" for="glassTypeRadio11">CHAMPAGNE_FLUTE</label>
                                 </div>
                             </form>
-                            <form>CATEGORY:
+                            <form th:action="@{/d2c/search}" th:href="@{/d2c/search}" action="/d2c/search.html">CATEGORY:
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="RadioOptions3" id="categoryRadio1"
-                                           value="option1">
+                                    <input class="form-check-input" type="radio" name="glassType" id="categoryRadio1"
+                                           value="COCKTAIL">
                                     <label class="form-check-label" for="categoryRadio1">COFFEE_OR_TEA</label>
                                 </div>
                                 <div class="form-check form-check-inline">
@@ -165,7 +165,7 @@
                                            value="option2">
                                     <label class="form-check-label" for="categoryRadio5">SHOT</label>
                                 </div>
-                                <button class="btn btn-primary" type="submit">Submit form</button>
+                                <button class="btn btn-primary" type="submit"  >Submit form</button>
                             </form>
                         </code>
                     </div>
