@@ -13,7 +13,6 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -46,15 +45,17 @@ public class D2Ccontroler {
 
     @RequestMapping("/search")
     public String getSearch(Model model,
-                            @RequestParam(name = "input", required = true) String item,
+                            @RequestParam(name = "input", required = false) String item,
                             @RequestParam(name = "type", required = false) Type type,
                             @RequestParam(name = "glassType", required = false) GlassType glassType,
                             @RequestParam(name = "category", required = false)  Category category
                             ) {
         DrinkParser drinkParser = new DrinkParser();
         DrinkRepository drinkRepository = drinkParser.readFileIntoDrinkRepository();
-        List<Drink> drinks = Search.searchItemsForQuery(drinkRepository, item);
-
+        List<Drink> drinks = new ArrayList<>();
+        if (item!= null) {
+            drinks.addAll(Search.searchItemsForQuery(drinkRepository, item));
+        }
         if (type != null) {
             drinks = Filter.filterByType(drinks, type);
         }
