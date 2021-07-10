@@ -126,7 +126,7 @@
             <div th:if="${persons.totalPages != 1}" class="form-group col-md-11 pagination-container" style="padding-left: 770px;">
                 <ul class="pagination">
                     <li th:class="${persons.number == 0} ? disabled">
-                        <a p th:class="page-link" th:href="@{/d2c/search(size=${drinkPage.size}, page=1)}">&laquo;</a>
+                        <a p th:class="page-link" th:href="@{/d2c/search(size=${drinkPage.size}, page=1), glassType=${glassType}, type=${type}, category=${category}}">&laquo;</a>
                     </li>
                     <li th:class="${persons.number == 0} ? disabled">
                         <a p th:class="page-link" th:href="@{/d2c/search(size=${drinkPage.size}, page=${persons.number}, glassType=${glassType}, type=${type}, category=${category})}">&larr;</a>
