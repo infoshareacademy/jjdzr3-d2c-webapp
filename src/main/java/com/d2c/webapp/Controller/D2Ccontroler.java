@@ -48,7 +48,7 @@ public class D2Ccontroler {
         return "Menu";
     }
 
-    @RequestMapping("/search")
+/*    @RequestMapping("/search")
     public String getSearch(Model model,
                             @RequestParam(name = "input", required = false) String item,
                             @RequestParam(name = "type", required = false) Type type,
@@ -81,7 +81,7 @@ public class D2Ccontroler {
             model.addAttribute("listOfDrinks", drinks);
         }
         return "search.html";
-    }
+    }*/
 
 
 //    private static List<Drink> filterByType(List<Drink> drinks, Type type) {

@@ -28,7 +28,6 @@ public class DrinkService {
     }
 
     public Page<Drink> findPaginated(Pageable pageable) {
-        this.drinkList = getDrinkList();
         int pageSize = pageable.getPageSize();
         int currentPage = pageable.getPageNumber();
         int startItem = currentPage * pageSize;
@@ -47,4 +46,7 @@ public class DrinkService {
             return drinkPage;
     }
 
+    public void setDrinkList(List<Drink> drinkList) {
+        this.drinkList = drinkList;
+    }
 }
