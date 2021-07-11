@@ -10,6 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -34,8 +35,31 @@ public class D2Ccontroler {
         List<Drink> drinks = drinkParser.readFileIntoDrinkRepository().getDrinks();
         model.addAttribute("listOfDrinks", drinks);
 
-        return "/allDrinks.html";
+        return "/allDrinks";
     }
+
+    @GetMapping(value = "/singleDrink")
+    public String  getSinDrink(Model model, @RequestParam ("name") String name) {
+        List <Drink> drinks = getDrink(name);
+        if (drinks == null) {
+            return ResponseEntity.notFound().build().toString();
+        } else {
+            model.addAttribute("name", name);
+            model.addAttribute("listOfDrinks", drinks);
+            return "singleDrink";
+        }
+    }
+    private List<Drink> getDrink(String name) {
+        List<Drink> drinkList = drinkService.getDrinkList();
+        List<Drink> filteredDrinks = drinkList
+                .stream()
+                .filter(a -> a.getDrinkName().toLowerCase().equals(name.toLowerCase()))
+                .collect(Collectors.toList());
+        System.out.println(filteredDrinks);
+        return  filteredDrinks;
+    }
+
+
 
     @GetMapping("/menu")
     public String getMenu(Model model) {
@@ -47,59 +71,5 @@ public class D2Ccontroler {
         menu.menu(drinkParser, drinkRepository, drinks);
         return "Menu";
     }
-
-/*    @RequestMapping("/search")
-    public String getSearch(Model model,
-                            @RequestParam(name = "input", required = false) String item,
-                            @RequestParam(name = "type", required = false) Type type,
-                            @RequestParam(name = "glassType", required = false) GlassType glassType,
-                            @RequestParam(name = "category", required = false)  Category category
-                            ) {
-        DrinkParser drinkParser = new DrinkParser();
-        DrinkRepository drinkRepository = drinkParser.readFileIntoDrinkRepository();
-        List<Drink> drinks = drinkService.getDrinkList();
-        if (item!= null) {
-            drinks = Search.searchItemsForQuery(drinkRepository, item);
-        }
-        if (type != null) {
-            drinks = Filter.filterByType(drinks, type);
-        }
-
-        if (glassType != null) {
-            drinks = Filter.filterByGlassType(drinks, glassType);
-        }
-
-        if (category != null) {
-            drinks = Filter.filterByCategory(drinks, category);
-        }
-
-
-        if (drinks.isEmpty()) {
-            model.addAttribute("noDrinksFound", "No drinks found for given criteria: input too short or no drink available");
-        }
-        {
-            model.addAttribute("listOfDrinks", drinks);
-        }
-        return "search.html";
-    }*/
-
-
-//    private static List<Drink> filterByType(List<Drink> drinks, Type type) {
-//        return drinks.stream()
-//                .filter(drink -> drink.getDrinkType() == type)
-//                .collect(Collectors.toList());
-//    }
-//
-//    private static List<Drink> filterByGlassType(List<Drink> drinks, GlassType glassType) {
-//        return drinks.stream()
-//                .filter(drink -> drink.getGlassType() == glassType)
-//                .collect(Collectors.toList());
-//    }
-//
-//    private static List<Drink> filterByCategory(List<Drink> drinks, Category category) {
-//        return drinks.stream()
-//                .filter(drink -> drink.getDrinkCategory() == category)
-//                .collect(Collectors.toList());
-//    }
 
 }

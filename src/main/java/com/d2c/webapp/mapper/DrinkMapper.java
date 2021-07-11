@@ -15,4 +15,3 @@ public class DrinkMapper {
         return dao;
     }
 }
-

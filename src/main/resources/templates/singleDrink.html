@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>SingleDrink</title>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
+          integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
+          crossorigin="anonymous"></script>
+</head>
+<body>
+<div th:insert="style/navbar :: navbar "></div>
+<div
+        class="container bg-image p-4 text-center shadow-1-strong rounded mb-5 text-black "
+        style="background-position: center; background-repeat: no-repeat; background-color: lightblue; background-size: 1400px ">
+
+  <h5 class="card-title text-white ">Drink details</h5>
+  <tr th:each="drink : ${listOfDrinks}">
+    <img th:src="@{${drink.getDrinkImg()}}" class="card-img-top w-25 p-3" alt="..."/>
+    <br>
+    <label for="drinkName" class="form-label text-white">Drink name</label>
+    <li class="form-control" id="drinkName" th:text="${drink.getDrinkName()}"></li>
+    <label for="drinkCategory" class="form-label text-white">Drink category</label>
+    <li class="form-control" id="drinkCategory" th:text="${drink.getDrinkCategory()}"></li>
+    <label for="glassType" class="form-label text-white">Glass to drink</label>
+    <li class="form-control" id="glassType" th:text="${drink.getGlassType()}"></li>
+    <label for="recipe" class="form-label text-white">Recipe</label>
+    <li class="form-control" id="recipe" th:text="${drink.getPreparationInstruction()}"></li>
+    <label class="form-check-label  text-white">Ingredients</label>
+    <tabela class="form-control ">
+
+      <td class="form-control " th:if="${drink.getIngredients().get(0).getIngredientName != null}">
+        <span th:text="${drink.getIngredients.get(0).getIngredientName}">ingredient</span>  :
+        <span  th:text="${drink.getIngredients().get(0).getMeasure}"> ingredient</span> , </td>
+      <br>
+      <td class="form-control" th:if="${drink.getIngredients().get(1).getIngredientName != null}">
+        <span th:text="${drink.getIngredients.get(1).getIngredientName}">ingredients </span> :
+        <span th:text="${drink.getIngredients().get(1).getMeasure}"> ingredient</span>, </td>
+      <br>
+      <td class="form-control " th:if="${drink.getIngredients().get(2).getIngredientName != null}">
+        <span th:text="${drink.getIngredients.get(2).getIngredientName}">ingredients </span> :
+        <span th:text="${drink.getIngredients().get(2).getMeasure}"> ingredient</span> , </td>
+      <br>
+      <td class="form-control " th:if="${drink.getIngredients().get(3).getIngredientName != null}">
+        <span th:text="${drink.getIngredients.get(3).getIngredientName}">ingredients </span> :
+        <span th:text="${drink.getIngredients().get(3).getMeasure}"> ingredient</span>, </td>
+      <br>
+      <td class="form-control " th:if="${drink.getIngredients().get(4).getIngredientName != null}">
+        <span th:text="${drink.getIngredients.get(4).getIngredientName}">ingredients </span> :
+        <span th:text="${drink.getIngredients().get(4).getMeasure}"> ingredient</span> </td>
+
+    </tabela>
+
+    <label class="form-check-label  text-white" for="drinkType">Drink type</label>
+    <li class="form-control" id="drinkType" th:text="${drink.getDrinkType()}"></li>
+
+  </tr>
+
+  <a th:href="@{/showAllDrinks}" class="card-link">Show all drinks</a>
+</div>
+</div>
+</div>
+</div>
+<div th:insert="style/navbar :: footer "></div>
+</body>
+</html>
