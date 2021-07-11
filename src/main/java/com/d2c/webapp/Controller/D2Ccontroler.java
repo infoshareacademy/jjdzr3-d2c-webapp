@@ -1,11 +1,14 @@
 package com.d2c.webapp.Controller;
 
+import com.d2c.webapp.Service.DrinkService;
 import com.infoshareademy.Filter;
 import com.infoshareademy.Menu;
 import com.infoshareademy.data.DrinkParser;
 import com.infoshareademy.domain.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -19,6 +22,8 @@ import static com.infoshareademy.Search.*;
 @RequestMapping("/d2c")
 public class D2Ccontroler {
 
+    @Autowired
+    DrinkService drinkService;
 
 
     private static Logger logger = LoggerFactory.getLogger(D2Ccontroler.class);
@@ -34,41 +39,45 @@ public class D2Ccontroler {
     }
 
 
-    @RequestMapping(value = "/singleDrink")
-    public String getDrink(Model model, @RequestParam("name") String name){
-
-        DrinkParser drinkParser = new DrinkParser();
-        DrinkRepository drinkRepository = drinkParser.readNewDataBase();
-        List<Drink> filteredDrinks = drinkRepository.getDrinks()
+    @GetMapping(value = "/singleDrink")
+    public String  getSinDrink(Model model, @RequestParam ("name") String name) {
+        List <Drink> drinks = getDrink(name);
+        if (drinks == null) {
+            return ResponseEntity.notFound().build().toString();
+        } else {
+            model.addAttribute("name", name);
+            model.addAttribute("listOfDrinks", drinks);
+            return "singleDrink";
+        }
+    }
+    private List<Drink> getDrink(String name) {
+        List<Drink> drinkList = drinkService.getDrinkList();
+        List<Drink> filteredDrinks = drinkList
                 .stream()
-                .filter(a -> a.getDrinkName().toLowerCase().contains(name))
+                .filter(a -> a.getDrinkName().toLowerCase().equals(name.toLowerCase()))
                 .collect(Collectors.toList());
-
-        Drink drink = filteredDrinks.get(0);
-        model.addAttribute("drink", drink);
-        return "singleDrink";
+        System.out.println(filteredDrinks);
+        return  filteredDrinks;
     }
 
-    private Optional<Drink> getDrink(String name) {
-        DrinkParser drinkParser = new DrinkParser();
-        DrinkRepository drinkRepository = drinkParser.readNewDataBase();
-        List<Drink> filteredDrinks = drinkRepository.getDrinks()
-                .stream()
-                .filter(a -> a.getDrinkName().toLowerCase().contains(name))
-                .collect(Collectors.toList());
-        return  filteredDrinks.stream().findFirst();
-    }
     @GetMapping ("/AddDrink")
     public String addSingleDrink(Model model){
+
         model.addAttribute("drink", new Drink());
+        model.addAttribute("ingredients", drinkService.getIngredientsList());
+
         return "Managements/AddDrink";
     }
-    @PostMapping("singleDrink")
+
+
+    @PostMapping("/AddDrink")
     public String addDrink(@ModelAttribute Drink drink) {
-
-
-        return "redirect:/allDrinks";
+        int id = 44;
+        drink.setDrinkId(id);
+        System.out.println(drink);
+        return "redirect:/d2c/allDrinks";
     }
+
 
 
     @GetMapping("/menu")

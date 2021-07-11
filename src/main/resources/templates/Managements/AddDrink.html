@@ -3,8 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <title>Add Drink</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
+            crossorigin="anonymous"></script>
 
 </head>
 <body>
@@ -14,108 +17,91 @@
         style="background-position: center; background-repeat: no-repeat; background-color: lightblue; background-size: 1400px ">
     <h1 class="mb-3 h2" style="color: black">Create your new drink</h1>
 
-
-    <form th:action="@{/singleDrink}" th:object="${drink}" method="post">
-        <label for="drinkId"  class="form-label">DrinkId</label>
-<!--        th:field="*{drinkId}"-->
-        <input type = "text" id="drinkId" class="form-control" placeholder="Enter id" th:field="*{drinkId}" >
+    <form th:action="@{/d2c/AddDrink}" th:object="${drink}" method="post">
 
         <label for="drinkName" class="form-label">Drink name</label>
-        <input type = "text" class="form-control" id="drinkName"  placeholder="Enter name"  th:field="*{drinkName}"  >
+        <input type="text" class="form-control" id="drinkName" placeholder="Enter name" th:field="*{drinkName}">
 
         <label for="drinkCategory" class="form-label">Choose drink category</label>
-        <input class="form-control" list="drinkCategoryList" id="drinkCategory" placeholder="Category to search..." th:field="*{drinkCategory}"  >
-        <datalist id="drinkCategoryList">
-            <option value="Coffee / Tea">
-            <option value="Cocktail">
-            <option value="Ordinary Drink">
-            <option value="Punch / Party Drink">
-            <option value="Shot">
-        </datalist>
+        <select name="drinkCategory" class="form-control" id="drinkCategory"  placeholder="Category to search...">
+            <option value="">Choose</option>
+            <option th:each="dCategory: ${T(com.infoshareademy.domain.Category).values()}" th:value="${dCategory}"
+                    th:text="${dCategory.label}"></option>
+        </select>
+
         <label for="glassType" class="form-label">Choose glass to drink</label>
-        <input class="form-control" list="glassTypeList" id="glassType" placeholder="Category to search..." th:field="*{glassCategory}">
-        <datalist id="glassTypeList">
-            <option value="Cocktail glass">
-            <option value="Shot glass">
-            <option value="Old-fashioned glass">
-            <option value="Collins glass">
-            <option value="Highball glass">
-            <option value="Irish coffee cup">
-            <option value="Copper Mug">
-            <option value="Coffee Mug">
-            <option value="Punch bowl">
-            <option value="Pint glass">
-            <option value="Champagne flute">
-        </datalist>
+        <select name="glassType" class="form-control" id="glassType" placeholder="Glass type to search...">
+            <option value="">Choose</option>
+            <option th:each="dGlassType: ${T(com.infoshareademy.domain.GlassType).values()}" th:value="${dGlassType}"
+                    th:text="${dGlassType.label}"></option>
+        </select>
+
         <label for="recipe" class="form-label">Recipe</label>
-        <input class="form-control" id="recipe" rows="3"  th:field="*{preparationInstruction}">
+        <input class="form-control" id="recipe" rows="3" th:field="*{preparationInstruction}" placeholder="Recipe...">
 
-        <label for="type" class="form-label">Choose type of drink - alcohol or alkohol free</label>
-        <input class="form-control" list="typeList" id="type" placeholder="Category to search..." th:field="*{drinkType}" >
-        <datalist id="typeList">
-            <option value="Non alcoholic">
-            <option value="Alcoholic">
-        </datalist>
+        <!--        <label for="glassType" class="form-label">Choose how many ingredients would you want to add</label>-->
 
-        <label for="glassType" class="form-label">Choose how many ingredients would you want to add</label>
         <div class="form-check form-check-inline">
-            <input class="form-check form-check-inline" type="checkbox" id="inlineCheckbox1" name="nazwa" value="wartość" placeholder="1" onclick="document.getElementById('identyfikator').style.display = this.checked ? 'block' : 'none'; this.form.elements['nazwa1'].disabled = !this.checked" rows="1"  >
-            <label class="form-check-label" for="inlineCheckbox1">1</label>
-            <div id="identyfikator" style="display: none">
-                <input type="text" name="nazwa1" disabled>
-            </div>
+            <input class="form-check form-check-inline" type="checkbox" id="inlineCheckbox5" name="nazwa"
+                   value="wartość" placeholder="5"
+                   onclick="document.getElementById('identyfikator5').style.display = this.checked ? 'block' : 'none'; this.form.elements['nazwa11'].disabled =  this.form.elements['nazwa1'].disabled =  this.form.elements['nazwa12'].disabled = this.form.elements['nazwa2'].disabled = this.form.elements['nazwa13'].disabled =this.form.elements['nazwa3'].disabled =  this.form.elements['nazwa14'].disabled =this.form.elements['nazwa4'].disabled =this.form.elements['nazwa15'].disabled =   this.form.elements['nazwa5'].disabled=!this.checked">
+            <label class="form-check-label" for="inlineCheckbox5">Fill in ingredients</label>
+            <table id="identyfikator5" style="display: none" >
+                <tr th:each="ingredient, itemStat : *{ingredients}">
+                    <td><input name="nazwa11"   disabled th:field="*{ingredients[__${itemStat.index}__].ingredientName}">
+                    </td>
+                    <td><input name="nazwa1" disabled th:field="*{ingredients[__${itemStat.index}__].measure}">> </td>
+                </tr>
+                <tr>
+                    <td><input name="nazwa12" disabled ></td>
+                    <td><input type="text" name="nazwa2" disabled></td>
+                </tr>
+
+                <tr>
+                    <td><input type="text" name="nazwa13" disabled></td>
+                    <td><input type="text" name="nazwa3" disabled></td>
+                </tr>
+
+                <tr>
+                    <td><input type="text" name="nazwa14" disabled></td>
+                    <td><input type="text" name="nazwa4" disabled></td>
+                </tr>
+
+                <tr>
+                    <td><input type="text" name="nazwa15" disabled></td>
+                    <td><input type="text" name="nazwa5" disabled></td>
+                </tr>
+            </table>
         </div>
-        <div class="form-check form-check-inline">
-            <input class="form-check form-check-inline" type="checkbox" id="inlineCheckbox2" name="nazwa" value="wartość" placeholder="2" onclick="document.getElementById('identyfikator2').style.display = this.checked ? 'block' : 'none'; this.form.elements['nazwa2'].disabled = this.form.elements['nazwa3'].disabled = !this.checked">
-            <label class="form-check-label" for="inlineCheckbox2">2</label>
-            <div id="identyfikator2" style="display: none">
-                <input type="text" name="nazwa2" disabled >
-                <input type="text" name="nazwa3" disabled>
-            </div>
-        </div>
-        <div class="form-check form-check-inline">
-            <input class="form-check form-check-inline" type="checkbox" id="inlineCheckbox3" name="nazwa" value="wartość" placeholder="3" rows="1" onclick="document.getElementById('identyfikator3').style.display = this.checked ? 'block' : 'none'; this.form.elements['nazwa4'].disabled = this.form.elements['nazwa5'].disabled = this.form.elements['nazwa6'].disabled =!this.checked">
-            <label class="form-check-label" for="inlineCheckbox3">3</label>
-            <div id="identyfikator3" style="display: none">
-                <input type="text" name="nazwa4" disabled>
-                <input type="text" name="nazwa5" disabled>
-                <input type="text" name="nazwa6" disabled>
-            </div>
-        </div>
-        <div class="form-check form-check-inline">
-            <input class="form-check form-check-inline" type="checkbox" id="inlineCheckbox4" name="nazwa" value="wartość" placeholder="4" onclick="document.getElementById('identyfikator4').style.display = this.checked ? 'block' : 'none'; this.form.elements['nazwa7'].disabled = this.form.elements['nazwa8'].disabled = this.form.elements['nazwa9'].disabled = this.form.elements['nazwa10'].disabled=!this.checked">
-            <label class="form-check-label" for="inlineCheckbox4">4</label>
-            <div id="identyfikator4" style="display: none">
-                <input type="text" name="nazwa7" disabled>
-                <input type="text" name="nazwa8" disabled>
-                <input type="text" name="nazwa9" disabled>
-                <input type="text" name="nazwa10" disabled>
-            </div>
-        </div>
-        <div class="form-check form-check-inline">
-            <input class="form-check form-check-inline" type="checkbox" id="inlineCheckbox5" name="nazwa" value="wartość" placeholder="5" onclick="document.getElementById('identyfikator5').style.display = this.checked ? 'block' : 'none'; this.form.elements['nazwa11'].disabled = this.form.elements['nazwa12'].disabled = this.form.elements['nazwa13'].disabled = this.form.elements['nazwa14'].disabled = this.form.elements['nazwa15'].disabled=!this.checked">
-            <label class="form-check-label" for="inlineCheckbox5">5</label>
-            <div id="identyfikator5" style="display: none">
-                <input type="text" name="nazwa11" disabled>
-                <input type="text" name="nazwa12" disabled>
-                <input type="text" name="nazwa13" disabled>
-                <input type="text" name="nazwa14" disabled>
-                <input type="text" name="nazwa15" disabled>
-            </div>
-        </div>
+
+        <tr></tr>
+        <br>   <label for="drinkType" class="form-label" >Drink type category</label>
+        <select name="drinkType" class="form-control" id="drinkType"  placeholder="Choose drink type...">
+            <option value="">Choose</option>
+            <option th:each="dType: ${T(com.infoshareademy.domain.Type).values()}" th:value="${dType}"
+                    th:text="${dType.label}"></option>
+        </select>
+
+        <label for="drinkImg" class="form-label">Add drink image</label>
+        <input type="text" class="form-control" id="drinkImg" placeholder="Enter drink img" th:field="*{drinkImg}">
 
 
         <button type="submit" value="Wyślij">Submit</button>
     </form>
 </div>
-<p>Space for Txt :)</p>
 
 
 <div th:insert="style/navbar :: footer "></div>
 
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+        integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+        crossorigin="anonymous"></script>
 
 </body>
 </html>

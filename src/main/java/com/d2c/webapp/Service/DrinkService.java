@@ -4,6 +4,7 @@ package com.d2c.webapp.Service;
 import com.infoshareademy.data.DrinkParser;
 import com.infoshareademy.domain.Drink;
 import com.infoshareademy.domain.DrinkRepository;
+import com.infoshareademy.domain.Ingredient;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
@@ -13,11 +14,14 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class DrinkService {
 
     private List<Drink> drinkList;
+    private List<Ingredient> ingredientsList;
 
     public List<Drink> getDrinkList() {
         this.drinkList = new ArrayList<>();
@@ -25,6 +29,26 @@ public class DrinkService {
         List<Drink> drinks = drinkParser.readFileIntoDrinkRepository().getDrinks();
         drinkList.addAll(drinks);
         return drinkList;
+    }
+
+    public List<Ingredient> getIngredientsList(){
+        this.ingredientsList = new ArrayList<>();
+        Ingredient ingredient = new Ingredient();
+        Drink drink = new Drink();
+        List <Ingredient> ingredients = drink.getIngredients();
+        ingredientsList.addAll(ingredients);
+        return ingredientsList;
+    }
+
+
+    private Optional<Drink> getDrink(String name) {
+        DrinkParser drinkParser = new DrinkParser();
+        DrinkRepository drinkRepository = drinkParser.readNewDataBase();
+        List<Drink> filteredDrinks = drinkRepository.getDrinks()
+                .stream()
+                .filter(a -> a.getDrinkName().toLowerCase().contains(name))
+                .collect(Collectors.toList());
+        return  filteredDrinks.stream().findFirst();
     }
 
 

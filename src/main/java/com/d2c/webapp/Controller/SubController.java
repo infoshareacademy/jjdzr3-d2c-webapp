@@ -21,10 +21,7 @@ public class SubController {
         return "Managements/Menagments";
     }
 
-    @GetMapping(value = "/AddDrink")
-    public String getAddDrink() {
-        return "Managements/AddDrink";
-    }
+
 
     @GetMapping(value = "/AdvSearch")
     public String getAdvSearch() {
@@ -46,9 +43,5 @@ public class SubController {
         return "subSites/Search";
     }
 
-    @GetMapping(value = "/singleDrink")
-    public String getDrink() {
-        return "singleDrink";
-    }
 
 }
