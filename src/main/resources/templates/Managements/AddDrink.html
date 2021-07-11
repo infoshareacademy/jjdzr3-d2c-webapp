@@ -17,7 +17,7 @@
         style="background-position: center; background-repeat: no-repeat; background-color: lightblue; background-size: 1400px ">
     <h1 class="mb-3 h2" style="color: black">Create your new drink</h1>
 
-    <form th:action="@{/d2c/AddDrink}" th:object="${drink}" method="post">
+    <form th:action="@{/AddDrink}" th:object="${drink}" method="post">
 
         <label for="drinkName" class="form-label">Drink name</label>
         <input type="text" class="form-control" id="drinkName" placeholder="Enter name" th:field="*{drinkName}">
@@ -46,11 +46,13 @@
                    value="wartość" placeholder="5"
                    onclick="document.getElementById('identyfikator5').style.display = this.checked ? 'block' : 'none'; this.form.elements['nazwa11'].disabled =  this.form.elements['nazwa1'].disabled =  this.form.elements['nazwa12'].disabled = this.form.elements['nazwa2'].disabled = this.form.elements['nazwa13'].disabled =this.form.elements['nazwa3'].disabled =  this.form.elements['nazwa14'].disabled =this.form.elements['nazwa4'].disabled =this.form.elements['nazwa15'].disabled =   this.form.elements['nazwa5'].disabled=!this.checked">
             <label class="form-check-label" for="inlineCheckbox5">Fill in ingredients</label>
-            <table id="identyfikator5" style="display: none"  th:action="@{/d2c/AddDrink}" th:object="${ingredient}" method="post" th:each="ingredients, itemStat : ${ingredients}">
+            <table id="identyfikator5" style="display: none"  >
+<!--                th:each="ingredients, itemStat : ${ingredients}"-->
                 <tr >
-                    <td><input name="nazwa11"   disabled th:field="*{ingredients[__${itemStat.index}__].ingredientName}">
+<!--                    th:field="*{ingredients[__${itemStat.index}__].ingredientName}"-->
+                    <td><input name="nazwa11"   disabled >
                     </td>
-                    <td><input name="nazwa1" disabled th:field="*{ingredients[__${itemStat.index}__].measure}">> </td>
+                    <td><input name="nazwa1" disabled> </td>
                 </tr>
                 <tr>
                     <td><input name="nazwa12" disabled ></td>

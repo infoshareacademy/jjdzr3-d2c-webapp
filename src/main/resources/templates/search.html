@@ -39,7 +39,7 @@
                     <th class="tg-0pky">Favorite</th>
                 </tr>
                 <tr> <!--                Integrents List:                                -->
-                    <td class="tg-0pky">Integrents List: -> <br><a href="/">Instruction Details</a></td>
+                    <td class="tg-0pky">Integrents List: -> <br><a th:href="@{/d2c/singleDrink(name=${drink.getDrinkName()})}">Instruction Details</a></td>
                     <th class="tg-0pky" style="width: 186px; height: 87px; ">
                 <span th:if="${drink.getIngredients().get(0).getIngredientName != null}">
                     <span style="height: 20px" th:text="${drink.getIngredients().get(0).getIngredientName}"/>

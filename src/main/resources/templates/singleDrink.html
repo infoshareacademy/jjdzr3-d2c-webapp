@@ -18,7 +18,7 @@
 
   <h5 class="card-title text-white ">Drink details</h5>
   <tr th:each="drink : ${listOfDrinks}">
-    <img th:src="@{${drink.getDrinkImg()}}" class="card-img-top" width="60px" height="60px" alt="..."/>
+    <img th:src="@{${drink.getDrinkImg()}}" class="card-img-top w-25 p-3" alt="..."/>
     <br>
     <label for="drinkName" class="form-label text-white">Drink name</label>
     <li class="form-control" id="drinkName" th:text="${drink.getDrinkName()}"></li>
@@ -58,7 +58,7 @@
 
   </tr>
 
-  <a th:href="@{allDrinks}" class="card-link">Show all drinks</a>
+  <a th:href="@{/showAllDrinks}" class="card-link">Show all drinks</a>
 </div>
 </div>
 </div>

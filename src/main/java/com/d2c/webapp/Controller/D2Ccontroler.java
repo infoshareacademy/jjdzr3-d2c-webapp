@@ -35,7 +35,7 @@ public class D2Ccontroler {
         List<Drink> drinks = drinkParser.readFileIntoDrinkRepository().getDrinks();
         model.addAttribute("listOfDrinks", drinks);
 
-        return "/allDrinks.html";
+        return "/allDrinks";
     }
 
     @GetMapping(value = "/singleDrink")
@@ -59,23 +59,6 @@ public class D2Ccontroler {
         return  filteredDrinks;
     }
 
-    @GetMapping ("/AddDrink")
-    public String addSingleDrink(Model model){
-
-        model.addAttribute("drink", new Drink());
-        model.addAttribute("ingredients", drinkService.getIngredientsList());
-
-        return "Managements/AddDrink";
-    }
-
-
-    @PostMapping("/AddDrink")
-    public String addDrink(@ModelAttribute Drink drink) {
-        int id = 44;
-        drink.setDrinkId(id);
-        System.out.println(drink);
-        return "redirect:/d2c/allDrinks";
-    }
 
 
     @GetMapping("/menu")
