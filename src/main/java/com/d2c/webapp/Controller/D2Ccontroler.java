@@ -68,6 +68,4 @@ public class D2Ccontroler {
         menu.menu(drinkParser, drinkRepository, drinks);
         return "Menu";
     }
-
-
 }
