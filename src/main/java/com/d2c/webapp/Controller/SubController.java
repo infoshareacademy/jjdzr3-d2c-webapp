@@ -2,6 +2,7 @@ package com.d2c.webapp.Controller;
 
 import com.d2c.webapp.Service.DrinkService;
 import com.infoshareademy.domain.Drink;
+import com.infoshareademy.domain.Ingredient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,12 +10,15 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 @Controller
 public class SubController {
 
 
+    @Autowired
+    DrinkService drinkService;
 
     @GetMapping(value = "/login")
     public String getLogin() {
@@ -55,7 +59,8 @@ public class SubController {
 
     @GetMapping ("/AddDrink")
     public String addSingleDrink(Model model){
-        model.addAttribute("drink", new Drink());
+        model.addAttribute("drink", drinkService.getIngredientsList());
+
         return "Managements/AddDrink";
     }
 
