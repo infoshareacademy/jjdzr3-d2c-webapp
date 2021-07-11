@@ -10,6 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -36,6 +37,46 @@ public class D2Ccontroler {
 
         return "/allDrinks.html";
     }
+
+    @GetMapping(value = "/singleDrink")
+    public String  getSinDrink(Model model, @RequestParam ("name") String name) {
+        List <Drink> drinks = getDrink(name);
+        if (drinks == null) {
+            return ResponseEntity.notFound().build().toString();
+        } else {
+            model.addAttribute("name", name);
+            model.addAttribute("listOfDrinks", drinks);
+            return "singleDrink";
+        }
+    }
+    private List<Drink> getDrink(String name) {
+        List<Drink> drinkList = drinkService.getDrinkList();
+        List<Drink> filteredDrinks = drinkList
+                .stream()
+                .filter(a -> a.getDrinkName().toLowerCase().equals(name.toLowerCase()))
+                .collect(Collectors.toList());
+        System.out.println(filteredDrinks);
+        return  filteredDrinks;
+    }
+
+    @GetMapping ("/AddDrink")
+    public String addSingleDrink(Model model){
+
+        model.addAttribute("drink", new Drink());
+        model.addAttribute("ingredients", drinkService.getIngredientsList());
+
+        return "Managements/AddDrink";
+    }
+
+
+    @PostMapping("/AddDrink")
+    public String addDrink(@ModelAttribute Drink drink) {
+        int id = 44;
+        drink.setDrinkId(id);
+        System.out.println(drink);
+        return "redirect:/d2c/allDrinks";
+    }
+
 
     @GetMapping("/menu")
     public String getMenu(Model model) {

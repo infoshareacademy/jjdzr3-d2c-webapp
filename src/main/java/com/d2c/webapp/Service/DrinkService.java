@@ -4,10 +4,9 @@ package com.d2c.webapp.Service;
 import com.infoshareademy.data.DrinkParser;
 import com.infoshareademy.domain.Drink;
 import com.infoshareademy.domain.DrinkRepository;
-<<<<<<< HEAD
+
 import com.infoshareademy.domain.Ingredient;
-=======
->>>>>>> origin/JJDZR3D2C-25
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
@@ -17,20 +16,16 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-<<<<<<< HEAD
+
 import java.util.Optional;
 import java.util.stream.Collectors;
-=======
->>>>>>> origin/JJDZR3D2C-25
 
 @Service
 public class DrinkService {
 
     private List<Drink> drinkList;
-<<<<<<< HEAD
+
     private List<Ingredient> ingredientsList;
-=======
->>>>>>> origin/JJDZR3D2C-25
 
     public List<Drink> getDrinkList() {
         this.drinkList = new ArrayList<>();
@@ -40,7 +35,7 @@ public class DrinkService {
         return drinkList;
     }
 
-<<<<<<< HEAD
+
     public List<Ingredient> getIngredientsList(){
         this.ingredientsList = new ArrayList<>();
         Ingredient ingredient = new Ingredient();
@@ -63,10 +58,6 @@ public class DrinkService {
 
 
     public Page<Drink> findPaginated(Pageable pageable) {
-        this.drinkList = getDrinkList();
-=======
-    public Page<Drink> findPaginated(Pageable pageable) {
->>>>>>> origin/JJDZR3D2C-25
         int pageSize = pageable.getPageSize();
         int currentPage = pageable.getPageNumber();
         int startItem = currentPage * pageSize;
@@ -82,17 +73,12 @@ public class DrinkService {
                 new PageImpl<Drink>(list, PageRequest.of(currentPage, pageSize), drinkList.size());
 
 
-<<<<<<< HEAD
         return drinkPage;
-    }
-
-
-=======
-            return drinkPage;
     }
 
     public void setDrinkList(List<Drink> drinkList) {
         this.drinkList = drinkList;
     }
->>>>>>> origin/JJDZR3D2C-25
+
+
 }
