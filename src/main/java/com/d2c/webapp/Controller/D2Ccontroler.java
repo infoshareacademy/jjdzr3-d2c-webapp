@@ -58,9 +58,6 @@ public class D2Ccontroler {
         System.out.println(filteredDrinks);
         return  filteredDrinks;
     }
-
-
-
     @GetMapping("/menu")
     public String getMenu(Model model) {
         Map<Integer, String> menuMap = new HashMap<>();
@@ -71,5 +68,4 @@ public class D2Ccontroler {
         menu.menu(drinkParser, drinkRepository, drinks);
         return "Menu";
     }
-
 }

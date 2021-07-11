@@ -34,18 +34,15 @@ public class DrinkService {
         drinkList.addAll(drinks);
         return drinkList;
     }
-
-
-    public List<Ingredient> getIngredientsList(){
-        this.ingredientsList = new ArrayList<>();
+    public Drink getIngredientsList(){
         Ingredient ingredient = new Ingredient();
+        List<Ingredient> ingredients = new ArrayList<>();
+        for (int i=0; i<=4; i++) {ingredients.add(ingredient);
+                    }
         Drink drink = new Drink();
-        List <Ingredient> ingredients = drink.getIngredients();
-        ingredientsList.addAll(ingredients);
-        return ingredientsList;
+        drink.setIngredients(ingredients);
+        return drink;
     }
-
-
     private Optional<Drink> getDrink(String name) {
         DrinkParser drinkParser = new DrinkParser();
         DrinkRepository drinkRepository = drinkParser.readNewDataBase();
@@ -55,8 +52,6 @@ public class DrinkService {
                 .collect(Collectors.toList());
         return  filteredDrinks.stream().findFirst();
     }
-
-
     public Page<Drink> findPaginated(Pageable pageable) {
         int pageSize = pageable.getPageSize();
         int currentPage = pageable.getPageNumber();
@@ -71,14 +66,9 @@ public class DrinkService {
         }
         Page<Drink> drinkPage =
                 new PageImpl<Drink>(list, PageRequest.of(currentPage, pageSize), drinkList.size());
-
-
         return drinkPage;
     }
-
     public void setDrinkList(List<Drink> drinkList) {
         this.drinkList = drinkList;
     }
-
-
 }
