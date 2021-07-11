@@ -61,9 +61,6 @@ public class DrinkListController {
         modelAndView.addObject("pager", pager);
         return modelAndView;
     }
-    // TODO Paginacja i ostylizowanie jej  https://frontbackend.com/thymeleaf/spring-boot-bootstrap-thymeleaf-pagination-jpa-liquibase-h2
-    // TODO Ostylizowanie wyniku Search
-    // TODO Próba podłączenia przyciksów filtracyjnych do filtrowania
 
     @RequestMapping("d2c/search")
     public ModelAndView getSearch(Model model,  @RequestParam("page")Optional<Integer>page, @RequestParam("size") Optional<Integer>size,
@@ -103,10 +100,8 @@ public class DrinkListController {
             model.addAttribute("listOfDrinks", drinks);
         }
              }
-        /*Mój Kod poniżej*/
-       // drinks -- jest to moja lista, przefiltrowana
-        drinkService.setDrinkList(drinks);
 
+        drinkService.setDrinkList(drinks);
 
         Page<Drink> drinkPage = drinkService.findPaginated(PageRequest.of(currentPage-1,pageSize5));
         int evalPageSize = size.orElse(INITIAL_PAGE_SIZE);
@@ -133,17 +128,5 @@ public class DrinkListController {
         return modelAndView;
 
     }
-
-
-
-
-
-
-
-
-
-
-
-
 
 }

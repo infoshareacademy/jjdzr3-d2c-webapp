@@ -14,8 +14,6 @@ import java.util.Random;
 @Controller
 public class SubController {
 
-
-
     @GetMapping(value = "/login")
     public String getLogin() {
         return "Managements/login";
@@ -31,8 +29,6 @@ public class SubController {
         return "Managements/Menagments";
     }
 
-
-
     @GetMapping(value = "/AdvSearch")
     public String getAdvSearch() {
         return "subSites/AdvSearch";
@@ -42,12 +38,6 @@ public class SubController {
     public String getFavorites() {
         return "subSites/Favorites";
     }
-
-//    @GetMapping(value = "/showAllDrinks")
-//    public String getShowAllDrinks() {
-//        return "subSites/showAllDrinks";
-//    }
-
     @GetMapping(value = "/Search")
     public String getSearch() {
         return "subSites/Search";
@@ -67,6 +57,4 @@ public class SubController {
         System.out.println(drink);
         return "redirect:/showAllDrinks";
     }
-
-
 }
