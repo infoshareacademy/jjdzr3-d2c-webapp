@@ -46,11 +46,10 @@
                    value="wartość" placeholder="5"
                    onclick="document.getElementById('identyfikator5').style.display = this.checked ? 'block' : 'none'; this.form.elements['nazwa11'].disabled =  this.form.elements['nazwa1'].disabled =  this.form.elements['nazwa12'].disabled = this.form.elements['nazwa2'].disabled = this.form.elements['nazwa13'].disabled =this.form.elements['nazwa3'].disabled =  this.form.elements['nazwa14'].disabled =this.form.elements['nazwa4'].disabled =this.form.elements['nazwa15'].disabled =   this.form.elements['nazwa5'].disabled=!this.checked">
             <label class="form-check-label" for="inlineCheckbox5">Fill in ingredients</label>
-            <table id="identyfikator5" style="display: none"  >
-<!--                th:each="ingredients, itemStat : ${ingredients}"-->
+            <table id="identyfikator5" style="display: none"   th:each="ingredients, itemStat : ${ingredients}">
+
                 <tr >
-<!--                    th:field="*{ingredients[__${itemStat.index}__].ingredientName}"-->
-                    <td><input name="nazwa11"   disabled >
+                    <td><input name="nazwa11"   disabled   th:field="*{ingredients[__${itemStat.index}__].ingredientName}">
                     </td>
                     <td><input name="nazwa1" disabled> </td>
                 </tr>
