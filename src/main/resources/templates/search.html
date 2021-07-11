@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Show All Drinks</title>
+    <title>Search</title>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
     <!--    <link rel="stylesheet" th:href="@{~/static/css/container.css}">-->
     <style type="text/css">
@@ -96,59 +96,59 @@
         </table>
         <!--Tabela End-->
     </div>
-<!-- Containter upper Footer Start-->
+    <!-- Containter upper Footer Start-->
 
-<div class="container">
+    <div class="container">
 
-    <div class="row">
-        <!--Per Page Start-->
-        <div class="form-group col-md-1 page-select">
-            <div class="col-sm-3" th:height="20">
-                <div class="item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="border-left-width: 50px; padding-left: 100px;">
-                        Per Page
-                    </a>
-                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <li><a class="dropdown-item" th:href="@{/showAllDrinks(size=5, page=1)}"
-                               th:class="${pageNumber==drinkPage.number + 1} ? active">5</a></li>
-                        <li><a class="dropdown-item" th:href="@{/showAllDrinks(size=10, page=1)}"
-                               th:class="${pageNumber==drinkPage.number + 1} ? active">10</a></li>
-                        <!--<li><hr class="dropdown-divider"></li>-->
-                        <li><a class="dropdown-item" th:href="@{/showAllDrinks(size=15, page=1)}"
-                               th:class="${pageNumber==drinkPage.number + 1} ? active">15 </a></li>
-                    </ul>
+        <div class="row">
+            <!--Per Page Start-->
+            <div class="form-group col-md-1 page-select">
+                <div class="col-sm-3" th:height="20">
+                    <div class="item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="border-left-width: 50px; padding-left: 100px;">
+                            Per Page
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" th:href="@{/d2c/search(size=5, page=1, glassType=${glassType}, type=${type}, category=${category})}"
+                                   th:class="${pageNumber==drinkPage.number + 1} ? active">5</a></li>
+                            <li><a class="dropdown-item" th:href="@{/d2c/search(size=10, page=1, glassType=${glassType}, type=${type}, category=${category})}"
+                                   th:class="${pageNumber==drinkPage.number + 1} ? active">10</a></li>
+                            <!--<li><hr class="dropdown-divider"></li>-->
+                            <li><a class="dropdown-item" th:href="@{/d2c/search(size=15, page=1, glassType=${glassType}, type=${type}, category=${category})}"
+                                   th:class="${pageNumber==drinkPage.number + 1} ? active">15 </a></li>
+                        </ul>
+                    </div>
                 </div>
             </div>
-        </div>
-        <!--Per Page End-->
-        <!--Pagination Start-->
+            <!--Per Page End-->
+            <!--Pagination Start-->
 
-        <div th:if="${persons.totalPages != 1}" class="form-group col-md-11 pagination-container" style="padding-left: 770px;">
-            <ul class="pagination">
-                <li th:class="${persons.number == 0} ? disabled">
-                    <a p th:class="page-link" th:href="@{/showAllDrinks(size=${drinkPage.size}, page=1)}">&laquo;</a>
-                </li>
-                <li th:class="${persons.number == 0} ? disabled">
-                    <a p th:class="page-link" th:href="@{/showAllDrinks(size=${drinkPage.size}, page=${persons.number})}">&larr;</a>
-                </li>
-                <li th:class="${persons.number == (page - 1)} ? 'active pointer-disabled'"
-                    th:each="page : ${#numbers.sequence(pager.startPage, pager.endPage)}">
-                    <a p th:class="page-link" th:href="@{/showAllDrinks(size=${drinkPage.size}, page=${page})}"
-                       th:text="${page}"></a>
-                </li>
-                <li th:class="${persons.number + 1 == persons.totalPages} ? disabled">
-                    <a p th:class="page-link"
-                       th:href="@{/showAllDrinks(size=${drinkPage.size}, page=${persons.number + 2})}">&rarr;</a>
-                </li>
-                <li th:class="${persons.number + 1 == persons.totalPages} ? disabled">
-                    <a p th:class="page-link"
-                       th:href="@{/showAllDrinks(size=${drinkPage.size}, page=${persons.totalPages})}">&raquo;</a>
-                </li>
-            </ul>
+            <div th:if="${persons.totalPages != 1}" class="form-group col-md-11 pagination-container" style="padding-left: 770px;">
+                <ul class="pagination">
+                    <li th:class="${persons.number == 0} ? disabled">
+                        <a p th:class="page-link" th:href="@{/d2c/search(size=${drinkPage.size}, page=1), glassType=${glassType}, type=${type}, category=${category}}">&laquo;</a>
+                    </li>
+                    <li th:class="${persons.number == 0} ? disabled">
+                        <a p th:class="page-link" th:href="@{/d2c/search(size=${drinkPage.size}, page=${persons.number}, glassType=${glassType}, type=${type}, category=${category})}">&larr;</a>
+                    </li>
+                    <li th:class="${persons.number == (page - 1)} ? 'active pointer-disabled'"
+                        th:each="page : ${#numbers.sequence(pager.startPage, pager.endPage)}">
+                        <a p th:class="page-link" th:href="@{/d2c/search(size=${drinkPage.size}, page=${page}, glassType=${glassType}, type=${type}, category=${category})}"
+                           th:text="${page}"></a>
+                    </li>
+                    <li th:class="${persons.number + 1 == persons.totalPages} ? disabled">
+                        <a p th:class="page-link"
+                           th:href="@{/d2c/search(size=${drinkPage.size}, page=${persons.number + 2}, glassType=${glassType}, type=${type}, category=${category})}">&rarr;</a>
+                    </li>
+                    <li th:class="${persons.number + 1 == persons.totalPages} ? disabled">
+                        <a p th:class="page-link"
+                           th:href="@{/d2c/search(size=${drinkPage.size}, page=${persons.totalPages}, glassType=${glassType}, type=${type}, category=${category})}">&raquo;</a>
+                    </li>
+                </ul>
+            </div>
+            <!--Pagination End-->
         </div>
-        <!--Pagination End-->
     </div>
-</div>
 
 </div>
 <!-- Containter upper Footer End-->
