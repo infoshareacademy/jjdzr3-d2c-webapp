@@ -62,106 +62,107 @@
                         <code>
                             <form th:action="@{/d2c/search}" th:href="@{/d2c/search}" action="/d2c/search.html">TYPE:
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="type" id="typeRadio1" value="ALKOHOL_FREE">
+                                    <input class="form-check-input" type="radio" name="RadioOptions" id="typeRadio1">
                                     <label class="form-check-label" for="typeRadio1">ALKOHOL FREE</label>
                                 </div>
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio"  name="type" id="typeRadio2"
-                                           value="ALKOHOL">
+                                    <input class="form-check-input" type="radio"  name="RadioOptions" id="typeRadio2"
+                                           value="option2">
                                     <label class="form-check-label" for="typeRadio2">ALKOHOL</label>
                                 </div>
-<br>
-                            GLASS TYPE:
+                            </form>
+                            <form>GLASS TYPE:
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="glassType"
+                                    <input class="form-check-input" type="radio" name="RadioOptions2"
                                            id="glassTypeRadio1"
-                                           value="COCKTAIL">
+                                           value="option1">
                                     <label class="form-check-label" for="glassTypeRadio1">COCKTAIL</label>
                                 </div>
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="glassType"
+                                    <input class="form-check-input" type="radio" name="RadioOptions2"
                                            id="glassTypeRadio2"
-                                           value="SHOT">
+                                           value="option2">
                                     <label class="form-check-label" for="glassTypeRadio2">SHOT</label>
                                 </div>
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="glassType"
+                                    <input class="form-check-input" type="radio" name="RadioOptions2"
                                            id="glassTypeRadio3"
-                                           value="OLD_FASHIONED">
+                                           value="option2">
                                     <label class="form-check-label" for="glassTypeRadio3">OLD_FASHIONED</label>
                                 </div>
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="glassType"
+                                    <input class="form-check-input" type="radio" name="RadioOptions2"
                                            id="glassTypeRadio4"
-                                           value="COLLINS">
+                                           value="option2">
                                     <label class="form-check-label" for="glassTypeRadio4">COLLINS</label>
                                 </div>
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="glassType"
+                                    <input class="form-check-input" type="radio" name="RadioOptions2"
                                            id="glassTypeRadio5"
-                                           value="HIGHBALL">
+                                           value="option2">
                                     <label class="form-check-label" for="glassTypeRadio5">HIGHBALL</label>
                                 </div>
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="glassType"
+                                    <input class="form-check-input" type="radio" name="RadioOptions2"
                                            id="glassTypeRadio6"
-                                           value="IRISH_COFFEE_CUP">
+                                           value="option2">
                                     <label class="form-check-label" for="glassTypeRadio6">IRISH_COFFEE_CUP</label>
                                 </div>
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="glassType"
+                                    <input class="form-check-input" type="radio" name="RadioOptions2"
                                            id="glassTypeRadio7"
-                                           value="COPPER_MUG">
+                                           value="option2">
                                     <label class="form-check-label" for="glassTypeRadio7">COPPER_MUG</label>
                                 </div>
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="glassType"
+                                    <input class="form-check-input" type="radio" name="RadioOptions2"
                                            id="glassTypeRadio8"
-                                           value="COFFEE_MUG">
+                                           value="option2">
                                     <label class="form-check-label" for="glassTypeRadio8">COFFEE_MUG</label>
                                 </div>
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="glassType"
+                                    <input class="form-check-input" type="radio" name="RadioOptions2"
                                            id="glassTypeRadio9"
-                                           value="PUNCH">
+                                           value="option2">
                                     <label class="form-check-label" for="glassTypeRadio9">PUNCH</label>
                                 </div>
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="glassType"
+                                    <input class="form-check-input" type="radio" name="RadioOptions2"
                                            id="glassTypeRadio10"
-                                           value="PINT_GLASS">
+                                           value="option2">
                                     <label class="form-check-label" for="glassTypeRadio10">PINT_GLASS</label>
                                 </div>
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="glassType"
+                                    <input class="form-check-input" type="radio" name="RadioOptions2"
                                            id="glassTypeRadio11"
-                                           value="CHAMPAGNE_FLUTE">
+                                           value="option2">
                                     <label class="form-check-label" for="glassTypeRadio11">CHAMPAGNE_FLUTE</label>
                                 </div>
-                                <br>                   CATEGORY:
+                            </form>
+                            <form th:action="@{/d2c/search}">CATEGORY:
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="category" id="categoryRadio1"
-                                           value="COFFEE_OR_TEA">
+                                    <input class="form-check-input" type="radio" name="glassType" id="categoryRadio1"
+                                           value="COCKTAIL">
                                     <label class="form-check-label" for="categoryRadio1">COFFEE_OR_TEA</label>
                                 </div>
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="category" id="categoryRadio2"
-                                           value="COCKTAIL">
+                                    <input class="form-check-input" type="radio" name="RadioOptions3" id="categoryRadio2"
+                                           value="option2">
                                     <label class="form-check-label" for="categoryRadio2">COCKTAIL</label>
                                 </div>
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="category" id="categoryRadio3"
-                                           value="ORDINARY_DRINK">
+                                    <input class="form-check-input" type="radio" name="RadioOptions3" id="categoryRadio3"
+                                           value="option2">
                                     <label class="form-check-label" for="categoryRadio3">ORDINARY_DRINK</label>
                                 </div>
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="category" id="categoryRadio4"
-                                           value="PARTY_DRINK_OR_PUNCH">
+                                    <input class="form-check-input" type="radio" name="RadioOptions3" id="categoryRadio4"
+                                           value="option2">
                                     <label class="form-check-label" for="categoryRadio4">PARTY_DRINK_OR_PUNCH</label>
                                 </div>
                                 <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="category" id="categoryRadio5"
-                                           value="SHOT">
+                                    <input class="form-check-input" type="radio" name="RadioOptions3" id="categoryRadio5"
+                                           value="option2">
                                     <label class="form-check-label" for="categoryRadio5">SHOT</label>
                                 </div>
                                 <button class="btn btn-primary" type="submit"  >Submit form</button>
