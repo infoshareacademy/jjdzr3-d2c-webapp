@@ -133,17 +133,4 @@ public class DrinkListController {
         return modelAndView;
 
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
 }
