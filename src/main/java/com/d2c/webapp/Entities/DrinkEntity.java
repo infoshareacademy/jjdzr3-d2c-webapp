@@ -8,11 +8,10 @@ import javax.persistence.Id;
 @Entity
 public class DrinkEntity {
 
-
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long drinkid;
+
     private String drink_name;
     private String preparation_instruction;
     private String drink_category;
@@ -29,7 +28,6 @@ public class DrinkEntity {
     private String measure_5;
     private String type;
     private String drinkImg;
-
 
     public DrinkEntity() {
     }

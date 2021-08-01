@@ -64,6 +64,6 @@ public class SubController {
         drink.setDrinkId(max);
         System.out.println(drink);
         drinkService.addDrink(drink);
-        return "redirect:/showAllDrinks";
+        return "Managements/AddDrink";
     }
 }

@@ -52,12 +52,10 @@ public class DrinkService {
 
     public void addDrink(Drink drink){
         final DrinkEntity drinkEntity= new DrinkEntity();
-       // drinkEntity.setDrinkid(Long.valueOf(drink.getDrinkId()));
         drinkEntity.setDrink_name(drink.getDrinkName());
         drinkEntity.setPreparation_instruction(drink.getPreparationInstruction());
         drinkEntity.setDrink_category(String.valueOf(drink.getDrinkCategory()));
         drinkEntity.setGlass_type(String.valueOf(drink.getGlassType()));
-        //TODO  lista ingredient
         drinkEntity.setIngredient_name_1(drink.getIngredients().get(0).getIngredientName());
         drinkEntity.setMeasure_1(drink.getIngredients().get(0).getMeasure());
         drinkEntity.setIngredient_name_2(drink.getIngredients().get(1).getIngredientName());
@@ -68,8 +66,6 @@ public class DrinkService {
         drinkEntity.setMeasure_4(drink.getIngredients().get(3).getMeasure());
         drinkEntity.setIngredient_name_5(drink.getIngredients().get(4).getIngredientName());
         drinkEntity.setMeasure_5(drink.getIngredients().get(4).getMeasure());
-
-
         drinkEntity.setType(String.valueOf(drink.getDrinkType()));
         drinkEntity.setDrinkImg(drink.getDrinkImg());
         repositoryDrinkSQL.save(drinkEntity);
