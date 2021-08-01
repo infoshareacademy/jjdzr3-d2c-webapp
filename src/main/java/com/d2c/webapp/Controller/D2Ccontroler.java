@@ -6,8 +6,6 @@ import com.infoshareademy.Menu;
 import com.infoshareademy.Search;
 import com.infoshareademy.data.DrinkParser;
 import com.infoshareademy.domain.*;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.http.ResponseEntity;
@@ -25,8 +23,6 @@ public class D2Ccontroler {
 
     @Autowired
     DrinkService drinkService;
-
-    private static Logger logger = LoggerFactory.getLogger(D2Ccontroler.class);
 
     @GetMapping("/allDrinks")
     public String getAllDrinks(Model model) {
