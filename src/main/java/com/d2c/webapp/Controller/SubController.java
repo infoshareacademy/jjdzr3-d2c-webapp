@@ -63,6 +63,7 @@ public class SubController {
         int max = rand.nextInt(80000);
         drink.setDrinkId(max);
         System.out.println(drink);
+        drinkService.addDrink(drink);
         return "redirect:/showAllDrinks";
     }
 }

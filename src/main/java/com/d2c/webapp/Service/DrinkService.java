@@ -1,12 +1,15 @@
 package com.d2c.webapp.Service;
 
 
+import com.d2c.webapp.Entities.DrinkEntity;
+import com.d2c.webapp.RepositorySql.RepositoryDrinkSQL;
 import com.infoshareademy.data.DrinkParser;
 import com.infoshareademy.domain.Drink;
 import com.infoshareademy.domain.DrinkRepository;
 
 import com.infoshareademy.domain.Ingredient;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
@@ -22,6 +25,9 @@ import java.util.stream.Collectors;
 
 @Service
 public class DrinkService {
+
+    @Autowired
+    private RepositoryDrinkSQL repositoryDrinkSQL;
 
     private List<Drink> drinkList;
 
@@ -43,6 +49,33 @@ public class DrinkService {
         drink.setIngredients(ingredients);
         return drink;
     }
+
+    public void addDrink(Drink drink){
+        final DrinkEntity drinkEntity= new DrinkEntity();
+       // drinkEntity.setDrinkid(Long.valueOf(drink.getDrinkId()));
+        drinkEntity.setDrink_name(drink.getDrinkName());
+        drinkEntity.setPreparation_instruction(drink.getPreparationInstruction());
+        drinkEntity.setDrink_category(String.valueOf(drink.getDrinkCategory()));
+        drinkEntity.setGlass_type(String.valueOf(drink.getGlassType()));
+        //TODO  lista ingredient
+        drinkEntity.setIngredient_name_1(drink.getIngredients().get(0).getIngredientName());
+        drinkEntity.setMeasure_1(drink.getIngredients().get(0).getMeasure());
+        drinkEntity.setIngredient_name_2(drink.getIngredients().get(1).getIngredientName());
+        drinkEntity.setMeasure_2(drink.getIngredients().get(1).getMeasure());
+        drinkEntity.setIngredient_name_3(drink.getIngredients().get(2).getIngredientName());
+        drinkEntity.setMeasure_3(drink.getIngredients().get(2).getMeasure());
+        drinkEntity.setIngredient_name_4(drink.getIngredients().get(3).getIngredientName());
+        drinkEntity.setMeasure_4(drink.getIngredients().get(3).getMeasure());
+        drinkEntity.setIngredient_name_5(drink.getIngredients().get(4).getIngredientName());
+        drinkEntity.setMeasure_5(drink.getIngredients().get(4).getMeasure());
+
+
+        drinkEntity.setType(String.valueOf(drink.getDrinkType()));
+        drinkEntity.setDrinkImg(drink.getDrinkImg());
+        repositoryDrinkSQL.save(drinkEntity);
+    }
+
+
     private Optional<Drink> getDrink(String name) {
         DrinkParser drinkParser = new DrinkParser();
         DrinkRepository drinkRepository = drinkParser.readNewDataBase();
