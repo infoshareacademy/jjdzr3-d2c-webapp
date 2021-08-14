@@ -16,6 +16,8 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -50,6 +52,7 @@ public class DrinkService {
         return drink;
     }
 
+    @Valid
     public void addDrink(Drink drink){
         final DrinkEntity drinkEntity= new DrinkEntity();
         drinkEntity.setDrink_name(drink.getDrinkName());

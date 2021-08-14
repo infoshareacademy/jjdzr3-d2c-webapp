@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -58,7 +59,7 @@ public class SubController {
     }
 
     @PostMapping("/AddDrink")
-    public String addDrink(@ModelAttribute Drink drink) {
+    public String addDrink(@Valid @ModelAttribute Drink drink) {
         Random rand = new Random();
         int max = rand.nextInt(80000);
         drink.setDrinkId(max);

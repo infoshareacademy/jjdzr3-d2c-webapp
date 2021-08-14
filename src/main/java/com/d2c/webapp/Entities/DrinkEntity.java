@@ -4,6 +4,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
+import javax.validation.executable.ValidateOnExecution;
 
 @Entity
 public class DrinkEntity {
@@ -12,7 +15,9 @@ public class DrinkEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long drinkid;
 
+    @NotNull(message = "Field can't be empty")
     private String drink_name;
+
     private String preparation_instruction;
     private String drink_category;
     private String glass_type;
@@ -27,8 +32,11 @@ public class DrinkEntity {
     private String ingredient_name_5;
     private String measure_5;
     private String type;
+
+    @NotNull(message = "This field should have some picture")
     private String drinkImg;
 
+    @ValidateOnExecution
     public DrinkEntity() {
     }
 
