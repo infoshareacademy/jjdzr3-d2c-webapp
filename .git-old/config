@@ -1,0 +1,14 @@
+[core]
+	repositoryformatversion = 0
+	filemode = true
+	bare = false
+	logallrefupdates = true
+[remote "origin"]
+	url = git@github.com:infoshareacademy/jjdzr3-d2c-webapp.git
+	fetch = +refs/heads/*:refs/remotes/origin/*
+[branch "develop"]
+	remote = origin
+	merge = refs/heads/develop
+[branch "JJDZR3D2C-36"]
+	remote = origin
+	merge = refs/heads/JJDZR3D2C-36
