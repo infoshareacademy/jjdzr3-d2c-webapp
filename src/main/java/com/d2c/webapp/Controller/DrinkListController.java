@@ -6,6 +6,8 @@ import com.infoshareademy.Filter;
 import com.infoshareademy.Search;
 import com.infoshareademy.data.DrinkParser;
 import com.infoshareademy.domain.*;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -31,10 +33,13 @@ public class DrinkListController {
      @Autowired
     DrinkService drinkService;
 
+    private static final Logger LOGGER = LogManager.getLogger(DrinkListController.class);
+
     @GetMapping(value = "/showAllDrinks")
     public ModelAndView getShowAllDrinks3(
             Model model, @RequestParam("page")Optional<Integer>page, @RequestParam("size") Optional<Integer>size) {
         var modelAndView = new ModelAndView("subSites/showAllDrinks");
+        LOGGER.info("Getting list of all drinks");
         drinkService.getDrinkList();
         int currentPage = page.orElse(1);
         int pageSize5 = size.orElse(5);
