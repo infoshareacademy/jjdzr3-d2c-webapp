@@ -1,0 +1,131 @@
+2021-08-22 14:57:30 INFO 39850 --- [main] c.d.w.WebApplication                     : Starting WebApplication using Java 15.0.1 on Sandra with PID 39850 (/home/sandra/IdeaProjects/jjdzr3-d2c-webapp/target/classes started by sandra in /home/sandra/IdeaProjects/jjdzr3-d2c-webapp)
+2021-08-22 14:57:30 DEBUG 39850 --- [main] c.d.w.WebApplication                     : Running with Spring Boot v2.4.5, Spring v5.3.6
+2021-08-22 14:57:30 INFO 39850 --- [main] c.d.w.WebApplication                     : No active profile set, falling back to default profiles: default
+2021-08-22 14:57:30 INFO 39850 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2021-08-22 14:57:30 INFO 39850 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 5 ms. Found 0 JPA repository interfaces.
+2021-08-22 14:57:31 INFO 39850 --- [main] o.s.b.w.e.t.TomcatWebServer              : Tomcat initialized with port(s): 8080 (http)
+2021-08-22 14:57:31 INFO 39850 --- [main] o.a.c.h.Http11NioProtocol                : Initializing ProtocolHandler ["http-nio-8080"]
+2021-08-22 14:57:31 INFO 39850 --- [main] o.a.c.c.StandardService                  : Starting service [Tomcat]
+2021-08-22 14:57:31 INFO 39850 --- [main] o.a.c.c.StandardEngine                   : Starting Servlet engine: [Apache Tomcat/9.0.45]
+2021-08-22 14:57:31 INFO 39850 --- [main] o.a.c.c.C.[.[.[/]                        : Initializing Spring embedded WebApplicationContext
+2021-08-22 14:57:31 INFO 39850 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 803 ms
+2021-08-22 14:57:31 INFO 39850 --- [main] o.h.j.i.u.LogHelper                      : HHH000204: Processing PersistenceUnitInfo [name: default]
+2021-08-22 14:57:31 INFO 39850 --- [main] o.h.Version                              : HHH000412: Hibernate ORM core version 5.4.30.Final
+2021-08-22 14:57:31 INFO 39850 --- [main] o.h.a.c.Version                          : HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2021-08-22 14:57:31 INFO 39850 --- [main] c.z.h.HikariDataSource                   : HikariPool-1 - Starting...
+2021-08-22 14:57:31 INFO 39850 --- [main] c.z.h.HikariDataSource                   : HikariPool-1 - Start completed.
+2021-08-22 14:57:31 INFO 39850 --- [main] o.h.d.Dialect                            : HHH000400: Using dialect: org.hibernate.dialect.MySQL55Dialect
+2021-08-22 14:57:31 INFO 39850 --- [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2021-08-22 14:57:31 INFO 39850 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2021-08-22 14:57:31 WARN 39850 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2021-08-22 14:57:32 INFO 39850 --- [main] o.s.s.c.ThreadPoolTaskExecutor           : Initializing ExecutorService 'applicationTaskExecutor'
+2021-08-22 14:57:32 INFO 39850 --- [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2021-08-22 14:57:32 INFO 39850 --- [main] o.a.c.h.Http11NioProtocol                : Starting ProtocolHandler ["http-nio-8080"]
+2021-08-22 14:57:32 INFO 39850 --- [main] o.s.b.w.e.t.TomcatWebServer              : Tomcat started on port(s): 8080 (http) with context path ''
+2021-08-22 14:57:32 INFO 39850 --- [main] c.d.w.WebApplication                     : Started WebApplication in 2.191 seconds (JVM running for 2.799)
+2021-08-22 14:57:32 INFO 39850 --- [main] c.d.w.WebApplication                     : The application is running
+2021-08-22 14:57:43 INFO 39850 --- [http-nio-8080-exec-1] o.a.c.c.C.[.[.[/]                        : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2021-08-22 14:57:43 INFO 39850 --- [http-nio-8080-exec-1] o.s.w.s.DispatcherServlet                : Initializing Servlet 'dispatcherServlet'
+2021-08-22 14:57:43 INFO 39850 --- [http-nio-8080-exec-1] o.s.w.s.DispatcherServlet                : Completed initialization in 1 ms
+2021-08-22 14:57:43 INFO 39850 --- [http-nio-8080-exec-1] c.d.w.WebApplicationController           : Received request for main page
+2021-08-22 14:57:49 INFO 39850 --- [http-nio-8080-exec-2] c.d.w.C.D2Ccontroler                     : Read single drink of name: National Aquarium
+2021-08-22 14:57:49 INFO 39850 --- [http-nio-8080-exec-2] c.d.w.C.D2Ccontroler                     : Filtered list of drinks: [Drink{drinkId=13192, drinkName='National Aquarium', drinkCategory=ORDINARY_DRINK, glassType=COLLINS, preparationInstruction='Pour all ingredients into a shaker of ice. Shake well. Serve on the rocks.', ingredients=[ingredientName: Rum, measure: 1/2 oz , ingredientName: Vodka, measure: 1/2 oz , ingredientName: Gin, measure: 1/2 oz , ingredientName: Blue Curacao, measure: 1/2 oz , ingredientName: Sour mix, measure: 2 oz ], drinkType=ALKOHOL_FREE}]
+2021-08-22 14:57:49 DEBUG 39850 --- [http-nio-8080-exec-2] c.d.w.C.D2Ccontroler                     : Added drink of name National Aquarium to display of drinks
+2021-08-22 14:57:59 INFO 39850 --- [SpringContextShutdownHook] o.s.s.c.ThreadPoolTaskExecutor           : Shutting down ExecutorService 'applicationTaskExecutor'
+2021-08-22 14:57:59 INFO 39850 --- [SpringContextShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2021-08-22 14:57:59 INFO 39850 --- [SpringContextShutdownHook] .SchemaDropperImpl$DelayedDropActionImpl : HHH000477: Starting delayed evictData of schema as part of SessionFactory shut-down'
+2021-08-22 14:57:59 INFO 39850 --- [SpringContextShutdownHook] c.z.h.HikariDataSource                   : HikariPool-1 - Shutdown initiated...
+2021-08-22 14:57:59 INFO 39850 --- [SpringContextShutdownHook] c.z.h.HikariDataSource                   : HikariPool-1 - Shutdown completed.
+2021-08-22 14:58:37 INFO 40005 --- [main] c.d.w.WebApplication                    
+            : Starting WebApplication using Java 15.0.1 on Sandra with PID 40005 (/home/sandra/IdeaProjects/jjdzr3-d2c-webapp/target/classes started by sandra in /home/sandra/IdeaProjects/jjdzr3-d2c-webapp)
+2021-08-22 14:58:37 DEBUG 40005 --- [main] c.d.w.WebApplication                    
+            : Running with Spring Boot v2.4.5, Spring v5.3.6
+2021-08-22 14:58:37 INFO 40005 --- [main] c.d.w.WebApplication                    
+            : No active profile set, falling back to default profiles: default
+2021-08-22 14:58:38 INFO 40005 --- [main] .s.d.r.c.RepositoryConfigurationDelegate
+            : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2021-08-22 14:58:38 INFO 40005 --- [main] .s.d.r.c.RepositoryConfigurationDelegate
+            : Finished Spring Data repository scanning in 5 ms. Found 0 JPA repository interfaces.
+2021-08-22 14:58:38 INFO 40005 --- [main] o.s.b.w.e.t.TomcatWebServer             
+            : Tomcat initialized with port(s): 8080 (http)
+2021-08-22 14:58:38 INFO 40005 --- [main] o.a.c.h.Http11NioProtocol               
+            : Initializing ProtocolHandler ["http-nio-8080"]
+2021-08-22 14:58:38 INFO 40005 --- [main] o.a.c.c.StandardService                 
+            : Starting service [Tomcat]
+2021-08-22 14:58:38 INFO 40005 --- [main] o.a.c.c.StandardEngine                  
+            : Starting Servlet engine: [Apache Tomcat/9.0.45]
+2021-08-22 14:58:38 INFO 40005 --- [main] o.a.c.c.C.[.[.[/]                       
+            : Initializing Spring embedded WebApplicationContext
+2021-08-22 14:58:38 INFO 40005 --- [main] w.s.c.ServletWebServerApplicationContext
+            : Root WebApplicationContext: initialization completed in 787 ms
+2021-08-22 14:58:38 INFO 40005 --- [main] o.h.j.i.u.LogHelper                     
+            : HHH000204: Processing PersistenceUnitInfo [name: default]
+2021-08-22 14:58:38 INFO 40005 --- [main] o.h.Version                             
+            : HHH000412: Hibernate ORM core version 5.4.30.Final
+2021-08-22 14:58:38 INFO 40005 --- [main] o.h.a.c.Version                         
+            : HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2021-08-22 14:58:38 INFO 40005 --- [main] c.z.h.HikariDataSource                  
+            : HikariPool-1 - Starting...
+2021-08-22 14:58:39 INFO 40005 --- [main] c.z.h.HikariDataSource                  
+            : HikariPool-1 - Start completed.
+2021-08-22 14:58:39 INFO 40005 --- [main] o.h.d.Dialect                           
+            : HHH000400: Using dialect: org.hibernate.dialect.MySQL55Dialect
+2021-08-22 14:58:39 INFO 40005 --- [main] o.h.e.t.j.p.i.JtaPlatformInitiator      
+            : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2021-08-22 14:58:39 INFO 40005 --- [main] j.LocalContainerEntityManagerFactoryBean
+            : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2021-08-22 14:58:39 WARN 40005 --- [main] JpaBaseConfiguration$JpaWebConfiguration
+            : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2021-08-22 14:58:39 INFO 40005 --- [main] o.s.s.c.ThreadPoolTaskExecutor          
+            : Initializing ExecutorService 'applicationTaskExecutor'
+2021-08-22 14:58:39 INFO 40005 --- [main] o.s.b.a.w.s.WelcomePageHandlerMapping   
+            : Adding welcome page template: index
+2021-08-22 14:58:39 INFO 40005 --- [main] o.a.c.h.Http11NioProtocol               
+            : Starting ProtocolHandler ["http-nio-8080"]
+2021-08-22 14:58:39 INFO 40005 --- [main] o.s.b.w.e.t.TomcatWebServer             
+            : Tomcat started on port(s): 8080 (http) with context path ''
+2021-08-22 14:58:39 INFO 40005 --- [main] c.d.w.WebApplication                    
+            : Started WebApplication in 2.146 seconds (JVM running for 2.82)
+2021-08-22 14:58:39 INFO 40005 --- [main] c.d.w.WebApplication                    
+            : The application is running
+2021-08-22 14:58:46 INFO 40005 --- [SpringContextShutdownHook] o.s.s.c.ThreadPoolTaskExecutor          
+            : Shutting down ExecutorService 'applicationTaskExecutor'
+2021-08-22 14:58:46 INFO 40005 --- [SpringContextShutdownHook] j.LocalContainerEntityManagerFactoryBean
+            : Closing JPA EntityManagerFactory for persistence unit 'default'
+2021-08-22 14:58:46 INFO 40005 --- [SpringContextShutdownHook] .SchemaDropperImpl$DelayedDropActionImpl
+            : HHH000477: Starting delayed evictData of schema as part of SessionFactory shut-down'
+2021-08-22 14:58:46 INFO 40005 --- [SpringContextShutdownHook] c.z.h.HikariDataSource                  
+            : HikariPool-1 - Shutdown initiated...
+2021-08-22 14:58:46 INFO 40005 --- [SpringContextShutdownHook] c.z.h.HikariDataSource                  
+            : HikariPool-1 - Shutdown completed.
+2021-08-22 14:58:49 INFO 40130 --- [main] c.d.w.WebApplication                     : Starting WebApplication using Java 15.0.1 on Sandra with PID 40130 (/home/sandra/IdeaProjects/jjdzr3-d2c-webapp/target/classes started by sandra in /home/sandra/IdeaProjects/jjdzr3-d2c-webapp)
+2021-08-22 14:58:49 DEBUG 40130 --- [main] c.d.w.WebApplication                     : Running with Spring Boot v2.4.5, Spring v5.3.6
+2021-08-22 14:58:49 INFO 40130 --- [main] c.d.w.WebApplication                     : No active profile set, falling back to default profiles: default
+2021-08-22 14:58:50 INFO 40130 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2021-08-22 14:58:50 INFO 40130 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 4 ms. Found 0 JPA repository interfaces.
+2021-08-22 14:58:50 INFO 40130 --- [main] o.s.b.w.e.t.TomcatWebServer              : Tomcat initialized with port(s): 8080 (http)
+2021-08-22 14:58:50 INFO 40130 --- [main] o.a.c.h.Http11NioProtocol                : Initializing ProtocolHandler ["http-nio-8080"]
+2021-08-22 14:58:50 INFO 40130 --- [main] o.a.c.c.StandardService                  : Starting service [Tomcat]
+2021-08-22 14:58:50 INFO 40130 --- [main] o.a.c.c.StandardEngine                   : Starting Servlet engine: [Apache Tomcat/9.0.45]
+2021-08-22 14:58:50 INFO 40130 --- [main] o.a.c.c.C.[.[.[/]                        : Initializing Spring embedded WebApplicationContext
+2021-08-22 14:58:50 INFO 40130 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 838 ms
+2021-08-22 14:58:50 INFO 40130 --- [main] o.h.j.i.u.LogHelper                      : HHH000204: Processing PersistenceUnitInfo [name: default]
+2021-08-22 14:58:50 INFO 40130 --- [main] o.h.Version                              : HHH000412: Hibernate ORM core version 5.4.30.Final
+2021-08-22 14:58:50 INFO 40130 --- [main] o.h.a.c.Version                          : HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2021-08-22 14:58:50 INFO 40130 --- [main] c.z.h.HikariDataSource                   : HikariPool-1 - Starting...
+2021-08-22 14:58:50 INFO 40130 --- [main] c.z.h.HikariDataSource                   : HikariPool-1 - Start completed.
+2021-08-22 14:58:50 INFO 40130 --- [main] o.h.d.Dialect                            : HHH000400: Using dialect: org.hibernate.dialect.MySQL55Dialect
+2021-08-22 14:58:51 INFO 40130 --- [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2021-08-22 14:58:51 INFO 40130 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2021-08-22 14:58:51 WARN 40130 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2021-08-22 14:58:51 INFO 40130 --- [main] o.s.s.c.ThreadPoolTaskExecutor           : Initializing ExecutorService 'applicationTaskExecutor'
+2021-08-22 14:58:51 INFO 40130 --- [main] o.s.b.a.w.s.WelcomePageHandlerMapping    : Adding welcome page template: index
+2021-08-22 14:58:51 INFO 40130 --- [main] o.a.c.h.Http11NioProtocol                : Starting ProtocolHandler ["http-nio-8080"]
+2021-08-22 14:58:51 INFO 40130 --- [main] o.s.b.w.e.t.TomcatWebServer              : Tomcat started on port(s): 8080 (http) with context path ''
+2021-08-22 14:58:51 INFO 40130 --- [main] c.d.w.WebApplication                     : Started WebApplication in 2.216 seconds (JVM running for 2.822)
+2021-08-22 14:58:51 INFO 40130 --- [main] c.d.w.WebApplication                     : The application is running
+2021-08-22 14:58:57 INFO 40130 --- [SpringContextShutdownHook] o.s.s.c.ThreadPoolTaskExecutor           : Shutting down ExecutorService 'applicationTaskExecutor'
+2021-08-22 14:58:57 INFO 40130 --- [SpringContextShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2021-08-22 14:58:57 INFO 40130 --- [SpringContextShutdownHook] .SchemaDropperImpl$DelayedDropActionImpl : HHH000477: Starting delayed evictData of schema as part of SessionFactory shut-down'
+2021-08-22 14:58:57 INFO 40130 --- [SpringContextShutdownHook] c.z.h.HikariDataSource                   : HikariPool-1 - Shutdown initiated...
+2021-08-22 14:58:57 INFO 40130 --- [SpringContextShutdownHook] c.z.h.HikariDataSource                   : HikariPool-1 - Shutdown completed.
