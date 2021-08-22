@@ -99,6 +99,7 @@ public class SubController {
         } else {
             model.addAttribute("name", drink.getDrinkName());
             model.addAttribute("listOfDrinks", drinks);
+            System.out.println(drink); // To delate, testing line
             return "singleDrink";
         }
     }

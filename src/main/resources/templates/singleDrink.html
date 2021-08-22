@@ -55,7 +55,7 @@
 
     <label class="form-check-label  text-white" for="drinkType">Drink type</label>
     <li class="form-control" id="drinkType" th:text="${drink.getDrinkType()}"></li>
-
+    <a th:href="@{/EditDrink(name=${drink.getDrinkName()})}" class="card-link">Edit</a>
   </tr>
 
   <a th:href="@{/showAllDrinks}" class="card-link">Show all drinks</a>
