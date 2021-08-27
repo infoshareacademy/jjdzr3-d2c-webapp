@@ -1,8 +1,7 @@
 package com.d2c.webapp.Controller;
 
-import com.d2c.webapp.Service.DrinkService;
+import com.d2c.webapp.service.DrinkService;
 import com.infoshareademy.domain.Drink;
-import com.infoshareademy.domain.Ingredient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,7 +10,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.validation.Valid;
-import java.util.ArrayList;
 import java.util.Random;
 
 @Controller

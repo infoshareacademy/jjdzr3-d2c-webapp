@@ -1,10 +1,9 @@
-package com.d2c.webapp.Entities;
+package com.d2c.webapp.entities;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.validation.executable.ValidateOnExecution;
 

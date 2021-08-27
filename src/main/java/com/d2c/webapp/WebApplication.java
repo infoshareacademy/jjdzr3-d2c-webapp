@@ -1,14 +1,7 @@
 package com.d2c.webapp;
 
-import com.d2c.webapp.Service.DrinkService;
-import com.infoshareademy.Search;
-import com.infoshareademy.data.DrinkParser;
-import com.infoshareademy.domain.Drink;
-import com.infoshareademy.domain.DrinkRepository;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-
-import java.util.List;
 
 @SpringBootApplication
 public class WebApplication {

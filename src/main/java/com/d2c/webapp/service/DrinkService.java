@@ -1,8 +1,8 @@
-package com.d2c.webapp.Service;
+package com.d2c.webapp.service;
 
 
-import com.d2c.webapp.Entities.DrinkEntity;
-import com.d2c.webapp.RepositorySql.RepositoryDrinkSQL;
+import com.d2c.webapp.entities.DrinkEntity;
+import com.d2c.webapp.reposotirySQL.RepositoryDrinkSQL;
 import com.infoshareademy.data.DrinkParser;
 import com.infoshareademy.domain.Drink;
 import com.infoshareademy.domain.DrinkRepository;
@@ -17,7 +17,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -30,6 +29,7 @@ public class DrinkService {
 
     @Autowired
     private RepositoryDrinkSQL repositoryDrinkSQL;
+
 
     private List<Drink> drinkList;
 
@@ -103,4 +103,17 @@ public class DrinkService {
     public void setDrinkList(List<Drink> drinkList) {
         this.drinkList = drinkList;
     }
+
+
+//TODO
+
+//    public List<Drink> findAll(){
+//final List<DrinkEntity> drinkEntities = this.repositoryDrinkSQL.findAll();
+//return drinkEntities.stream().map(drinkEntity -> new DrinkRepository(drinkEntity.getDrinkid(), drinkEntity.getDrink_name(),
+//        drinkEntity.getDrink_category(), drinkEntity.getGlass_type(), drinkEntity.getIngredient_name_1(), drinkEntity.getMeasure_1(),
+//        drinkEntity.getIngredient_name_2(), drinkEntity.getMeasure_2(), drinkEntity.getIngredient_name_3(), drinkEntity.getMeasure_3(),
+//        drinkEntity.getIngredient_name_4(), drinkEntity.getMeasure_4(), drinkEntity.getIngredient_name_5(), drinkEntity.getMeasure_5(),
+//        drinkEntity.getPreparation_instruction(),drinkEntity.getType())).collect(Collectors.toList());
+//    }
+
 }
