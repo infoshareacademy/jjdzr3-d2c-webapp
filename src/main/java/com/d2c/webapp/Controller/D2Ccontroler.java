@@ -1,20 +1,15 @@
 package com.d2c.webapp.Controller;
 
 import com.d2c.webapp.Service.DrinkService;
-import com.d2c.webapp.WebApplication;
-import com.infoshareademy.Filter;
 import com.infoshareademy.Menu;
-import com.infoshareademy.Search;
 import com.infoshareademy.data.DrinkParser;
 import com.infoshareademy.domain.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
@@ -41,10 +36,10 @@ public class D2Ccontroler {
     }
 
     @GetMapping(value = "/singleDrink")
-    public String  getSinDrink(Model model, @RequestParam ("name") String name) {
-        LOGGER.info("Read single drink of name: " + name );
+    public String getSinDrink(Model model, @RequestParam("name") String name) {
+        LOGGER.info("Read single drink of name: " + name);
 
-        List <Drink> drinks = getDrink(name);
+        List<Drink> drinks = getDrink(name);
         if (drinks == null) {
             LOGGER.info("No drink of name " + name + " found");
             return ResponseEntity.notFound().build().toString();
@@ -55,6 +50,7 @@ public class D2Ccontroler {
             return "singleDrink";
         }
     }
+
     private List<Drink> getDrink(String name) {
         List<Drink> drinkList = drinkService.getDrinkList();
         List<Drink> filteredDrinks = drinkList
@@ -62,8 +58,9 @@ public class D2Ccontroler {
                 .filter(a -> a.getDrinkName().toLowerCase().equals(name.toLowerCase()))
                 .collect(Collectors.toList());
         LOGGER.info("Filtered list of drinks: " + filteredDrinks);
-        return  filteredDrinks;
+        return filteredDrinks;
     }
+
     @GetMapping("/menu")
     public String getMenu(Model model) {
         Map<Integer, String> menuMap = new HashMap<>();

@@ -2,7 +2,6 @@ package com.d2c.webapp.Controller;
 
 import com.d2c.webapp.Service.DrinkService;
 import com.infoshareademy.domain.Drink;
-import com.infoshareademy.domain.Ingredient;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +12,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.validation.Valid;
-import java.util.ArrayList;
 import java.util.Random;
 
 @Controller
@@ -53,14 +51,15 @@ public class SubController {
         LOGGER.info("Received request for Favorites");
         return "subSites/Favorites";
     }
+
     @GetMapping(value = "/Search")
     public String getSearch() {
         LOGGER.info("Received request for Search");
         return "subSites/Search";
     }
 
-    @GetMapping ("/AddDrink")
-    public String addSingleDrink(Model model){
+    @GetMapping("/AddDrink")
+    public String addSingleDrink(Model model) {
         model.addAttribute("drink", drinkService.getIngredientsList());
         LOGGER.info("Received request for AddDrink");
         return "Managements/AddDrink";

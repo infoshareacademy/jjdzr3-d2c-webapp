@@ -20,7 +20,7 @@ public class RepositoryDrinkSQL {
     private static final Logger LOGGER = LogManager.getLogger(RepositoryDrinkSQL.class);
 
     public void save(DrinkEntity drinkEntity) {
-        LOGGER.info(drinkEntity);
+        LOGGER.debug("Saved drink entity: " + drinkEntity);
         entityManager.persist(drinkEntity);
 
     }
