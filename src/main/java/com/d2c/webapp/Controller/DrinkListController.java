@@ -74,6 +74,7 @@ public class DrinkListController {
                             @RequestParam(name = "glassType", required = false) GlassType glassType,
                             @RequestParam(name = "category", required = false) Category category
     ) {
+        LOGGER.info("input: '{}', type: '{}', glassType: '{}', category: '{}'", item, type, glassType, category);
         DrinkService drinkService = new DrinkService();
         var modelAndView = new ModelAndView("search.html");
         int currentPage = page.orElse(1);
