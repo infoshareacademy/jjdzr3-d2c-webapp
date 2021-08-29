@@ -28,6 +28,7 @@ public class D2Ccontroler {
 
     @GetMapping("/allDrinks")
     public String getAllDrinks(Model model) {
+
         Map<Integer, String> menuMap = new HashMap<>();
         DrinkParser drinkParser = new DrinkParser();
         List<Drink> drinks = drinkParser.readFileIntoDrinkRepository().getDrinks();

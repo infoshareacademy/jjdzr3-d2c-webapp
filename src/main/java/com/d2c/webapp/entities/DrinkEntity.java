@@ -1,5 +1,7 @@
 package com.d2c.webapp.entities;
 
+import org.hibernate.annotations.Type;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.executable.ValidateOnExecution;
@@ -14,8 +16,12 @@ public class DrinkEntity {
     @NotNull(message = "Field can't be empty")
     private String drink_name;
 
+    @Type(type="text")
     private String preparation_instruction;
+
+
     private String drink_category;
+
     private String glass_type;
     private String ingredient_name_1;
     private String measure_1;
@@ -30,6 +36,7 @@ public class DrinkEntity {
     private String type;
 
     @NotNull(message = "This field should have some picture")
+    @Column(columnDefinition = "varchar(512)")
     private String drinkImg;
 
     @ValidateOnExecution

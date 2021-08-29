@@ -1,9 +1,9 @@
 package com.d2c.webapp.Controller;
 
 import com.d2c.webapp.entities.DrinkEntity;
+import com.d2c.webapp.reposotirySQL.RepositoryDrinkSQL;
 import com.d2c.webapp.service.DrinkService;
 import com.infoshareademy.domain.Drink;
-import com.infoshareademy.domain.Ingredient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -16,13 +16,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 @Controller
 public class SubController {
 
+
     @Autowired
     DrinkService drinkService;
+
 
     @GetMapping(value = "/login")
     public String getLogin() {
@@ -62,7 +63,8 @@ public class SubController {
 
     @GetMapping(value = "/EditDrink")
     public String  EditDrink(Model model, @RequestParam ("name") String name) {
-        List <Drink> drinks = drinkService.getDrinkByName(name);
+        drinkService.addDrinksToBB();
+        List<DrinkEntity> drinks = drinkService.findByName(name);
         if (drinks == null) {
             return ResponseEntity.notFound().build().toString();
         } else {
@@ -81,6 +83,7 @@ public class SubController {
         } else {
             model.addAttribute("name", drink.getDrinkName());
             model.addAttribute("listOfDrinks", drinks);
+            drinkService.addDrink(drink); //TODO  rozdzielenie logiki na edit i add
             System.out.println(drink); // To delate, testing line
         }
         return "singleDrink";
@@ -89,7 +92,7 @@ public class SubController {
 
     @GetMapping ("/singleDrinkFromDB")
     public String showAllEntities(Model model){
-        List<DrinkEntity> drinkEntities = drinkService.findAll();
+        List<DrinkEntity> drinkEntities = drinkService.findLast();
         model.addAttribute("drinkEntities", drinkEntities);
       return "Managements/singleDrinkFromDB";
     }

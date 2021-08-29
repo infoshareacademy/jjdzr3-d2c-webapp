@@ -33,8 +33,6 @@ public class DrinkService {
 
     private List<Drink> drinkList;
 
-    private List<Ingredient> ingredientsList;
-
     public List<Drink> getDrinkList() {
         this.drinkList = new ArrayList<>();
         DrinkParser drinkParser = new DrinkParser();
@@ -88,18 +86,30 @@ public class DrinkService {
 
 
 
-    public List<DrinkEntity> findAll(){
-        Iterable<DrinkEntity> drinkEntities = repositoryDrinkSQL.findAll();
+    public List<DrinkEntity> findLast(){
+        Iterable<DrinkEntity> drinkEntities = repositoryDrinkSQL.findLast();
         return (List<DrinkEntity>) drinkEntities;
     }
 
-
+    public List<DrinkEntity> findByName(String name)    {
+        Iterable<DrinkEntity> drinkEntities = repositoryDrinkSQL.findByName(name);
+        return (List<DrinkEntity>) drinkEntities;
+    }
     public void delete(DrinkEntity drinkEntity){
 
         repositoryDrinkSQL.delete(drinkEntity);
 
     }
 
+
+    public void addDrinksToBB(){
+        List<Drink> drinksList = getDrinkList();
+        int i = 0;
+        for (Drink drink: getDrinkList())
+        {
+            addDrink(drink);
+        }
+    }
 
     private Optional<Drink> getDrink(String name) {
         DrinkParser drinkParser = new DrinkParser();

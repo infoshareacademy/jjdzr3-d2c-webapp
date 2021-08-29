@@ -18,26 +18,26 @@
         class="container bg-image p-4 text-center shadow-1-strong rounded mb-5 text-black "
         style="background-position: center; background-repeat: no-repeat; background-color: lightblue; background-size: 1400px ">
   <tr th:each="drink : ${listOfDrinks}">
-    <form th:action="@{/EditDrink(name=${drink.getDrinkName()})}" th:object="${drink}" method="post">
+    <form th:action="@{/EditDrink(name=${drink.getDrink_name()})}" th:object="${drink}" method="post">
 
       <label for="drinkName" class="form-label text-white">Drink name</label>
-      <input th:type="text" th:class="form-control" id="drinkName" th:field="*{drinkName}">
+      <input th:type="text" th:class="form-control" id="drinkName" th:field="*{drink_name}">
 
       <label for="drinkCategory" class="form-label">Drink category</label>
       <select name="drinkCategory" class="form-control" id="drinkCategory"  placeholder="Category to search...">
-        <option th:value="*{drinkCategory}" >Choose ...</option>
+        <option th:value="*{drink_category}" >Choose ...</option>
         <option th:each="dCategory: ${T(com.infoshareademy.domain.Category).values()}" th:value="${dCategory}"
-                th:text="${dCategory.label}" th:selected="(${dCategory} == ${drink.getDrinkCategory()})" ></option>
+                th:text="${dCategory.label}" th:selected="(${dCategory} == ${drink.getDrink_category()})" ></option>
       </select>
       <label for="glassType" class="form-label text-white">Glass to drink</label>
       <select name="glassType" class="form-control" id="glassType" placeholder="Glass type to search...">
         <option value="">Choose</option>
         <option th:each="dGlassType: ${T(com.infoshareademy.domain.GlassType).values()}" th:value="${dGlassType}"
-                th:text="${dGlassType.label}" th:selected="(${dGlassType} == ${drink.getGlassType()})" ></option>
+                th:text="${dGlassType.label}" th:selected="(${dGlassType} == ${drink.getGlass_type()})" ></option>
       </select>
 
       <label for="recipe" class="form-label text-white">Recipe</label>
-      <input class="form-control" id="recipe" rows="3" th:field="*{preparationInstruction}" placeholder="Recipe...">
+      <input class="form-control" id="recipe" rows="3" th:field="*{preparation_instruction}" placeholder="Recipe...">
   <div class="form-check form-check-inline">
         <input class="form-check form-check-inline" type="checkbox" id="inlineCheckbox5" name="nazwa"
                value="wartość" placeholder="5"
@@ -45,23 +45,37 @@
         <label class="form-check-label" for="inlineCheckbox5">Fill in ingredients</label>
         <table id="identyfikator5" style="display: none"  >
           <!--                th:each="ingredients: ${ingredients}"-->
-          <tr th:each="ingredient, itemStat : *{ingredients}">
-            <td><input type="text"  name="ingredientName1"  th:value ="${drink.getIngredients().get(0).getIngredientName}" th:field="*{ingredients[__${itemStat.index}__].ingredientName}" ></td>
-            <td><input type="text"  name="ingredientMeasure1"   th:value ="${drink.getIngredients().get(0).getMeasure}" th:field="*{ingredients[__${itemStat.index}__].measure}" > </td>
-          </tr>
+<!--          <tr th:each="ingredient, itemStat : *{ingredients}">-->
+<!--            <td><input type="text"  name="ingredientName1"  th:value ="${drink.getIngredients().get(0).getIngredientName}" th:field="*{ingredients[__${itemStat.index}__].ingredientName}" ></td>-->
+<!--            <td><input type="text"  name="ingredientMeasure1"   th:value ="${drink.getIngredients().get(0).getMeasure}" th:field="*{ingredients[__${itemStat.index}__].measure}" > </td>-->
+<!--          </tr>-->
+            <tr>
+                <td> <input type="text" name = "ingredientName1" th:value =" ${drink.getIngredient_name_1()}" th:field="*{ingredient_name_1}"></td>
+                <td> <input type="text" name = "ingredientMeasure1" th:value =" ${drink.getMeasure_1()}" th:field="*{measure_1}"></td>
+                <td> <input type="text" name = "ingredientName1" th:value =" ${drink.getIngredient_name_2()}" th:field="*{ingredient_name_2}"></td>
+                <td> <input type="text" name = "ingredientMeasure1" th:value =" ${drink.getMeasure_2()}" th:field="*{measure_2}"></td>
+                <td> <input type="text" name = "ingredientName1" th:value =" ${drink.getIngredient_name_3()}" th:field="*{ingredient_name_3}"></td>
+                <td> <input type="text" name = "ingredientMeasure1" th:value =" ${drink.getMeasure_3()}" th:field="*{measure_3}"></td>
+                <td> <input type="text" name = "ingredientName1" th:value =" ${drink.getIngredient_name_4()}" th:field="*{ingredient_name_4}"></td>
+                <td> <input type="text" name = "ingredientMeasure1" th:value =" ${drink.getMeasure_4()}" th:field="*{measure_4}"></td>
+                <td> <input type="text" name = "ingredientName1" th:value =" ${drink.getIngredient_name_5()}" th:field="*{ingredient_name_5}"></td>
+                <td> <input type="text" name = "ingredientMeasure1" th:value =" ${drink.getMeasure_5()}" th:field="*{measure_5}"></td>
+
+            </tr>
+
         </table>
       </div>
 <label class="form-check-label  text-white" for="drinkType">Drink type</label>
       <select name="drinkType" class="form-control" id="drinkType"  placeholder="Choose drink type...">
         <option value="">Choose</option>
         <option th:each="dType: ${T(com.infoshareademy.domain.Type).values()}" th:value="${dType}"
-                th:text="${dType.label}" th:selected="(${dType} == ${drink.getDrinkType()})"></option>
+                th:text="${dType.label}" th:selected="(${dType} == ${drink.getType()})"></option>
       </select>
       <label for="drinkImg" class="form-label">Add drink image</label>
       <input type="text" class="form-control" id="drinkImg" placeholder="Enter drink img" th:field="*{drinkImg}">
-  </tr>
+
   <button type="submit" value="Wyślij">Submit</button>
-  </form>
+  </form></tr>
   <a th:href="@{/showAllDrinks}" class="card-link">Show all drinks</a>
 </div>
 </div>

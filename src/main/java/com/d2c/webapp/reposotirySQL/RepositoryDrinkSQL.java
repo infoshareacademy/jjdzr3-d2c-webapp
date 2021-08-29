@@ -21,9 +21,20 @@ public class RepositoryDrinkSQL {
         entityManager.persist(drinkEntity);
 
     }
-  //  @SuppressWarnings("unchecked")
+
     public List<DrinkEntity> findAll(){
         final Query query = entityManager.createQuery("SELECT o FROM DrinkEntity o ", DrinkEntity.class);
+        return query.getResultList();
+    }
+
+    public List<DrinkEntity> findByName(String name){
+        String test = "SELECT o FROM DrinkEntity o where o.drink_name= " + "'"+name+"'"  ;
+        final Query query = entityManager.createQuery(test, DrinkEntity.class);
+        return query.getResultList();
+    }
+
+    public List<DrinkEntity> findLast(){
+        final Query query = entityManager.createQuery("SELECT  o FROM DrinkEntity o order by o.drinkid desc", DrinkEntity.class).setFirstResult(1).setMaxResults(1);
         return query.getResultList();
     }
 
