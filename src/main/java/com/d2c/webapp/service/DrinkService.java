@@ -33,7 +33,6 @@ public class DrinkService {
 
     private List<Drink> drinkList;
 
-    private List<Ingredient> ingredientsList;
 
     public List<Drink> getDrinkList() {
         this.drinkList = new ArrayList<>();
@@ -42,6 +41,15 @@ public class DrinkService {
         drinkList.addAll(drinks);
         return drinkList;
     }
+
+    public void addAllDrinks(List<Drink> drinks){
+        DrinkParser drinkParser = new DrinkParser();
+        drinks = drinkParser.readFileIntoDrinkRepository().getDrinks();
+        List <DrinkEntity> drinkEntities = new ArrayList<>();
+        drinks.forEach(drink -> {repositoryDrinkSQL.save(new DrinkEntity());});
+
+    }
+
     public Drink getIngredientsList(){
         Ingredient ingredient = new Ingredient();
         List<Ingredient> ingredients = new ArrayList<>();
@@ -54,7 +62,7 @@ public class DrinkService {
 
     @Valid
     public void addDrink(Drink drink){
-        final DrinkEntity drinkEntity= new DrinkEntity();
+        final DrinkEntity drinkEntity = new DrinkEntity();
         drinkEntity.setDrink_name(drink.getDrinkName());
         drinkEntity.setPreparation_instruction(drink.getPreparationInstruction());
         drinkEntity.setDrink_category(String.valueOf(drink.getDrinkCategory()));
@@ -72,6 +80,23 @@ public class DrinkService {
         drinkEntity.setType(String.valueOf(drink.getDrinkType()));
         drinkEntity.setDrinkImg(drink.getDrinkImg());
         repositoryDrinkSQL.save(drinkEntity);
+    }
+
+    //TODO
+    //
+
+
+
+    public List<DrinkEntity> findAll(){
+        Iterable<DrinkEntity> drinkEntities = repositoryDrinkSQL.findAll();
+        return (List<DrinkEntity>) drinkEntities;
+    }
+
+
+    public void delete(DrinkEntity drinkEntity){
+
+        repositoryDrinkSQL.delete(drinkEntity);
+
     }
 
 
@@ -105,15 +130,6 @@ public class DrinkService {
     }
 
 
-//TODO
 
-//    public List<Drink> findAll(){
-//final List<DrinkEntity> drinkEntities = this.repositoryDrinkSQL.findAll();
-//return drinkEntities.stream().map(drinkEntity -> new DrinkRepository(drinkEntity.getDrinkid(), drinkEntity.getDrink_name(),
-//        drinkEntity.getDrink_category(), drinkEntity.getGlass_type(), drinkEntity.getIngredient_name_1(), drinkEntity.getMeasure_1(),
-//        drinkEntity.getIngredient_name_2(), drinkEntity.getMeasure_2(), drinkEntity.getIngredient_name_3(), drinkEntity.getMeasure_3(),
-//        drinkEntity.getIngredient_name_4(), drinkEntity.getMeasure_4(), drinkEntity.getIngredient_name_5(), drinkEntity.getMeasure_5(),
-//        drinkEntity.getPreparation_instruction(),drinkEntity.getType())).collect(Collectors.toList());
-//    }
 
 }

@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.*;
 import java.util.stream.Collectors;
 
+//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
+
 @Controller
 @RequestMapping("/d2c")
 public class D2Ccontroler {
@@ -22,7 +24,7 @@ public class D2Ccontroler {
     @Autowired
     DrinkService drinkService;
 
-    private static Logger logger = LoggerFactory.getLogger(D2Ccontroler.class);
+    private static final Logger logger = LoggerFactory.getLogger(D2Ccontroler.class);
 
     @GetMapping("/allDrinks")
     public String getAllDrinks(Model model) {
@@ -33,6 +35,8 @@ public class D2Ccontroler {
 
         return "/allDrinks";
     }
+
+
 
     @GetMapping(value = "/singleDrink")
     public String  getSinDrink(Model model, @RequestParam ("name") String name) {
@@ -49,7 +53,7 @@ public class D2Ccontroler {
         List<Drink> drinkList = drinkService.getDrinkList();
         List<Drink> filteredDrinks = drinkList
                 .stream()
-                .filter(a -> a.getDrinkName().toLowerCase().equals(name.toLowerCase()))
+                .filter(a -> a.getDrinkName().equalsIgnoreCase(name))
                 .collect(Collectors.toList());
         System.out.println(filteredDrinks);
         return  filteredDrinks;

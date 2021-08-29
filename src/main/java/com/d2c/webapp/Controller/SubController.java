@@ -1,5 +1,6 @@
 package com.d2c.webapp.Controller;
 
+import com.d2c.webapp.entities.DrinkEntity;
 import com.d2c.webapp.service.DrinkService;
 import com.infoshareademy.domain.Drink;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.validation.Valid;
+import java.util.List;
 import java.util.Random;
 
 @Controller
@@ -65,4 +67,25 @@ public class SubController {
         drinkService.addDrink(drink);
         return "Managements/AddDrink";
     }
+
+    @GetMapping ("/singleDrinkFromDB")
+    public String showAllEntities(Model model){
+        List<DrinkEntity> drinkEntities = drinkService.findAll();
+        model.addAttribute("drinkEntities", drinkEntities);
+      return "Managements/singleDrinkFromDB";
+    }
+
+//    @PostMapping("/test")
+//    public String addAllDrinks(@ModelAttribute List<Drink> drinks){
+//        drinkService.addAllDrinks(drinks);
+//        return "Managements/test";
+//    }
+//
+//    @GetMapping ("/test")
+//    public String adAllDrinks(Model model){
+//        model.addAttribute("drinks", drinkService.getDrinkList());
+//        return "Managements/test";
+//    }
+
+
 }
