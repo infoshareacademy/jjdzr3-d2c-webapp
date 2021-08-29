@@ -1,5 +1,6 @@
 package com.d2c.webapp.Controller;
 
+import com.d2c.webapp.entities.DrinkEntity;
 import com.d2c.webapp.service.DrinkService;
 import com.infoshareademy.domain.Drink;
 import com.infoshareademy.domain.Ingredient;
