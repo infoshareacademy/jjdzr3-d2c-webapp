@@ -17,6 +17,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -30,9 +31,9 @@ public class DrinkService {
     @Autowired
     private RepositoryDrinkSQL repositoryDrinkSQL;
 
-
     private List<Drink> drinkList;
 
+    private List<Ingredient> ingredientsList;
 
     public List<Drink> getDrinkList() {
         this.drinkList = new ArrayList<>();
@@ -109,6 +110,16 @@ public class DrinkService {
                 .collect(Collectors.toList());
         return  filteredDrinks.stream().findFirst();
     }
+    public List<Drink> getDrinkByName(String name) {
+        List<Drink> drinkList = getDrinkList();
+        List<Drink> filteredDrinks = drinkList
+                .stream()
+                .filter(a -> a.getDrinkName().toLowerCase().equals(name.toLowerCase()))
+                .collect(Collectors.toList());
+        System.out.println(filteredDrinks);
+        return  filteredDrinks;
+    }
+
     public Page<Drink> findPaginated(Pageable pageable) {
         int pageSize = pageable.getPageSize();
         int currentPage = pageable.getPageNumber();
@@ -128,8 +139,4 @@ public class DrinkService {
     public void setDrinkList(List<Drink> drinkList) {
         this.drinkList = drinkList;
     }
-
-
-
-
 }
