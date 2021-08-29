@@ -103,27 +103,7 @@ public class DrinkListController {
 
         drinkService.setDrinkList(drinks);
 
-        Page<Drink> drinkPage = drinkService.findPaginated(PageRequest.of(currentPage-1,pageSize5));
-        int evalPageSize = size.orElse(INITIAL_PAGE_SIZE);
-        int evalPage = page.filter(p -> p >= 1)
-                .map(p -> p - 1)
-                .orElse(INITIAL_PAGE);
-        model.addAttribute("drinkPage", drinkPage);
 
-        int totalPages = drinkPage.getTotalPages();
-        if (totalPages>0){
-            List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPages).boxed().collect(Collectors.toList());
-            model.addAttribute("pageNumbers", pageNumbers);
-        }
-        var persons = drinkService.findPaginated(PageRequest.of(evalPage, evalPageSize));
-        var pager = new Pager(persons.getTotalPages(), persons.getNumber(), BUTTONS_TO_SHOW);
-        modelAndView.addObject("persons", persons);
-        modelAndView.addObject("selectedPageSize", evalPageSize);
-        modelAndView.addObject("pageSizes", PAGE_SIZES);
-        modelAndView.addObject("pager", pager);
-        modelAndView.addObject("type", type);
-        modelAndView.addObject("glassType", glassType);
-        modelAndView.addObject("category", category);
 
         return modelAndView;
 

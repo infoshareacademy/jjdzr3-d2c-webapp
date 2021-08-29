@@ -21,8 +21,6 @@ import java.util.stream.Collectors;
 @Controller
 public class SubController {
 
-
-
     @Autowired
     DrinkService drinkService;
 
@@ -62,25 +60,9 @@ public class SubController {
         return "Managements/AddDrink";
     }
 
-    @PostMapping(value = "/AddDrink")
-    public String  getSinDrink(@Valid @ModelAttribute Drink drink, Model model) {
-        List<Drink> drinks = new ArrayList<>();
-        drinks.add(drink);
-        if (drinks == null) {
-            return ResponseEntity.notFound().build().toString();
-        } else {
-            model.addAttribute("name", drink.getDrinkName());
-            model.addAttribute("listOfDrinks", drinks);
-            return "singleDrink";
-        }
-    }
-
-// Start of Editing Drink
-
-
     @GetMapping(value = "/EditDrink")
     public String  EditDrink(Model model, @RequestParam ("name") String name) {
-        List <Drink> drinks = getDrink(name);
+        List <Drink> drinks = drinkService.getDrinkByName(name);
         if (drinks == null) {
             return ResponseEntity.notFound().build().toString();
         } else {
@@ -90,7 +72,7 @@ public class SubController {
             return "Managements/EditDrink";
         }
     }
-    @PostMapping(value = "/EditDrink")
+    @PostMapping(value ={"/EditDrink", "/AddDrink"})
     public String  getEditedDrink(@Valid @ModelAttribute Drink drink, Model model) {
         List<Drink> drinks = new ArrayList<>();
         drinks.add(drink);
@@ -100,19 +82,7 @@ public class SubController {
             model.addAttribute("name", drink.getDrinkName());
             model.addAttribute("listOfDrinks", drinks);
             System.out.println(drink); // To delate, testing line
-            return "singleDrink";
         }
+        return "singleDrink";
     }
-    private List<Drink> getDrink(String name) {
-        List<Drink> drinkList = drinkService.getDrinkList();
-        List<Drink> filteredDrinks = drinkList
-                .stream()
-                .filter(a -> a.getDrinkName().toLowerCase().equals(name.toLowerCase()))
-                .collect(Collectors.toList());
-        System.out.println(filteredDrinks);
-        return  filteredDrinks;
-    }
-
-
-    // End of Editing Drink
 }
