@@ -84,5 +84,6 @@ public class SubController {
             System.out.println(drink); // To delate, testing line
         }
         return "singleDrink";
+
     }
 }

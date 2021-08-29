@@ -23,9 +23,9 @@
     <label for="drinkName" class="form-label text-white">Drink name</label>
     <li class="form-control" id="drinkName" th:text="${drink.getDrinkName()}"></li>
     <label for="drinkCategory" class="form-label text-white">Drink category</label>
-    <li class="form-control" id="drinkCategory" th:text="${drink.getDrinkCategory()}"></li>
+    <li class="form-control" id="drinkCategory" th:text="${drink.getDrinkCategory().getLabel()}"></li>
     <label for="glassType" class="form-label text-white">Glass to drink</label>
-    <li class="form-control" id="glassType" th:text="${drink.getGlassType()}"></li>
+    <li class="form-control" id="glassType" th:text="${drink.getGlassType().getLabel()}"></li>
     <label for="recipe" class="form-label text-white">Recipe</label>
     <li class="form-control" id="recipe" th:text="${drink.getPreparationInstruction()}"></li>
     <label class="form-check-label  text-white">Ingredients</label>
@@ -54,7 +54,7 @@
     </tabela>
 
     <label class="form-check-label  text-white" for="drinkType">Drink type</label>
-    <li class="form-control" id="drinkType" th:text="${drink.getDrinkType()}"></li>
+     <li class="form-control" id="drinkType" th:text="${drink.getDrinkType().getLabel()}"></li>
     <a th:href="@{/EditDrink(name=${drink.getDrinkName()})}" class="card-link">Edit</a>
   </tr>
 

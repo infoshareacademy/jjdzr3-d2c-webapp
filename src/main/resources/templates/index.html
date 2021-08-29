@@ -176,8 +176,9 @@
 <!--Jumbotron  End-->
 
 <!-- Start Features #1 up to Features #3-->
-<div class="container marketing">
 
+<div class="container marketing" >
+<!--<tr th:each="drink : ${listOfDrinks}">-->
     <!-- Three columns of text below the carousel -->
     <div class="row">
         <div class="col-lg-4">
@@ -185,7 +186,8 @@
             <h2>Mana Potion Drink</h2>
             <p>An exhilarating blend of 42 Below Vodka, apple pressé and the bluest of Blue Curacao’s, all shaken with
                 fresh lime and charged with sparkling white wine served straight up.</p>
-            <p><a class="btn btn-secondary" href="#">View details »</a></p>
+            <p><!--/*@thymesVar id="listOfDrinks" type=""*/-->
+            <a class="btn btn-secondary" th:href="@{/d2c/singleDrink?name=National%20Aquarium}"> View details »</a></p>
         </div><!-- /.col-lg-4 -->
         <div class="col-lg-4">
             <img src="https://cocktail.review.com.np/images/drink-image.svg" width="140" height="140">
@@ -195,7 +197,7 @@
                 seems to coat the honey without mixing, so you get a dusty, sticky mass that looks as though it will
                 never mix. Then all at once, presto! It looks like dark chocolate sauce. Pour hot espresso over the
                 honey,stirring to dissolve. Serve with cream.</p>
-            <p><a class="btn btn-secondary" href="#">View details »</a></p>
+            <p><a class="btn btn-secondary" th:href="@{/d2c/singleDrink?name=Melya}">View details »</a></p>
         </div><!-- /.col-lg-4 -->
         <div class="col-lg-4">
             <img src="https://www.gimmesomeoven.com/wp-content/uploads/2018/05/How-To-Make-A-Mojito-Recipe-Cocktail-Fresh-Honey-3.jpg"
@@ -204,11 +206,11 @@
             <p>Muddle mint leaves with sugar and lime juice. Add a splash of soda water and fill the glass with cracked
                 ice. Pour the rum and top with soda water. Garnish and serve with straw.",
             </p>
-            <p><a class="btn btn-secondary" href="#">View details »</a></p>
+            <p><a class="btn btn-secondary" th:href="@{/d2c/singleDrink?name=Mojito}">View details »</a></p>
         </div><!-- /.col-lg-4 -->
     </div><!-- /.row -->
 
-
+</tr>
 </div>
 <!--End Features #1 up to Features #3-->
 
