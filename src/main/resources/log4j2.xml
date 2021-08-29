@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Configuration status="WARN">
+<Configuration>
     <Properties>
         <Property name="LOG_EXCEPTION_CONVERSION_WORD">%xwEx</Property>
         <Property name="LOG_LEVEL_PATTERN">%3p</Property>
@@ -14,7 +14,7 @@
     </Properties>
 
     <Appenders>
-        <Console name="Console" target="SYSTEM_OUT" follow="true">
+        <Console name="Console" target="SYSTEM_OUT" follow="false">
             <PatternLayout pattern="${sys:CONSOLE_LOG_PATTERN}" charset="${sys:CONSOLE_LOG_CHARSET}"/>
         </Console>
         <RollingFile name="File" fileName="${sys:LOG_PATH}/${sys:LOG_FILE}"
@@ -30,13 +30,18 @@
     </Appenders>
 
     <Loggers>
-        <Logger name="org.apache.tomcat.util.net.NioSelectorPool" level="warn"/>
-        <Logger name="org.hibernate.validator.internal.util.Version" level="warn"/>
-        <Logger name="org.springframework.boot.actuate.endpoint.jmx" level="warn"/>
-        <Logger name="com.d2c.webapp" level="debug"/>
+        <Logger name="Console" level="info" additivity="false">
+            <AppenderRef ref="Console"/>
+        </Logger>
+
+        <Logger name="File" level="warn" additivity="false">
+            <AppenderRef ref="AsyncFile"/>
+        </Logger>
+
         <Root level="info">
             <AppenderRef ref="Console"/>
             <AppenderRef ref="AsyncFile"/>
         </Root>
     </Loggers>
+
 </Configuration>
