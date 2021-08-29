@@ -4,20 +4,22 @@ import com.d2c.webapp.Service.DrinkService;
 import com.infoshareademy.domain.Drink;
 import com.infoshareademy.domain.Ingredient;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.validation.Valid;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
+import java.util.stream.Collectors;
 
 @Controller
 public class SubController {
-
-
 
     @Autowired
     DrinkService drinkService;
@@ -58,13 +60,30 @@ public class SubController {
         return "Managements/AddDrink";
     }
 
-    @PostMapping("/AddDrink")
-    public String addDrink(@Valid @ModelAttribute Drink drink) {
-        Random rand = new Random();
-        int max = rand.nextInt(80000);
-        drink.setDrinkId(max);
-        System.out.println(drink);
-        drinkService.addDrink(drink);
-        return "Managements/AddDrink";
+    @GetMapping(value = "/EditDrink")
+    public String  EditDrink(Model model, @RequestParam ("name") String name) {
+        List <Drink> drinks = drinkService.getDrinkByName(name);
+        if (drinks == null) {
+            return ResponseEntity.notFound().build().toString();
+        } else {
+            model.addAttribute("name", name);
+            model.addAttribute("listOfDrinks", drinks);
+            model.addAttribute("drink", drinks.get(0));
+            return "Managements/EditDrink";
+        }
+    }
+    @PostMapping(value ={"/EditDrink", "/AddDrink"})
+    public String  getEditedDrink(@Valid @ModelAttribute Drink drink, Model model) {
+        List<Drink> drinks = new ArrayList<>();
+        drinks.add(drink);
+        if (drinks == null) {
+            return ResponseEntity.notFound().build().toString();
+        } else {
+            model.addAttribute("name", drink.getDrinkName());
+            model.addAttribute("listOfDrinks", drinks);
+            System.out.println(drink); // To delate, testing line
+        }
+        return "singleDrink";
+
     }
 }

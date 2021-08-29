@@ -84,6 +84,16 @@ public class DrinkService {
                 .collect(Collectors.toList());
         return  filteredDrinks.stream().findFirst();
     }
+    public List<Drink> getDrinkByName(String name) {
+        List<Drink> drinkList = getDrinkList();
+        List<Drink> filteredDrinks = drinkList
+                .stream()
+                .filter(a -> a.getDrinkName().toLowerCase().equals(name.toLowerCase()))
+                .collect(Collectors.toList());
+        System.out.println(filteredDrinks);
+        return  filteredDrinks;
+    }
+
     public Page<Drink> findPaginated(Pageable pageable) {
         int pageSize = pageable.getPageSize();
         int currentPage = pageable.getPageNumber();
@@ -103,4 +113,5 @@ public class DrinkService {
     public void setDrinkList(List<Drink> drinkList) {
         this.drinkList = drinkList;
     }
+
 }
