@@ -18,9 +18,15 @@ public class RepositoryDrinkSQL {
     private EntityManager entityManager;
 
     public void save(DrinkEntity drinkEntity) {
-        entityManager.persist(drinkEntity);
+       entityManager.persist(drinkEntity);
 
     }
+
+    @Transactional
+    public void update(DrinkEntity drinkEntity){
+        entityManager.merge(drinkEntity);
+    }
+
 
     public List<DrinkEntity> findAll(){
         final Query query = entityManager.createQuery("SELECT o FROM DrinkEntity o ", DrinkEntity.class);

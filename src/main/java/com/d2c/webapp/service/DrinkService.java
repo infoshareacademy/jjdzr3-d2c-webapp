@@ -81,8 +81,36 @@ public class DrinkService {
         repositoryDrinkSQL.save(drinkEntity);
     }
 
+
+    public void update(DrinkEntity drinkEntity){
+        Drink drink = new Drink();
+        drinkEntity.setDrink_name(drinkEntity.getDrink_name());
+        drinkEntity.setPreparation_instruction(drinkEntity.getPreparation_instruction());
+        drinkEntity.setDrink_category(drinkEntity.getDrink_category());
+        drinkEntity.setGlass_type(drinkEntity.getGlass_type());
+        drinkEntity.setIngredient_name_1(drinkEntity.getIngredient_name_1());
+        drinkEntity.setMeasure_1(drinkEntity.getMeasure_1());
+        drinkEntity.setIngredient_name_1(drinkEntity.getIngredient_name_2());
+        drinkEntity.setMeasure_1(drinkEntity.getMeasure_2());
+        drinkEntity.setIngredient_name_1(drinkEntity.getIngredient_name_3());
+        drinkEntity.setMeasure_1(drinkEntity.getMeasure_3());
+        drinkEntity.setIngredient_name_1(drinkEntity.getIngredient_name_4());
+        drinkEntity.setIngredient_name_1(drinkEntity.getIngredient_name_5());
+        drinkEntity.setMeasure_1(drinkEntity.getMeasure_4());
+        drinkEntity.setMeasure_1(drinkEntity.getMeasure_5());
+        drinkEntity.setType(drinkEntity.getType());
+        drinkEntity.setDrinkImg(drinkEntity.getDrinkImg());
+        repositoryDrinkSQL.update(drinkEntity);
+    }
+
+
     //TODO
     //
+
+    public List<DrinkEntity> findAll(){
+        Iterable<DrinkEntity> drinkEntities = repositoryDrinkSQL.findAll();
+        return (List<DrinkEntity>) drinkEntities;
+    }
 
 
 
@@ -103,12 +131,13 @@ public class DrinkService {
 
 
     public void addDrinksToBB(){
+        if(repositoryDrinkSQL.findAll().size()<20){
         List<Drink> drinksList = getDrinkList();
         int i = 0;
         for (Drink drink: getDrinkList())
         {
             addDrink(drink);
-        }
+        }}else System.out.println("Archive exist");
     }
 
     private Optional<Drink> getDrink(String name) {

@@ -17,8 +17,8 @@
 <div
         class="container bg-image p-4 text-center shadow-1-strong rounded mb-5 text-black "
         style="background-position: center; background-repeat: no-repeat; background-color: lightblue; background-size: 1400px ">
-  <tr th:each="drink : ${listOfDrinks}">
-    <form th:action="@{/EditDrink(name=${drink.getDrink_name()})}" th:object="${drink}" method="post">
+  <tr th:each="drinkEntity : ${listOfDrinks}">
+    <form th:action="@{/EditDrink(name=${drinkEntity.getDrink_name()})}" th:object="${drink}" method="post">
 
       <label for="drinkName" class="form-label text-white">Drink name</label>
       <input th:type="text" th:class="form-control" id="drinkName" th:field="*{drink_name}">

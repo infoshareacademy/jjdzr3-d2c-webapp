@@ -35,7 +35,9 @@ public class DrinkListController {
     public ModelAndView getShowAllDrinks3(
             Model model, @RequestParam("page")Optional<Integer>page, @RequestParam("size") Optional<Integer>size) {
         var modelAndView = new ModelAndView("subSites/showAllDrinks");
-        drinkService.getDrinkList();
+
+        drinkService.addDrinksToBB();
+        drinkService.findAll();
         int currentPage = page.orElse(1);
         int pageSize5 = size.orElse(5);
         GetDrinkPage(model, page, size, drinkService, modelAndView, currentPage, pageSize5);

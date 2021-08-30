@@ -3,6 +3,7 @@ package com.d2c.webapp.entities;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
+import javax.transaction.Transactional;
 import javax.validation.constraints.NotNull;
 import javax.validation.executable.ValidateOnExecution;
 
@@ -201,4 +202,6 @@ public class DrinkEntity {
     public void setDrinkImg(String drinkImg) {
         this.drinkImg = drinkImg;
     }
+
+
 }

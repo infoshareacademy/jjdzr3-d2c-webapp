@@ -63,7 +63,7 @@ public class SubController {
 
     @GetMapping(value = "/EditDrink")
     public String  EditDrink(Model model, @RequestParam ("name") String name) {
-        drinkService.addDrinksToBB();
+      //  drinkService.addDrinksToBB();
         List<DrinkEntity> drinks = drinkService.findByName(name);
         if (drinks == null) {
             return ResponseEntity.notFound().build().toString();
@@ -74,8 +74,8 @@ public class SubController {
             return "Managements/EditDrink";
         }
     }
-    @PostMapping(value ={"/EditDrink", "/AddDrink"})
-    public String  getEditedDrink(@Valid @ModelAttribute Drink drink, Model model) {
+    @PostMapping(value ={ "/AddDrink"})
+    public String  AddDrink(@Valid @ModelAttribute Drink drink, Model model) {
         List<Drink> drinks = new ArrayList<>();
         drinks.add(drink);
         if (drinks == null) {
@@ -83,12 +83,33 @@ public class SubController {
         } else {
             model.addAttribute("name", drink.getDrinkName());
             model.addAttribute("listOfDrinks", drinks);
+
+            //drinkService.update(drink);
             drinkService.addDrink(drink); //TODO  rozdzielenie logiki na edit i add
             System.out.println(drink); // To delate, testing line
         }
-        return "singleDrink";
+        return "Managements/singleDrinkFromDB";
 
     }
+
+    @PostMapping(value ={ "/EditDrink"})
+    public String  getEditedDrink(@Valid @ModelAttribute DrinkEntity drink, Model model) {
+        List<DrinkEntity> drinks = new ArrayList<>();
+        drinks.add(drink);
+        if (drinks == null) {
+            return ResponseEntity.notFound().build().toString();
+        } else {
+            model.addAttribute("name", drink.getDrink_name());
+            model.addAttribute("listOfDrinks", drinks);
+//TODO do dorobienia oddzielnie enumy żeby zapisywały się w bazie danych
+            drinkService.update(drink);
+          //  drinkService.addDrink(drink); //TODO  rozdzielenie logiki na edit i add
+            System.out.println(drink); // To delate, testing line
+        }
+        return "Managements/EditDrink";
+
+    }
+
 
     @GetMapping ("/singleDrinkFromDB")
     public String showAllEntities(Model model){
