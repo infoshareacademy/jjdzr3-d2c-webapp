@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="UTF-8">
-  <title>Edit Drink</title>
+    <meta charset="UTF-8">
+    <title>Edit Drink</title>
 
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
-          integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
-          crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
+            crossorigin="anonymous"></script>
 </head>
 <body>
 <div th:insert="style/navbar :: navbar "></div>
@@ -17,66 +17,52 @@
 <div
         class="container bg-image p-4 text-center shadow-1-strong rounded mb-5 text-black "
         style="background-position: center; background-repeat: no-repeat; background-color: lightblue; background-size: 1400px ">
-  <tr th:each="drinkEntity : ${listOfDrinks}">
-    <form th:action="@{/EditDrink(name=${drinkEntity.getDrink_name()})}" th:object="${drink}" method="post">
+    <tr th:each="drink : ${listOfDrinks}">
+        <form th:action="@{/EditDrink(name=${drink.getDrinkName()})}" th:object="${drink}" method="post">
 
-      <label for="drinkName" class="form-label text-white">Drink name</label>
-      <input th:type="text" th:class="form-control" id="drinkName" th:field="*{drink_name}">
+            <label for="drinkName" class="form-label text-white">Drink name</label>
+            <input th:type="text" th:class="form-control" id="drinkName" th:field="*{drinkName}">
 
-      <label for="drinkCategory" class="form-label">Drink category</label>
-      <select name="drinkCategory" class="form-control" id="drinkCategory"  placeholder="Category to search...">
-        <option th:value="*{drink_category}" >Choose ...</option>
-        <option th:each="dCategory: ${T(com.infoshareademy.domain.Category).values()}" th:value="${dCategory}"
-                th:text="${dCategory.label}" th:selected="(${dCategory} == ${drink.getDrink_category()})" ></option>
-      </select>
-      <label for="glassType" class="form-label text-white">Glass to drink</label>
-      <select name="glassType" class="form-control" id="glassType" placeholder="Glass type to search...">
-        <option value="">Choose</option>
-        <option th:each="dGlassType: ${T(com.infoshareademy.domain.GlassType).values()}" th:value="${dGlassType}"
-                th:text="${dGlassType.label}" th:selected="(${dGlassType} == ${drink.getGlass_type()})" ></option>
-      </select>
+            <label for="drinkCategory" class="form-label">Drink category</label>
+            <select name="drinkCategory" class="form-control" id="drinkCategory"  placeholder="Category to search...">
+                <option th:value="*{drinkCategory}" >Choose ...</option>
+                <option th:each="dCategory: ${T(com.infoshareademy.domain.Category).values()}" th:value="${dCategory}"
+                        th:text="${dCategory.label}" th:selected="(${dCategory} == ${drink.getDrinkCategory()})" ></option>
+            </select>
+            <label for="glassType" class="form-label text-white">Glass to drink</label>
+            <select name="glassType" class="form-control" id="glassType" placeholder="Glass type to search...">
+                <option value="">Choose</option>
+                <option th:each="dGlassType: ${T(com.infoshareademy.domain.GlassType).values()}" th:value="${dGlassType}"
+                        th:text="${dGlassType.label}" th:selected="(${dGlassType} == ${drink.getGlassType()})" ></option>
+            </select>
 
-      <label for="recipe" class="form-label text-white">Recipe</label>
-      <input class="form-control" id="recipe" rows="3" th:field="*{preparation_instruction}" placeholder="Recipe...">
-  <div class="form-check form-check-inline">
-        <input class="form-check form-check-inline" type="checkbox" id="inlineCheckbox5" name="nazwa"
-               value="wartość" placeholder="5"
-               onclick="document.getElementById('identyfikator5').style.display = this.checked ? 'block' : 'none'; this.form.elements['ingredientName1'].disabled =  this.form.elements['ingredientMeasure1'].disabled =  this.form.elements['ingredientName2'].disabled = this.form.elements['ingredientMeasure2'].disabled = this.form.elements['ingredientName3'].disabled =this.form.elements['ingredientMeasure3'].disabled =  this.form.elements['ingredientName4'].disabled =this.form.elements['ingredientMeasure4'].disabled =this.form.elements['ingredientName5'].disabled =   this.form.elements['ingredientMeasure5'].disabled=!this.checked">
-        <label class="form-check-label" for="inlineCheckbox5">Fill in ingredients</label>
-        <table id="identyfikator5" style="display: none"  >
-          <!--                th:each="ingredients: ${ingredients}"-->
-<!--          <tr th:each="ingredient, itemStat : *{ingredients}">-->
-<!--            <td><input type="text"  name="ingredientName1"  th:value ="${drink.getIngredients().get(0).getIngredientName}" th:field="*{ingredients[__${itemStat.index}__].ingredientName}" ></td>-->
-<!--            <td><input type="text"  name="ingredientMeasure1"   th:value ="${drink.getIngredients().get(0).getMeasure}" th:field="*{ingredients[__${itemStat.index}__].measure}" > </td>-->
-<!--          </tr>-->
-            <tr>
-                <td> <input type="text" name = "ingredientName1" th:value =" ${drink.getIngredient_name_1()}" th:field="*{ingredient_name_1}"></td>
-                <td> <input type="text" name = "ingredientMeasure1" th:value =" ${drink.getMeasure_1()}" th:field="*{measure_1}"></td>
-                <td> <input type="text" name = "ingredientName1" th:value =" ${drink.getIngredient_name_2()}" th:field="*{ingredient_name_2}"></td>
-                <td> <input type="text" name = "ingredientMeasure1" th:value =" ${drink.getMeasure_2()}" th:field="*{measure_2}"></td>
-                <td> <input type="text" name = "ingredientName1" th:value =" ${drink.getIngredient_name_3()}" th:field="*{ingredient_name_3}"></td>
-                <td> <input type="text" name = "ingredientMeasure1" th:value =" ${drink.getMeasure_3()}" th:field="*{measure_3}"></td>
-                <td> <input type="text" name = "ingredientName1" th:value =" ${drink.getIngredient_name_4()}" th:field="*{ingredient_name_4}"></td>
-                <td> <input type="text" name = "ingredientMeasure1" th:value =" ${drink.getMeasure_4()}" th:field="*{measure_4}"></td>
-                <td> <input type="text" name = "ingredientName1" th:value =" ${drink.getIngredient_name_5()}" th:field="*{ingredient_name_5}"></td>
-                <td> <input type="text" name = "ingredientMeasure1" th:value =" ${drink.getMeasure_5()}" th:field="*{measure_5}"></td>
-
-            </tr>
-
-        </table>
-      </div>
-<label class="form-check-label  text-white" for="drinkType">Drink type</label>
-      <select name="drinkType" class="form-control" id="drinkType"  placeholder="Choose drink type...">
-        <option value="">Choose</option>
-        <option th:each="dType: ${T(com.infoshareademy.domain.Type).values()}" th:value="${dType}"
-                th:text="${dType.label}" th:selected="(${dType} == ${drink.getType()})"></option>
-      </select>
-      <label for="drinkImg" class="form-label">Add drink image</label>
-      <input type="text" class="form-control" id="drinkImg" placeholder="Enter drink img" th:field="*{drinkImg}">
-
-  <button type="submit" value="Wyślij">Submit</button>
-  </form></tr>
-  <a th:href="@{/showAllDrinks}" class="card-link">Show all drinks</a>
+            <label for="recipe" class="form-label text-white">Recipe</label>
+            <input class="form-control" id="recipe" rows="3" th:field="*{preparationInstruction}" placeholder="Recipe...">
+            <div class="form-check form-check-inline">
+                <input class="form-check form-check-inline" type="checkbox" id="inlineCheckbox5" name="nazwa"
+                       value="wartość" placeholder="5"
+                       onclick="document.getElementById('identyfikator5').style.display = this.checked ? 'block' : 'none'; this.form.elements['ingredientName1'].disabled =  this.form.elements['ingredientMeasure1'].disabled =  this.form.elements['ingredientName2'].disabled = this.form.elements['ingredientMeasure2'].disabled = this.form.elements['ingredientName3'].disabled =this.form.elements['ingredientMeasure3'].disabled =  this.form.elements['ingredientName4'].disabled =this.form.elements['ingredientMeasure4'].disabled =this.form.elements['ingredientName5'].disabled =   this.form.elements['ingredientMeasure5'].disabled=!this.checked">
+                <label class="form-check-label" for="inlineCheckbox5">Fill in ingredients</label>
+                <table id="identyfikator5" style="display: none"  >
+                    <!--                th:each="ingredients: ${ingredients}"-->
+                    <tr th:each="ingredient, itemStat : *{ingredients}">
+                        <td><input type="text"  name="ingredientName1"  th:value ="${drink.getIngredients().get(0).getIngredientName}" th:field="*{ingredients[__${itemStat.index}__].ingredientName}" ></td>
+                        <td><input type="text"  name="ingredientMeasure1"   th:value ="${drink.getIngredients().get(0).getMeasure}" th:field="*{ingredients[__${itemStat.index}__].measure}" > </td>
+                    </tr>
+                </table>
+            </div>
+            <label class="form-check-label  text-white" for="drinkType">Drink type</label>
+            <select name="drinkType" class="form-control" id="drinkType"  placeholder="Choose drink type...">
+                <option value="">Choose</option>
+                <option th:each="dType: ${T(com.infoshareademy.domain.Type).values()}" th:value="${dType}"
+                        th:text="${dType.label}" th:selected="(${dType} == ${drink.getDrinkType()})"></option>
+            </select>
+            <label for="drinkImg" class="form-label">Add drink image</label>
+            <input type="text" class="form-control" id="drinkImg" placeholder="Enter drink img" th:field="*{drinkImg}">
+    </tr>
+    <button type="submit" value="Wyślij">Submit</button>
+    </form>
+    <a th:href="@{/showAllDrinks}" class="card-link">Show all drinks</a>
 </div>
 </div>
 </div>

@@ -1,5 +1,6 @@
 package com.d2c.webapp;
 
+import com.d2c.webapp.service.DrinkService;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 

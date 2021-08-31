@@ -4,10 +4,7 @@ package com.d2c.webapp.service;
 import com.d2c.webapp.entities.DrinkEntity;
 import com.d2c.webapp.reposotirySQL.RepositoryDrinkSQL;
 import com.infoshareademy.data.DrinkParser;
-import com.infoshareademy.domain.Drink;
-import com.infoshareademy.domain.DrinkRepository;
-
-import com.infoshareademy.domain.Ingredient;
+import com.infoshareademy.domain.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -61,7 +58,31 @@ public class DrinkService {
 
     @Valid
     public void addDrink(Drink drink){
-        final DrinkEntity drinkEntity = new DrinkEntity();
+        final DrinkEntity drinkEntity = changeDrinkToDrinkEntity(drink); // Może tak być Agu?
+
+        repositoryDrinkSQL.save(drinkEntity);
+    }
+
+    public Drink changeDrinkEntityToDrink (DrinkEntity drinkEntity){
+        Drink drink = new Drink();
+        List<Ingredient> ingredients = new ArrayList<>();
+        ingredients.add(new Ingredient(drinkEntity.getIngredient_name_1(), drinkEntity.getMeasure_1()));
+        ingredients.add(new Ingredient(drinkEntity.getIngredient_name_2(), drinkEntity.getMeasure_2()));
+        ingredients.add(new Ingredient(drinkEntity.getIngredient_name_3(), drinkEntity.getMeasure_3()));
+        ingredients.add(new Ingredient(drinkEntity.getIngredient_name_4(), drinkEntity.getMeasure_4()));
+        ingredients.add(new Ingredient(drinkEntity.getIngredient_name_5(), drinkEntity.getMeasure_5()));
+
+        drink.setDrinkId(drinkEntity.getDrinkid().intValue());
+        drink.setIngredients(ingredients);
+        drink.setDrinkImg(drinkEntity.getDrinkImg());
+        drink.setDrinkName(drinkEntity.getDrink_name());
+        drink.setDrinkType(Type.valueOf(drinkEntity.getType()));
+        drink.setDrinkCategory(Category.valueOf(drinkEntity.getDrink_category()));
+        drink.setGlassType(GlassType.valueOf(drinkEntity.getGlass_type()));
+        return drink;
+    }
+    public DrinkEntity changeDrinkToDrinkEntity (Drink drink){
+        DrinkEntity drinkEntity = new DrinkEntity();
         drinkEntity.setDrink_name(drink.getDrinkName());
         drinkEntity.setPreparation_instruction(drink.getPreparationInstruction());
         drinkEntity.setDrink_category(String.valueOf(drink.getDrinkCategory()));
@@ -78,8 +99,9 @@ public class DrinkService {
         drinkEntity.setMeasure_5(drink.getIngredients().get(4).getMeasure());
         drinkEntity.setType(String.valueOf(drink.getDrinkType()));
         drinkEntity.setDrinkImg(drink.getDrinkImg());
-        repositoryDrinkSQL.save(drinkEntity);
+        return drinkEntity;
     }
+
 
 
     public void update(DrinkEntity drinkEntity){

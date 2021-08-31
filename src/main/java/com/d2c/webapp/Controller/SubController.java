@@ -64,7 +64,11 @@ public class SubController {
     @GetMapping(value = "/EditDrink")
     public String  EditDrink(Model model, @RequestParam ("name") String name) {
       //  drinkService.addDrinksToBB();
-        List<DrinkEntity> drinks = drinkService.findByName(name);
+        List<DrinkEntity> drinkss = drinkService.findByName(name);
+        List<Drink> drinks = new ArrayList<>();
+        drinks.add(drinkService.changeDrinkEntityToDrink(drinkss.get(0)));
+
+
         if (drinks == null) {
             return ResponseEntity.notFound().build().toString();
         } else {
@@ -74,7 +78,7 @@ public class SubController {
             return "Managements/EditDrink";
         }
     }
-    @PostMapping(value ={ "/AddDrink"})
+    @PostMapping(value ={ "/AddDrink", })
     public String  AddDrink(@Valid @ModelAttribute Drink drink, Model model) {
         List<Drink> drinks = new ArrayList<>();
         drinks.add(drink);
@@ -94,23 +98,7 @@ public class SubController {
 
     }
 
-    @PostMapping(value ={ "/EditDrink"})
-    public String  getEditedDrink(@Valid @ModelAttribute DrinkEntity drink, Model model) {
-        List<DrinkEntity> drinks = new ArrayList<>();
-        drinks.add(drink);
-        if (drinks == null) {
-            return ResponseEntity.notFound().build().toString();
-        } else {
-            model.addAttribute("name", drink.getDrink_name());
-            model.addAttribute("listOfDrinks", drinks);
-//TODO do dorobienia oddzielnie enumy żeby zapisywały się w bazie danych
-            drinkService.update(drink);
-          //  drinkService.addDrink(drink); //TODO  rozdzielenie logiki na edit i add
-            System.out.println(drink); // To delate, testing line
-        }
-        return "Managements/singleDrinkFromDB";
 
-    }
 
 
     @GetMapping ("/singleDrinkFromDB")
@@ -131,6 +119,50 @@ public class SubController {
 //        model.addAttribute("drinks", drinkService.getDrinkList());
 //        return "Managements/test";
 //    }
+
+
+//////////////////////////////////////////////////////////////////
+   @PostMapping(value ={"/EditDrink"})
+    public String  getEditedDrink(@Valid @ModelAttribute Drink drink, Model model) {
+        List<DrinkEntity> drinkEntityList = new ArrayList<>();
+        drinkEntityList.add(drinkService.changeDrinkToDrinkEntity(drink));
+        drinkService.update(drinkEntityList.get(0));
+
+
+
+       model.addAttribute("drinkEntities", drinkEntityList.get(0) );
+
+            return "Managements/singleDrinkFromDB";
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 }
