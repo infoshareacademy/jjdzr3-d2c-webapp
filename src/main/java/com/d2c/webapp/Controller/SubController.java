@@ -78,7 +78,6 @@ public class SubController {
     public String  AddDrink(@Valid @ModelAttribute Drink drink, Model model) {
         List<Drink> drinks = new ArrayList<>();
         drinks.add(drink);
-     //  List<DrinkEntity> drinks = drinkService.findAll();
         Random rand = new Random();
         int max = rand.nextInt(80000);
         drink.setDrinkId(max);
@@ -87,12 +86,11 @@ public class SubController {
         } else {
             model.addAttribute("name", drink.getDrinkName());
             model.addAttribute("listOfDrinks", drinks);
+            drinkService.addDrink(drink);
 
-            //drinkService.update(drink);
-            drinkService.addDrink(drink); //TODO  rozdzielenie logiki na edit i add
             System.out.println(drink); // To delate, testing line
         }
-        return "Managements/singleDrinkFromDB";
+        return "singleDrink";
 
     }
 

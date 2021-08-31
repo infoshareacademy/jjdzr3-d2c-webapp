@@ -44,33 +44,13 @@
         <div class="form-check form-check-inline">
             <input class="form-check form-check-inline" type="checkbox" id="inlineCheckbox5" name="nazwa"
                    value="wartość" placeholder="5"
-                   onclick="document.getElementById('identyfikator5').style.display = this.checked ? 'block' : 'none'; this.form.elements['nazwa11'].disabled =  this.form.elements['nazwa1'].disabled =  this.form.elements['nazwa12'].disabled = this.form.elements['nazwa2'].disabled = this.form.elements['nazwa13'].disabled =this.form.elements['nazwa3'].disabled =  this.form.elements['nazwa14'].disabled =this.form.elements['nazwa4'].disabled =this.form.elements['nazwa15'].disabled =   this.form.elements['nazwa5'].disabled=!this.checked">
+                   onclick="document.getElementById('identyfikator5').style.display = this.checked ? 'block' : 'none'; this.form.elements['ingredientName1'].disabled =  this.form.elements['ingredientMeasure1'].disabled =  this.form.elements['ingredientName2'].disabled = this.form.elements['ingredientMeasure2'].disabled = this.form.elements['ingredientName3'].disabled =this.form.elements['ingredientMeasure3'].disabled =  this.form.elements['ingredientName4'].disabled =this.form.elements['ingredientMeasure4'].disabled =this.form.elements['ingredientName5'].disabled =   this.form.elements['ingredientMeasure5'].disabled=!this.checked">
             <label class="form-check-label" for="inlineCheckbox5">Fill in ingredients</label>
-            <table id="identyfikator5" style="display: none"   th:each="ingredients, itemStat : ${ingredients}">
-
-                <tr >
-                    <td><input name="nazwa11"   disabled   th:field="*{ingredients[__${itemStat.index}__].ingredientName}">
-                    </td>
-                    <td><input name="nazwa1" disabled> </td>
-                </tr>
-                <tr>
-                    <td><input name="nazwa12" disabled ></td>
-                    <td><input type="text" name="nazwa2" disabled></td>
-                </tr>
-
-                <tr>
-                    <td><input type="text" name="nazwa13" disabled></td>
-                    <td><input type="text" name="nazwa3" disabled></td>
-                </tr>
-
-                <tr>
-                    <td><input type="text" name="nazwa14" disabled></td>
-                    <td><input type="text" name="nazwa4" disabled></td>
-                </tr>
-
-                <tr>
-                    <td><input type="text" name="nazwa15" disabled></td>
-                    <td><input type="text" name="nazwa5" disabled></td>
+            <table id="identyfikator5" style="display: none"  >
+                <!--                th:each="ingredients: ${ingredients}"-->
+                <tr th:each="ingredient, itemStat : *{ingredients}">
+                    <td><input type="text"  name="ingredientName1"  th:value ="${drink.getIngredients().get(0).getIngredientName}" th:field="*{ingredients[__${itemStat.index}__].ingredientName}" ></td>
+                    <td><input type="text"  name="ingredientMeasure1"   th:value ="${drink.getIngredients().get(0).getMeasure}" th:field="*{ingredients[__${itemStat.index}__].measure}" > </td>
                 </tr>
             </table>
         </div>
