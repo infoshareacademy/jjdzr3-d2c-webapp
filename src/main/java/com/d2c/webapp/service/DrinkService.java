@@ -100,6 +100,7 @@ public class DrinkService {
         drinkEntity.setMeasure_1(drinkEntity.getMeasure_5());
         drinkEntity.setType(drinkEntity.getType());
         drinkEntity.setDrinkImg(drinkEntity.getDrinkImg());
+        System.out.println(drinkEntity);
         repositoryDrinkSQL.update(drinkEntity);
     }
 

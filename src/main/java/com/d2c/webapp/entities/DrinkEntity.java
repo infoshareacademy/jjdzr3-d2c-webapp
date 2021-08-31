@@ -6,7 +6,7 @@ import javax.persistence.*;
 import javax.transaction.Transactional;
 import javax.validation.constraints.NotNull;
 import javax.validation.executable.ValidateOnExecution;
-
+@Transactional
 @Entity(name = "DrinkEntity")
 public class DrinkEntity {
 
@@ -14,7 +14,7 @@ public class DrinkEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long drinkid;
 
-    @NotNull(message = "Field can't be empty")
+  //  @NotNull(message = "Field can't be empty")
     private String drink_name;
 
     @Type(type="text")
@@ -36,7 +36,7 @@ public class DrinkEntity {
     private String measure_5;
     private String type;
 
-    @NotNull(message = "This field should have some picture")
+  //  @NotNull(message = "This field should have some picture")
     @Column(columnDefinition = "varchar(512)")
     private String drinkImg;
 

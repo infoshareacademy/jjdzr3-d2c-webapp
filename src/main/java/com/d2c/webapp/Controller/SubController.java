@@ -1,7 +1,6 @@
 package com.d2c.webapp.Controller;
 
 import com.d2c.webapp.entities.DrinkEntity;
-import com.d2c.webapp.reposotirySQL.RepositoryDrinkSQL;
 import com.d2c.webapp.service.DrinkService;
 import com.infoshareademy.domain.Drink;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 @Controller
 public class SubController {
@@ -78,6 +78,10 @@ public class SubController {
     public String  AddDrink(@Valid @ModelAttribute Drink drink, Model model) {
         List<Drink> drinks = new ArrayList<>();
         drinks.add(drink);
+     //  List<DrinkEntity> drinks = drinkService.findAll();
+        Random rand = new Random();
+        int max = rand.nextInt(80000);
+        drink.setDrinkId(max);
         if (drinks == null) {
             return ResponseEntity.notFound().build().toString();
         } else {
@@ -106,7 +110,7 @@ public class SubController {
           //  drinkService.addDrink(drink); //TODO  rozdzielenie logiki na edit i add
             System.out.println(drink); // To delate, testing line
         }
-        return "Managements/EditDrink";
+        return "Managements/singleDrinkFromDB";
 
     }
 
