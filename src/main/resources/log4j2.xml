@@ -14,7 +14,7 @@
     </Properties>
 
     <Appenders>
-        <Console name="Console" target="SYSTEM_OUT" follow="false">
+        <Console name="Console" target="SYSTEM_OUT" follow="true">
             <PatternLayout pattern="${sys:CONSOLE_LOG_PATTERN}" charset="${sys:CONSOLE_LOG_CHARSET}"/>
         </Console>
         <RollingFile name="File" fileName="${sys:LOG_PATH}/${sys:LOG_FILE}"
@@ -23,6 +23,12 @@
             <Policies>
                 <SizeBasedTriggeringPolicy size="10 MB"/>
             </Policies>
+            <Filters>
+                <ThresholdFilter level="warn" onMatch="DENY" onMismatch="NEUTRAL"/>
+                <ThresholdFilter level="error" onMatch="DENY" onMismatch="NEUTRAL"/>
+                <ThresholdFilter level="fatal" onMatch="DENY" onMismatch="NEUTRAL"/>
+                <ThresholdFilter level="trace"  onMatch="ACCEPT" onMismatch="DENY"/>
+            </Filters>
         </RollingFile>
         <Async name="AsyncFile" bufferSize="80">
             <AppenderRef ref="File" />
@@ -30,17 +36,9 @@
     </Appenders>
 
     <Loggers>
-        <Logger name="Console" level="info" additivity="false">
-            <AppenderRef ref="Console"/>
-        </Logger>
-
-        <Logger name="File" level="warn" additivity="false">
-            <AppenderRef ref="AsyncFile"/>
-        </Logger>
-
-        <Root level="info">
-            <AppenderRef ref="Console"/>
-            <AppenderRef ref="AsyncFile"/>
+        <Root level="trace">
+            <AppenderRef ref="Console" level="info"/>
+            <AppenderRef ref="AsyncFile" level="debug"/>
         </Root>
     </Loggers>
 
