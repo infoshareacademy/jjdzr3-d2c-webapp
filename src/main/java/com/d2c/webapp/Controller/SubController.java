@@ -4,7 +4,6 @@ import com.d2c.webapp.Service.DrinkService;
 import com.infoshareademy.domain.Drink;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import com.infoshareademy.domain.Ingredient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -17,8 +16,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
-import java.util.stream.Collectors;
 
 @Controller
 public class SubController {
@@ -92,9 +89,8 @@ public class SubController {
         } else {
             model.addAttribute("name", drink.getDrinkName());
             model.addAttribute("listOfDrinks", drinks);
-            System.out.println(drink); // To delate, testing line
+            LOGGER.info(drink);
         }
-        LOGGER.info(drink);
         return "singleDrink";
 
     }
