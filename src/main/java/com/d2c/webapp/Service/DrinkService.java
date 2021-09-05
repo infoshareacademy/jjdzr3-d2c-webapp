@@ -35,8 +35,6 @@ public class DrinkService {
 
     private List<Drink> drinkList;
 
-    private List<Ingredient> ingredientsList;
-
     private static final Logger LOGGER = LogManager.getLogger(DrinkService.class);
 
     public List<Drink> getDrinkList() {
@@ -98,7 +96,7 @@ public class DrinkService {
                 .stream()
                 .filter(a -> a.getDrinkName().toLowerCase().equals(name.toLowerCase()))
                 .collect(Collectors.toList());
-        System.out.println(filteredDrinks);
+        LOGGER.info("Filtered list of drinks: " + filteredDrinks);
         return  filteredDrinks;
     }
 
