@@ -77,7 +77,6 @@ public class SubController {
         List<Drink> drinks = new ArrayList<>();
         drinks.add(drinkService.changeDrinkEntityToDrink(drinkss.get(0)));
 
-
         if (drinks == null) {
             return ResponseEntity.notFound().build().toString();
         } else {

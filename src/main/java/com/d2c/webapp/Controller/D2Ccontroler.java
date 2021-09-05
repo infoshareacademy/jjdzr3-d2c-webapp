@@ -1,6 +1,6 @@
 package com.d2c.webapp.Controller;
 
-import com.d2c.webapp.Service.DrinkService;
+import com.d2c.webapp.service.DrinkService;
 import com.infoshareademy.Menu;
 import com.infoshareademy.data.DrinkParser;
 import com.infoshareademy.domain.*;
