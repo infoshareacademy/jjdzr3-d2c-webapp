@@ -9,6 +9,8 @@ import com.infoshareademy.domain.DrinkRepository;
 
 import com.infoshareademy.domain.Ingredient;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -33,13 +35,14 @@ public class DrinkService {
 
     private List<Drink> drinkList;
 
-    private List<Ingredient> ingredientsList;
+    private static final Logger LOGGER = LogManager.getLogger(DrinkService.class);
 
     public List<Drink> getDrinkList() {
         this.drinkList = new ArrayList<>();
         DrinkParser drinkParser = new DrinkParser();
         List<Drink> drinks = drinkParser.readFileIntoDrinkRepository().getDrinks();
         drinkList.addAll(drinks);
+        LOGGER.debug("Received drink list" + drinks);
         return drinkList;
     }
     public Drink getIngredientsList(){
@@ -49,6 +52,7 @@ public class DrinkService {
                     }
         Drink drink = new Drink();
         drink.setIngredients(ingredients);
+        LOGGER.debug("Received ingredients list" + drink);
         return drink;
     }
 
@@ -71,6 +75,7 @@ public class DrinkService {
         drinkEntity.setMeasure_5(drink.getIngredients().get(4).getMeasure());
         drinkEntity.setType(String.valueOf(drink.getDrinkType()));
         drinkEntity.setDrinkImg(drink.getDrinkImg());
+        LOGGER.debug("Recipe for a drink ready for saving to Data Base: " + drinkEntity);
         repositoryDrinkSQL.save(drinkEntity);
     }
 
@@ -82,6 +87,7 @@ public class DrinkService {
                 .stream()
                 .filter(a -> a.getDrinkName().toLowerCase().contains(name))
                 .collect(Collectors.toList());
+        LOGGER.debug("Received filtered drinks list");
         return  filteredDrinks.stream().findFirst();
     }
     public List<Drink> getDrinkByName(String name) {
@@ -90,7 +96,7 @@ public class DrinkService {
                 .stream()
                 .filter(a -> a.getDrinkName().toLowerCase().equals(name.toLowerCase()))
                 .collect(Collectors.toList());
-        System.out.println(filteredDrinks);
+        LOGGER.info("Filtered list of drinks: " + filteredDrinks);
         return  filteredDrinks;
     }
 
@@ -108,6 +114,7 @@ public class DrinkService {
         }
         Page<Drink> drinkPage =
                 new PageImpl<Drink>(list, PageRequest.of(currentPage, pageSize), drinkList.size());
+        LOGGER.debug("Actual drink page = " + drinkPage);
         return drinkPage;
     }
     public void setDrinkList(List<Drink> drinkList) {
