@@ -20,7 +20,6 @@ public class DrinkEntity {
     @Type(type="text")
     private String preparation_instruction;
 
-
     private String drink_category;
 
     private String glass_type;
@@ -202,6 +201,4 @@ public class DrinkEntity {
     public void setDrinkImg(String drinkImg) {
         this.drinkImg = drinkImg;
     }
-
-
 }

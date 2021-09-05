@@ -1,4 +1,4 @@
-package com.d2c.webapp.Controller;
+package com.d2c.webapp.controller;
 
 import com.d2c.webapp.service.DrinkService;
 import com.infoshareademy.Menu;
@@ -11,9 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.*;
-import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/d2c")

@@ -1,4 +1,4 @@
-package com.d2c.webapp.Controller;
+package com.d2c.webapp.controller;
 
 import com.d2c.webapp.entities.DrinkEntity;
 import com.d2c.webapp.service.DrinkService;
@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
 import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
@@ -72,7 +71,6 @@ public class SubController {
 
     @GetMapping(value = "/EditDrink")
     public String  EditDrink(Model model, @RequestParam ("name") String name) {
-      //  drinkService.addDrinksToBB();
         List<DrinkEntity> drinkss = drinkService.findByName(name);
         List<Drink> drinks = new ArrayList<>();
         drinks.add(drinkService.changeDrinkEntityToDrink(drinkss.get(0)));
@@ -100,16 +98,10 @@ public class SubController {
             model.addAttribute("listOfDrinks", drinks);
             LOGGER.info(drink);
             drinkService.addDrink(drink);
-
             System.out.println(drink); // To delate, testing line
         }
         return "singleDrink";
-
     }
-
-
-
-
     @GetMapping ("/singleDrinkFromDB")
     public String showAllEntities(Model model){
         List<DrinkEntity> drinkEntities = drinkService.findLast();
@@ -117,61 +109,13 @@ public class SubController {
       return "Managements/singleDrinkFromDB";
     }
 
-//    @PostMapping("/test")
-//    public String addAllDrinks(@ModelAttribute List<Drink> drinks){
-//        drinkService.addAllDrinks(drinks);
-//        return "Managements/test";
-//    }
-//
-//    @GetMapping ("/test")
-//    public String adAllDrinks(Model model){
-//        model.addAttribute("drinks", drinkService.getDrinkList());
-//        return "Managements/test";
-//    }
-
-
-//////////////////////////////////////////////////////////////////
    @PostMapping(value ={"/EditDrink"})
     public String  getEditedDrink(@Valid @ModelAttribute Drink drink, Model model) {
         List<DrinkEntity> drinkEntityList = new ArrayList<>();
         drinkEntityList.add(drinkService.changeDrinkToDrinkEntity(drink));
         drinkService.update(drinkEntityList.get(0));
-
-
-
-       model.addAttribute("drinkEntities", drinkEntityList.get(0) );
+        model.addAttribute("drinkEntities", drinkEntityList.get(0) );
 
             return "Managements/singleDrinkFromDB";
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }

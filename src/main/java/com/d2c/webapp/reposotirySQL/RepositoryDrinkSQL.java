@@ -19,14 +19,12 @@ public class RepositoryDrinkSQL {
 
     public void save(DrinkEntity drinkEntity) {
        entityManager.persist(drinkEntity);
-
     }
 
     @Transactional
     public void update(DrinkEntity drinkEntity){
         entityManager.merge(drinkEntity);
     }
-
 
     public List<DrinkEntity> findAll(){
         final Query query = entityManager.createQuery("SELECT o FROM DrinkEntity o ", DrinkEntity.class);
@@ -43,9 +41,7 @@ public class RepositoryDrinkSQL {
         final Query query = entityManager.createQuery("SELECT  o FROM DrinkEntity o order by o.drinkid desc", DrinkEntity.class).setFirstResult(1).setMaxResults(1);
         return query.getResultList();
     }
-
     public void delete(DrinkEntity drinkEntity){
         entityManager.remove(drinkEntity);
     }
-
 }
