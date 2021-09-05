@@ -1,11 +1,13 @@
 package com.d2c.webapp.Controller;
 
-import com.d2c.webapp.service.DrinkService;
+import com.d2c.webapp.Service.DrinkService;
 import com.d2c.webapp.domain.Pager;
 import com.infoshareademy.Filter;
 import com.infoshareademy.Search;
 import com.infoshareademy.data.DrinkParser;
 import com.infoshareademy.domain.*;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -28,13 +30,16 @@ public class DrinkListController {
     private static final int INITIAL_PAGE_SIZE = 5;
     private static final int[] PAGE_SIZES = {5, 10, 20};
 
-     @Autowired
+    @Autowired
     DrinkService drinkService;
+
+    private static final Logger LOGGER = LogManager.getLogger(DrinkListController.class);
 
     @GetMapping(value = "/showAllDrinks")
     public ModelAndView getShowAllDrinks3(
             Model model, @RequestParam("page")Optional<Integer>page, @RequestParam("size") Optional<Integer>size) {
         var modelAndView = new ModelAndView("subSites/showAllDrinks");
+        LOGGER.info("Getting list of all drinks");
 
         drinkService.addDrinksToBB();
         drinkService.findAll();
@@ -51,6 +56,7 @@ public class DrinkListController {
                             @RequestParam(name = "glassType", required = false) GlassType glassType,
                             @RequestParam(name = "category", required = false) Category category
     ) {
+        LOGGER.info("input: '{}', type: '{}', glassType: '{}', category: '{}'", item, type, glassType, category);
         DrinkService drinkService = new DrinkService();
         var modelAndView = new ModelAndView("search.html");
         int currentPage = page.orElse(1);
