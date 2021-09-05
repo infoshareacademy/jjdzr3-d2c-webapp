@@ -22,8 +22,5 @@ public class RepositoryDrinkSQL {
     public void save(DrinkEntity drinkEntity) {
         LOGGER.debug("Saved drink entity: " + drinkEntity);
         entityManager.persist(drinkEntity);
-
     }
-
-
 }
