@@ -39,7 +39,7 @@ public class D2Ccontroler {
     public String getSinDrink(Model model, @RequestParam("name") String name) {
         LOGGER.info("Read single drink of name: " + name);
 
-        List<Drink> drinks = getDrink(name);
+        List<Drink> drinks = drinkService.getDrinkByName(name);
         if (drinks == null) {
             LOGGER.info("No drink of name " + name + " found");
             return ResponseEntity.notFound().build().toString();
@@ -49,16 +49,6 @@ public class D2Ccontroler {
             LOGGER.debug("Added drink of name " + name + " to display of drinks");
             return "singleDrink";
         }
-    }
-
-    private List<Drink> getDrink(String name) {
-        List<Drink> drinkList = drinkService.getDrinkList();
-        List<Drink> filteredDrinks = drinkList
-                .stream()
-                .filter(a -> a.getDrinkName().toLowerCase().equals(name.toLowerCase()))
-                .collect(Collectors.toList());
-        LOGGER.info("Filtered list of drinks: " + filteredDrinks);
-        return filteredDrinks;
     }
 
     @GetMapping("/menu")
