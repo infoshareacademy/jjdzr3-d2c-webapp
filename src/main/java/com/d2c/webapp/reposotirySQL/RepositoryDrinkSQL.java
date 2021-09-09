@@ -17,6 +17,7 @@ public class RepositoryDrinkSQL {
     @Autowired
     private EntityManager entityManager;
 
+    @Transactional
     public void save(DrinkEntity drinkEntity) {
        entityManager.persist(drinkEntity);
 
@@ -45,7 +46,7 @@ public class RepositoryDrinkSQL {
     }
 
     public void delete(DrinkEntity drinkEntity){
-        entityManager.remove(drinkEntity);
+        this.entityManager.remove(drinkEntity);
     }
 
 }

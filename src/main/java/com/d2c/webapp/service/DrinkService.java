@@ -5,7 +5,6 @@ import com.d2c.webapp.entities.DrinkEntity;
 import com.d2c.webapp.reposotirySQL.RepositoryDrinkSQL;
 import com.infoshareademy.data.DrinkParser;
 import com.infoshareademy.domain.*;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,11 +15,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -43,19 +40,22 @@ public class DrinkService {
         return drinkList;
     }
 
-    public void addAllDrinks(List<Drink> drinks){
+    public void addAllDrinks(List<Drink> drinks) {
         DrinkParser drinkParser = new DrinkParser();
         drinks = drinkParser.readFileIntoDrinkRepository().getDrinks();
-        List <DrinkEntity> drinkEntities = new ArrayList<>();
-        drinks.forEach(drink -> {repositoryDrinkSQL.save(new DrinkEntity());});
+        List<DrinkEntity> drinkEntities = new ArrayList<>();
+        drinks.forEach(drink -> {
+            repositoryDrinkSQL.save(new DrinkEntity());
+        });
 
     }
 
-    public Drink getIngredientsList(){
+    public Drink getIngredientsList() {
         Ingredient ingredient = new Ingredient();
         List<Ingredient> ingredients = new ArrayList<>();
-        for (int i=0; i<=4; i++) {ingredients.add(ingredient);
-                    }
+        for (int i = 0; i <= 4; i++) {
+            ingredients.add(ingredient);
+        }
         Drink drink = new Drink();
         drink.setIngredients(ingredients);
         LOGGER.debug("Received ingredients list" + drink);
@@ -63,13 +63,15 @@ public class DrinkService {
     }
 
     @Valid
-    public void addDrink(Drink drink){
+    public void addDrink(Drink drink) {
         final DrinkEntity drinkEntity = changeDrinkToDrinkEntity(drink); // Może tak być Agu?
         LOGGER.debug("Recipe for a drink ready for saving to Data Base: " + drinkEntity);
         repositoryDrinkSQL.save(drinkEntity);
+
     }
 
-    public Drink changeDrinkEntityToDrink (DrinkEntity drinkEntity){
+    @Valid
+    public Drink changeDrinkEntityToDrink(DrinkEntity drinkEntity) {
         Drink drink = new Drink();
         List<Ingredient> ingredients = new ArrayList<>();
         ingredients.add(new Ingredient(drinkEntity.getIngredient_name_1(), drinkEntity.getMeasure_1()));
@@ -87,7 +89,9 @@ public class DrinkService {
         drink.setGlassType(GlassType.valueOf(drinkEntity.getGlass_type()));
         return drink;
     }
-    public DrinkEntity changeDrinkToDrinkEntity (Drink drink){
+
+    @Valid
+    public DrinkEntity changeDrinkToDrinkEntity(Drink drink) {
         DrinkEntity drinkEntity = new DrinkEntity();
         drinkEntity.setDrink_name(drink.getDrinkName());
         drinkEntity.setPreparation_instruction(drink.getPreparationInstruction());
@@ -108,9 +112,7 @@ public class DrinkService {
         return drinkEntity;
     }
 
-
-
-    public void update(DrinkEntity drinkEntity){
+    public void update(DrinkEntity drinkEntity) {
         Drink drink = new Drink();
         drinkEntity.setDrink_name(drinkEntity.getDrink_name());
         drinkEntity.setPreparation_instruction(drinkEntity.getPreparation_instruction());
@@ -136,37 +138,36 @@ public class DrinkService {
     //TODO
     //
 
-    public List<DrinkEntity> findAll(){
+    public List<DrinkEntity> findAll() {
         Iterable<DrinkEntity> drinkEntities = repositoryDrinkSQL.findAll();
         return (List<DrinkEntity>) drinkEntities;
     }
 
 
-
-    public List<DrinkEntity> findLast(){
+    public List<DrinkEntity> findLast() {
         Iterable<DrinkEntity> drinkEntities = repositoryDrinkSQL.findLast();
         return (List<DrinkEntity>) drinkEntities;
     }
 
-    public List<DrinkEntity> findByName(String name)    {
+    public List<DrinkEntity> findByName(String name) {
         Iterable<DrinkEntity> drinkEntities = repositoryDrinkSQL.findByName(name);
         return (List<DrinkEntity>) drinkEntities;
     }
-    public void delete(DrinkEntity drinkEntity){
 
+    public void deleteByName(String name) {
+        final DrinkEntity drinkEntity = repositoryDrinkSQL.findByName(name).get(0);
         repositoryDrinkSQL.delete(drinkEntity);
-
     }
 
 
-    public void addDrinksToBB(){
-        if(repositoryDrinkSQL.findAll().size()<20){
-        List<Drink> drinksList = getDrinkList();
-        int i = 0;
-        for (Drink drink: getDrinkList())
-        {
-            addDrink(drink);
-        }}else System.out.println("Archive exist");
+    public void addDrinksToBB() {
+        if (repositoryDrinkSQL.findAll().size() < 20) {
+            List<Drink> drinksList = getDrinkList();
+            int i = 0;
+            for (Drink drink : getDrinkList()) {
+                addDrink(drink);
+            }
+        } else System.out.println("Archive exist");
     }
 
     private Optional<Drink> getDrink(String name) {
@@ -177,8 +178,9 @@ public class DrinkService {
                 .filter(a -> a.getDrinkName().toLowerCase().contains(name))
                 .collect(Collectors.toList());
         LOGGER.debug("Received filtered drinks list");
-        return  filteredDrinks.stream().findFirst();
+        return filteredDrinks.stream().findFirst();
     }
+
     public List<Drink> getDrinkByName(String name) {
         List<Drink> drinkList = getDrinkList();
         List<Drink> filteredDrinks = drinkList
@@ -186,14 +188,14 @@ public class DrinkService {
                 .filter(a -> a.getDrinkName().toLowerCase().equals(name.toLowerCase()))
                 .collect(Collectors.toList());
         LOGGER.info("Filtered list of drinks: " + filteredDrinks);
-        return  filteredDrinks;
+        return filteredDrinks;
     }
 
     public Page<Drink> findPaginated(Pageable pageable) {
         int pageSize = pageable.getPageSize();
         int currentPage = pageable.getPageNumber();
         int startItem = currentPage * pageSize;
-        List<Drink>list;
+        List<Drink> list;
 
         if (drinkList.size() < startItem) {
             list = Collections.emptyList();
@@ -206,6 +208,7 @@ public class DrinkService {
         LOGGER.debug("Actual drink page = " + drinkPage);
         return drinkPage;
     }
+
     public void setDrinkList(List<Drink> drinkList) {
         this.drinkList = drinkList;
     }

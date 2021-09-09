@@ -1,11 +1,17 @@
 package com.d2c.webapp.entities;
 
+
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import javax.transaction.Transactional;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 import javax.validation.executable.ValidateOnExecution;
+
+
+
 @Transactional
 @Entity(name = "DrinkEntity")
 public class DrinkEntity {
@@ -14,7 +20,10 @@ public class DrinkEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long drinkid;
 
-  //  @NotNull(message = "Field can't be empty")
+
+   // @NotNull(message = "Field can't be empty")
+    @Size(min=2, max= 25, message = "Drink name must have at least 2 characters")
+    @Pattern(regexp = "[a-zA-Ząśćężźłóń0-9]", message= "Drink name cannot contain special characters")
     private String drink_name;
 
     @Type(type="text")
@@ -36,7 +45,7 @@ public class DrinkEntity {
     private String measure_5;
     private String type;
 
-  //  @NotNull(message = "This field should have some picture")
+    @NotNull(message = "This field should have some picture")
     @Column(columnDefinition = "varchar(512)")
     private String drinkImg;
 

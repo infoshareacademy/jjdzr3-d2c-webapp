@@ -23,7 +23,7 @@
     <label for="drinkName" class="form-label text-white">Drink name</label>
     <li class="form-control" id="drinkName" th:text="${drink.getDrinkName()}"></li>
     <label for="drinkCategory" class="form-label text-white">Drink category</label>
-    <li class="form-control" id="drinkCategory" th:text="${drink.getDrinkCategory()}"></li>
+    <li class="form-control" id="drinkCategory" th:text="${drink.getDrinkCategory().getLabel()}"></li>
     <label for="glassType" class="form-label text-white">Glass to drink</label>
     <li class="form-control" id="glassType" th:text="${drink.getGlassType().getLabel()}"></li>
     <label for="recipe" class="form-label text-white">Recipe</label>
@@ -59,6 +59,7 @@
   </tr>
 
   <a th:href="@{/showAllDrinks}" class="card-link">Show all drinks</a>
+  <a th:href="@{/DeleteDrink}" class="card-link">Delete drink</a>
 </div>
 </div>
 </div>
