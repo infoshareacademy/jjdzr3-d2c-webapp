@@ -20,7 +20,7 @@
     <form th:action="@{/AddDrink}" th:object="${drink}" method="post">
 
         <label for="drinkName" class="form-label">Drink name</label>
-        <input type="text" class="form-control" id="drinkName" placeholder="Enter name" th:field="*{drinkName}">
+        <input type="text" class="form-control" id="drinkName" placeholder="Enter name" th:field="*{drinkName}" required>
         <span th:if="${#fields.hasErrors('drinkName')}" th:errors="*{drinkName}"/>
 <!--        <p class="validationError" th:if="${#fields.hasErrors('drinkName')}" >Name Error</p>-->
 <!--        <p  th:if="${#fields.hasErrors('drinkName')}" th:class="${#fields.hasErrors('drinkName')}? error">-->

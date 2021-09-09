@@ -1,4 +1,4 @@
-package com.d2c.webapp.Controller;
+package com.d2c.webapp.controller;
 
 import com.d2c.webapp.entities.DrinkEntity;
 import com.d2c.webapp.service.DrinkService;
@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
 import java.util.ArrayList;
@@ -30,6 +31,13 @@ public class SubController {
         LOGGER.info("Received login");
         return "Managements/login";
     }
+
+    @GetMapping(value = "/DeleteSuccesfull")
+    public String getDeleteIfSuccesfull() {
+        LOGGER.info("Received login");
+        return "Managements/DeleteSuccesfull";
+    }
+
 
     @GetMapping(value = "/Sign-Up")
     public String getSignUp() {
@@ -125,28 +133,21 @@ public class SubController {
         drinkEntityList.add(drinkService.changeDrinkToDrinkEntity(drink));
         drinkService.update(drinkEntityList.get(0));
         model.addAttribute("drinkEntities", drinkEntityList.get(0) );
-
             return "Managements/singleDrinkFromDB";
         }
 
-    @GetMapping(value ={  "/DeleteDrink"})
-    public String getDeleteDrink(Model model,  @RequestParam ("name") String name) {
-        List<DrinkEntity> drinkEntities = drinkService.findByName(name);
+    @GetMapping(value ={ "/DeleteDrink"})
+    public String deleteDrink(Model model, @RequestParam ("name") String name) {
 
-        model.addAttribute("name", name);
-        model.addAttribute("listOfDrinkEntities", drinkEntities);
-        model.addAttribute("drink", drinkEntities.get(0));
-        
+        List<DrinkEntity> drinkss = drinkService.findByName(name);
+        List<Drink> drinks = new ArrayList<>();
+        drinks.add(drinkService.changeDrinkEntityToDrink(drinkss.get(0)));
 
-            return "Managements/singleDrinkFromDB";
+        if (drinks == null) {
+            return ResponseEntity.notFound().build().toString();
+        } else {
+            drinkService.deleteByName(name);
+            return "redirect:DeleteSuccesfull";
         }
-
-
-    @PostMapping(value ="/DeleteDrink")
-    public String deleteDrinkByName( @ModelAttribute Drink drink) {
-       drinkService.findLast();
-       drinkService.deleteByName( drink.getDrinkName());
-
-        return "redirect:/showAllDrinks";
     }
 }

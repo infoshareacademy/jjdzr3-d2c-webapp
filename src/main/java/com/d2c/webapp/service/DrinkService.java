@@ -40,16 +40,6 @@ public class DrinkService {
         return drinkList;
     }
 
-    public void addAllDrinks(List<Drink> drinks) {
-        DrinkParser drinkParser = new DrinkParser();
-        drinks = drinkParser.readFileIntoDrinkRepository().getDrinks();
-        List<DrinkEntity> drinkEntities = new ArrayList<>();
-        drinks.forEach(drink -> {
-            repositoryDrinkSQL.save(new DrinkEntity());
-        });
-
-    }
-
     public Drink getIngredientsList() {
         Ingredient ingredient = new Ingredient();
         List<Ingredient> ingredients = new ArrayList<>();
@@ -112,7 +102,7 @@ public class DrinkService {
         return drinkEntity;
     }
 
-    public void update(DrinkEntity drinkEntity) {
+    public DrinkEntity update(DrinkEntity drinkEntity) {
         Drink drink = new Drink();
         drinkEntity.setDrink_name(drinkEntity.getDrink_name());
         drinkEntity.setPreparation_instruction(drinkEntity.getPreparation_instruction());
@@ -132,11 +122,8 @@ public class DrinkService {
         drinkEntity.setDrinkImg(drinkEntity.getDrinkImg());
         System.out.println(drinkEntity);
         repositoryDrinkSQL.update(drinkEntity);
+        return drinkEntity;
     }
-
-
-    //TODO
-    //
 
     public List<DrinkEntity> findAll() {
         Iterable<DrinkEntity> drinkEntities = repositoryDrinkSQL.findAll();
@@ -157,6 +144,7 @@ public class DrinkService {
     public void deleteByName(String name) {
         final DrinkEntity drinkEntity = repositoryDrinkSQL.findByName(name).get(0);
         repositoryDrinkSQL.delete(drinkEntity);
+        LOGGER.info(name + " Removed");
     }
 
 

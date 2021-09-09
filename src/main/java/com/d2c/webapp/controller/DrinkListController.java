@@ -1,7 +1,7 @@
 package com.d2c.webapp.controller;
 
-import com.d2c.webapp.service.DrinkService;
 import com.d2c.webapp.domain.Pager;
+import com.d2c.webapp.service.DrinkService;
 import com.infoshareademy.Filter;
 import com.infoshareademy.Search;
 import com.infoshareademy.data.DrinkParser;
@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -36,7 +37,7 @@ public class DrinkListController {
 
     @GetMapping(value = "/showAllDrinks")
     public ModelAndView getShowAllDrinks3(
-            Model model, @RequestParam("page")Optional<Integer>page, @RequestParam("size") Optional<Integer>size) {
+            Model model, @RequestParam("page") Optional<Integer> page, @RequestParam("size") Optional<Integer> size) {
         var modelAndView = new ModelAndView("subSites/showAllDrinks");
         LOGGER.info("Getting list of all drinks");
 
@@ -49,11 +50,11 @@ public class DrinkListController {
     }
 
     @RequestMapping("d2c/search")
-    public ModelAndView getSearch(Model model,  @RequestParam("page")Optional<Integer>page, @RequestParam("size") Optional<Integer>size,
-                            @RequestParam(name = "input", required = false) String item,
-                            @RequestParam(name = "type", required = false) Type type,
-                            @RequestParam(name = "glassType", required = false) GlassType glassType,
-                            @RequestParam(name = "category", required = false) Category category
+    public ModelAndView getSearch(Model model, @RequestParam("page") Optional<Integer> page, @RequestParam("size") Optional<Integer> size,
+                                  @RequestParam(name = "input", required = false) String item,
+                                  @RequestParam(name = "type", required = false) Type type,
+                                  @RequestParam(name = "glassType", required = false) GlassType glassType,
+                                  @RequestParam(name = "category", required = false) Category category
     ) {
         LOGGER.info("input: '{}', type: '{}', glassType: '{}', category: '{}'", item, type, glassType, category);
         DrinkService drinkService = new DrinkService();
@@ -64,7 +65,7 @@ public class DrinkListController {
         DrinkRepository drinkRepository = drinkParser.readFileIntoDrinkRepository();
         List<Drink> drinks = drinkService.getDrinkList();
         if (true) // filters
-             {
+        {
 
             if (item != null) {
                 drinks = Search.searchItemsForQuery(drinkRepository, item);
@@ -80,13 +81,13 @@ public class DrinkListController {
             }
 
 
-        if (drinks.isEmpty()) {
-            model.addAttribute("noDrinksFound", "No drinks found for given criteria: input too short or no drink available");
+            if (drinks.isEmpty()) {
+                model.addAttribute("noDrinksFound", "No drinks found for given criteria: input too short or no drink available");
+            }
+            {
+                model.addAttribute("listOfDrinks", drinks);
+            }
         }
-        {
-            model.addAttribute("listOfDrinks", drinks);
-        }
-             }
         drinkService.setDrinkList(drinks);
         GetDrinkPage(model, page, size, drinkService, modelAndView, currentPage, pageSize5);
         modelAndView.addObject("type", type);
@@ -94,15 +95,16 @@ public class DrinkListController {
         modelAndView.addObject("category", category);
         return modelAndView;
     }
+
     private void GetDrinkPage(Model model, @RequestParam("page") Optional<Integer> page, @RequestParam("size") Optional<Integer> size, DrinkService drinkService, ModelAndView modelAndView, int currentPage, int pageSize5) {
-        Page<Drink> drinkPage = drinkService.findPaginated(PageRequest.of(currentPage-1,pageSize5));
+        Page<Drink> drinkPage = drinkService.findPaginated(PageRequest.of(currentPage - 1, pageSize5));
         int evalPageSize = size.orElse(INITIAL_PAGE_SIZE);
         int evalPage = page.filter(p -> p >= 1)
                 .map(p -> p - 1)
                 .orElse(INITIAL_PAGE);
         model.addAttribute("drinkPage", drinkPage);
         int totalPages = drinkPage.getTotalPages();
-        if (totalPages>0){
+        if (totalPages > 0) {
             List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPages).boxed().collect(Collectors.toList());
             model.addAttribute("pageNumbers", pageNumbers);
         }

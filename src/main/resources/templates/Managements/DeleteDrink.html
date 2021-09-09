@@ -22,7 +22,7 @@
         <th>DeleteDrink</th>
     </tr>
     <tr th:each="drink : ${listOfDrinkEntities}">
-        <form th:action="@{/DeleteDrink(name=${drink.getDrinkName()})}" th:object="${drink}" method="post">
+        <form th:action="@{/DeleteDrink}" th:object="${drink}" method="delete" th:method="delete">
         </form>
     </tr>
     <button type="submit" value="Wyślij">Submit</button>
