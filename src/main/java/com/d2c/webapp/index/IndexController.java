@@ -15,5 +15,4 @@ public class IndexController {
         LOGGER.info("Received request for main page");
         return "index";
     }
-
 }

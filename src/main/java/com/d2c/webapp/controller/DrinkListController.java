@@ -1,4 +1,4 @@
-package com.d2c.webapp.Controller;
+package com.d2c.webapp.controller;
 
 import com.d2c.webapp.service.DrinkService;
 import com.d2c.webapp.domain.Pager;
@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -89,16 +88,12 @@ public class DrinkListController {
         }
              }
         drinkService.setDrinkList(drinks);
-
         GetDrinkPage(model, page, size, drinkService, modelAndView, currentPage, pageSize5);
         modelAndView.addObject("type", type);
         modelAndView.addObject("glassType", glassType);
         modelAndView.addObject("category", category);
-
         return modelAndView;
-
     }
-
     private void GetDrinkPage(Model model, @RequestParam("page") Optional<Integer> page, @RequestParam("size") Optional<Integer> size, DrinkService drinkService, ModelAndView modelAndView, int currentPage, int pageSize5) {
         Page<Drink> drinkPage = drinkService.findPaginated(PageRequest.of(currentPage-1,pageSize5));
         int evalPageSize = size.orElse(INITIAL_PAGE_SIZE);
@@ -106,7 +101,6 @@ public class DrinkListController {
                 .map(p -> p - 1)
                 .orElse(INITIAL_PAGE);
         model.addAttribute("drinkPage", drinkPage);
-
         int totalPages = drinkPage.getTotalPages();
         if (totalPages>0){
             List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPages).boxed().collect(Collectors.toList());
