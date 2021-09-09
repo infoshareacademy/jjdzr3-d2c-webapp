@@ -1,4 +1,4 @@
-package com.d2c.webapp.controller;
+package com.d2c.webapp.Controller;
 
 import com.d2c.webapp.entities.DrinkEntity;
 import com.d2c.webapp.service.DrinkService;
@@ -9,16 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-<<<<<<< HEAD:src/main/java/com/d2c/webapp/Controller/SubController.java
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-=======
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
->>>>>>> b4fa081abcc2cd3f44037b5821628e6e6a77a1b3:src/main/java/com/d2c/webapp/controller/SubController.java
 import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
@@ -75,14 +68,6 @@ public class SubController {
         return "Managements/AddDrink";
     }
 
-<<<<<<< HEAD:src/main/java/com/d2c/webapp/Controller/SubController.java
-=======
-    @GetMapping(value = "/EditDrink")
-    public String  EditDrink(Model model, @RequestParam ("name") String name) {
-        List<DrinkEntity> drinkss = drinkService.findByName(name);
-        List<Drink> drinks = new ArrayList<>();
-        drinks.add(drinkService.changeDrinkEntityToDrink(drinkss.get(0)));
->>>>>>> b4fa081abcc2cd3f44037b5821628e6e6a77a1b3:src/main/java/com/d2c/webapp/controller/SubController.java
 
     @PostMapping(value ={ "/AddDrink"})
     public String  AddDrink(@ModelAttribute("Managements/AddDrink")  @Valid  Drink drink , BindingResult result , Model model) {
@@ -100,7 +85,6 @@ public class SubController {
             model.addAttribute("listOfDrinks", drinks);
             model.addAttribute("drink", drinkService.findAll());
             drinkService.addDrink(drink);
-<<<<<<< HEAD:src/main/java/com/d2c/webapp/Controller/SubController.java
             // LOGGER.info(drink);
 
         }
@@ -113,12 +97,6 @@ public class SubController {
 
 
 
-=======
-            System.out.println(drink); // To delate, testing line
-        }
-        return "singleDrink";
-    }
->>>>>>> b4fa081abcc2cd3f44037b5821628e6e6a77a1b3:src/main/java/com/d2c/webapp/controller/SubController.java
     @GetMapping ("/singleDrinkFromDB")
     public String showAllEntities(Model model){
         List<DrinkEntity> drinkEntities = drinkService.findLast();
@@ -132,7 +110,6 @@ public class SubController {
         List<Drink> drinks = new ArrayList<>();
         drinks.add(drinkService.changeDrinkEntityToDrink(drinkss.get(0)));
 
-<<<<<<< HEAD:src/main/java/com/d2c/webapp/Controller/SubController.java
         if (drinks == null) {
             return ResponseEntity.notFound().build().toString();
         } else {
@@ -142,15 +119,12 @@ public class SubController {
             return "Managements/EditDrink";
         }
     }
-=======
->>>>>>> b4fa081abcc2cd3f44037b5821628e6e6a77a1b3:src/main/java/com/d2c/webapp/controller/SubController.java
    @PostMapping(value ={"/EditDrink"})
     public String  getEditedDrink(@Valid @ModelAttribute Drink drink, Model model) {
         List<DrinkEntity> drinkEntityList = new ArrayList<>();
         drinkEntityList.add(drinkService.changeDrinkToDrinkEntity(drink));
         drinkService.update(drinkEntityList.get(0));
         model.addAttribute("drinkEntities", drinkEntityList.get(0) );
-<<<<<<< HEAD:src/main/java/com/d2c/webapp/Controller/SubController.java
 
             return "Managements/singleDrinkFromDB";
         }
@@ -162,14 +136,7 @@ public class SubController {
         model.addAttribute("name", name);
         model.addAttribute("listOfDrinkEntities", drinkEntities);
         model.addAttribute("drink", drinkEntities.get(0));
-
-//
-//        List<DrinkEntity> drinkEntities = drinkService.findByName(name);
-//        List<DrinkEntity> drinkEntityList = new ArrayList<>();
-//        drinkEntityList.add(drinkEntities.get(0));
-//
-//        model.addAttribute("drinkEntities", drinkEntities);
-//        model.addAttribute("name", drinkEntityList.get(0).getDrink_name());
+        
 
             return "Managements/singleDrinkFromDB";
         }
@@ -182,39 +149,4 @@ public class SubController {
 
         return "redirect:/showAllDrinks";
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-=======
-
-            return "Managements/singleDrinkFromDB";
-        }
->>>>>>> b4fa081abcc2cd3f44037b5821628e6e6a77a1b3:src/main/java/com/d2c/webapp/controller/SubController.java
 }
