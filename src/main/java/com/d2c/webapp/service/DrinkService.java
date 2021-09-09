@@ -39,7 +39,6 @@ public class DrinkService {
         LOGGER.debug("Received drink list" + drinks);
         return drinkList;
     }
-<<<<<<< HEAD
 
     public void addAllDrinks(List<Drink> drinks) {
         DrinkParser drinkParser = new DrinkParser();
@@ -52,15 +51,6 @@ public class DrinkService {
     }
 
     public Drink getIngredientsList() {
-=======
-    public void addAllDrinks(List<Drink> drinks){
-        DrinkParser drinkParser = new DrinkParser();
-        drinks = drinkParser.readFileIntoDrinkRepository().getDrinks();
-        List <DrinkEntity> drinkEntities = new ArrayList<>();
-        drinks.forEach(drink -> {repositoryDrinkSQL.save(new DrinkEntity());});
-    }
-    public Drink getIngredientsList(){
->>>>>>> b4fa081abcc2cd3f44037b5821628e6e6a77a1b3
         Ingredient ingredient = new Ingredient();
         List<Ingredient> ingredients = new ArrayList<>();
         for (int i = 0; i <= 4; i++) {
@@ -71,6 +61,7 @@ public class DrinkService {
         LOGGER.debug("Received ingredients list" + drink);
         return drink;
     }
+
     @Valid
     public void addDrink(Drink drink) {
         final DrinkEntity drinkEntity = changeDrinkToDrinkEntity(drink); // Może tak być Agu?
@@ -78,13 +69,9 @@ public class DrinkService {
         repositoryDrinkSQL.save(drinkEntity);
 
     }
-<<<<<<< HEAD
 
     @Valid
     public Drink changeDrinkEntityToDrink(DrinkEntity drinkEntity) {
-=======
-    public Drink changeDrinkEntityToDrink (DrinkEntity drinkEntity){
->>>>>>> b4fa081abcc2cd3f44037b5821628e6e6a77a1b3
         Drink drink = new Drink();
         List<Ingredient> ingredients = new ArrayList<>();
         ingredients.add(new Ingredient(drinkEntity.getIngredient_name_1(), drinkEntity.getMeasure_1()));
@@ -124,12 +111,8 @@ public class DrinkService {
         drinkEntity.setDrinkImg(drink.getDrinkImg());
         return drinkEntity;
     }
-<<<<<<< HEAD
 
     public void update(DrinkEntity drinkEntity) {
-=======
-    public void update(DrinkEntity drinkEntity){
->>>>>>> b4fa081abcc2cd3f44037b5821628e6e6a77a1b3
         Drink drink = new Drink();
         drinkEntity.setDrink_name(drinkEntity.getDrink_name());
         drinkEntity.setPreparation_instruction(drinkEntity.getPreparation_instruction());
@@ -150,7 +133,6 @@ public class DrinkService {
         System.out.println(drinkEntity);
         repositoryDrinkSQL.update(drinkEntity);
     }
-<<<<<<< HEAD
 
 
     //TODO
@@ -186,32 +168,8 @@ public class DrinkService {
                 addDrink(drink);
             }
         } else System.out.println("Archive exist");
-=======
-    public List<DrinkEntity> findAll(){
-        Iterable<DrinkEntity> drinkEntities = repositoryDrinkSQL.findAll();
-        return (List<DrinkEntity>) drinkEntities;
     }
-    public List<DrinkEntity> findLast(){
-        Iterable<DrinkEntity> drinkEntities = repositoryDrinkSQL.findLast();
-        return (List<DrinkEntity>) drinkEntities;
-    }
-    public List<DrinkEntity> findByName(String name)    {
-        Iterable<DrinkEntity> drinkEntities = repositoryDrinkSQL.findByName(name);
-        return (List<DrinkEntity>) drinkEntities;
-    }
-    public void delete(DrinkEntity drinkEntity){
-        repositoryDrinkSQL.delete(drinkEntity);
-    }
-    public void addDrinksToBB(){
-        if(repositoryDrinkSQL.findAll().size()<20){
-        List<Drink> drinksList = getDrinkList();
-        int i = 0;
-        for (Drink drink: getDrinkList())
-        {
-            addDrink(drink);
-        }}else System.out.println("Archive exist");
->>>>>>> b4fa081abcc2cd3f44037b5821628e6e6a77a1b3
-    }
+
     private Optional<Drink> getDrink(String name) {
         DrinkParser drinkParser = new DrinkParser();
         DrinkRepository drinkRepository = drinkParser.readNewDataBase();
@@ -232,6 +190,7 @@ public class DrinkService {
         LOGGER.info("Filtered list of drinks: " + filteredDrinks);
         return filteredDrinks;
     }
+
     public Page<Drink> findPaginated(Pageable pageable) {
         int pageSize = pageable.getPageSize();
         int currentPage = pageable.getPageNumber();
