@@ -26,36 +26,37 @@ public class SubController {
 
     private static final Logger LOGGER = LogManager.getLogger(SubController.class);
 
-    @GetMapping(value = "/welcome")
+    @GetMapping("/")
     public String getIndex() {
         LOGGER.info("Received request for main page");
         drinkService.addDrinksToBB();
         return "index";
     }
 
+
     @GetMapping(value = "/login")
     public String getLogin() {
         LOGGER.info("Received login");
-        return "Managements/login";
+        return "managements/Login";
     }
 
     @GetMapping(value = "/DeleteSuccesfull")
     public String getDeleteIfSuccesfull() {
         LOGGER.info("Received login");
-        return "Managements/DeleteSuccesfull";
+        return "managements/DeleteSuccesfull";
     }
 
 
     @GetMapping(value = "/Sign-Up")
     public String getSignUp() {
         LOGGER.info("Received request for Sign-Up");
-        return "Managements/Sign-Up";
+        return "managements/Sign-Up";
     }
 
-    @GetMapping(value = "/Menagments")
-    public String getMenagments() {
+    @GetMapping(value = "/managements")
+    public String getManagement() {
         LOGGER.info("Received request for Menagments");
-        return "Managements/Menagments";
+        return "managements/managements";
     }
 
     @GetMapping(value = "/AdvSearch")
@@ -80,7 +81,7 @@ public class SubController {
     public String addSingleDrink(Drink drink, Model model) {
         model.addAttribute("drink", drinkService.getIngredientsList());
         LOGGER.info("Received request for AddDrink");
-        return "Managements/AddDrink";
+        return "managements/AddDrink";
     }
 
 
@@ -105,7 +106,7 @@ public class SubController {
         }
         if (result.hasErrors()) {
             drinkService.addDrink(drink);
-            return "Managements/AddDrink";
+            return "managements/AddDrink";
         }
        return "singleDrink";
     }
@@ -116,7 +117,7 @@ public class SubController {
     public String showAllEntities(Model model){
         List<DrinkEntity> drinkEntities = drinkService.findLast();
         model.addAttribute("drinkEntities", drinkEntities);
-      return "Managements/singleDrinkFromDB";
+      return "managements/singleDrinkFromDB";
     }
     @GetMapping(value ={ "/EditDrink"})
     public String   EditDrink(Model model, @RequestParam ("name") String name) {
@@ -131,7 +132,7 @@ public class SubController {
             model.addAttribute("name", name);
             model.addAttribute("listOfDrinks", drinks);
             model.addAttribute("drink", drinks.get(0));
-            return "Managements/EditDrink";
+            return "managements/EditDrink";
         }
     }
    @PostMapping(value ={"/EditDrink"})
@@ -140,7 +141,7 @@ public class SubController {
         drinkEntityList.add(drinkService.changeDrinkToDrinkEntity(drink));
         drinkService.update(drinkEntityList.get(0));
         model.addAttribute("drinkEntities", drinkEntityList.get(0) );
-            return "Managements/singleDrinkFromDB";
+            return "managements/singleDrinkFromDB";
         }
 
     @GetMapping(value ={ "/DeleteDrink"})

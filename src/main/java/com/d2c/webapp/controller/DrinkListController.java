@@ -41,7 +41,7 @@ public class DrinkListController {
         var modelAndView = new ModelAndView("subSites/showAllDrinks");
         LOGGER.info("Getting list of all drinks");
 
-        drinkService.addDrinksToBB();
+
         drinkService.findAll();
         drinkService.getDrinkListfromDB();
         int currentPage = page.orElse(1);
