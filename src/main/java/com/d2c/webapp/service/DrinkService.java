@@ -39,6 +39,16 @@ public class DrinkService {
         LOGGER.debug("Received drink list" + drinks);
         return drinkList;
     }
+    public List<Drink> getDrinkListfromDB() {
+        drinkList.removeAll(drinkList);
+
+        for (DrinkEntity drink: repositoryDrinkSQL.findAll())
+        {
+            drinkList.add(changeDrinkEntityToDrink(drink));
+        }
+        return drinkList;
+    }
+
 
     public Drink getIngredientsList() {
         Ingredient ingredient = new Ingredient();
@@ -158,19 +168,27 @@ public class DrinkService {
         } else System.out.println("Archive exist");
     }
 
-    private Optional<Drink> getDrink(String name) {
-        DrinkParser drinkParser = new DrinkParser();
-        DrinkRepository drinkRepository = drinkParser.readNewDataBase();
-        List<Drink> filteredDrinks = drinkRepository.getDrinks()
-                .stream()
-                .filter(a -> a.getDrinkName().toLowerCase().contains(name))
-                .collect(Collectors.toList());
-        LOGGER.debug("Received filtered drinks list");
-        return filteredDrinks.stream().findFirst();
+    public List<Drink> searchItemsForQuery(String input) {
+
+        if (input.length() < 3) {
+            return Collections.emptyList();
+        } else {
+            List<Drink> filteredDrinks = drinkList.stream().filter((a) -> {
+                return a.getDrinkName().toLowerCase().contains(input.toLowerCase());
+            }).collect(Collectors.toList());
+
+            if (filteredDrinks.size() == 0) {
+                LOGGER.info(" No items found for given search criteria");
+
+                return Collections.emptyList();
+            } else {
+               return filteredDrinks;
+            }
+        }
     }
 
     public List<Drink> getDrinkByName(String name) {
-        List<Drink> drinkList = getDrinkList();
+        List<Drink> drinkList = getDrinkListfromDB();
         List<Drink> filteredDrinks = drinkList
                 .stream()
                 .filter(a -> a.getDrinkName().toLowerCase().equals(name.toLowerCase()))
@@ -178,6 +196,11 @@ public class DrinkService {
         LOGGER.info("Filtered list of drinks: " + filteredDrinks);
         return filteredDrinks;
     }
+
+
+
+
+
 
     public Page<Drink> findPaginated(Pageable pageable) {
         int pageSize = pageable.getPageSize();

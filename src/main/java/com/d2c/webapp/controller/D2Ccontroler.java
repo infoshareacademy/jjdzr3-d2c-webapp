@@ -37,7 +37,8 @@ public class D2Ccontroler {
     public String getSinDrink(Model model, @RequestParam("name") String name) {
         LOGGER.info("Read single drink of name: " + name);
 
-        List<Drink> drinks = drinkService.getDrinkByName(name);
+        List<Drink> drinks = new ArrayList<>();
+        drinks.add(drinkService.getDrinkByName(name).get(0));
         if (drinks == null) {
             LOGGER.info("No drink of name " + name + " found");
             return ResponseEntity.notFound().build().toString();

@@ -26,6 +26,13 @@ public class SubController {
 
     private static final Logger LOGGER = LogManager.getLogger(SubController.class);
 
+    @GetMapping(value = "/welcome")
+    public String getIndex() {
+        LOGGER.info("Received request for main page");
+        drinkService.addDrinksToBB();
+        return "index";
+    }
+
     @GetMapping(value = "/login")
     public String getLogin() {
         LOGGER.info("Received login");

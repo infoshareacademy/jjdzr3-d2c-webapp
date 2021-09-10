@@ -43,6 +43,7 @@ public class DrinkListController {
 
         drinkService.addDrinksToBB();
         drinkService.findAll();
+        drinkService.getDrinkListfromDB();
         int currentPage = page.orElse(1);
         int pageSize5 = size.orElse(5);
         GetDrinkPage(model, page, size, drinkService, modelAndView, currentPage, pageSize5);
@@ -57,18 +58,18 @@ public class DrinkListController {
                                   @RequestParam(name = "category", required = false) Category category
     ) {
         LOGGER.info("input: '{}', type: '{}', glassType: '{}', category: '{}'", item, type, glassType, category);
-        DrinkService drinkService = new DrinkService();
+
         var modelAndView = new ModelAndView("search.html");
         int currentPage = page.orElse(1);
         int pageSize5 = size.orElse(5);
-        DrinkParser drinkParser = new DrinkParser();
-        DrinkRepository drinkRepository = drinkParser.readFileIntoDrinkRepository();
-        List<Drink> drinks = drinkService.getDrinkList();
+        List<Drink> drinks = drinkService.getDrinkListfromDB();
         if (true) // filters
         {
 
             if (item != null) {
-                drinks = Search.searchItemsForQuery(drinkRepository, item);
+
+              drinks = drinkService.searchItemsForQuery(item);
+
             }
             if (type != null) {
                 drinks = Filter.filterByType(drinks, type);
