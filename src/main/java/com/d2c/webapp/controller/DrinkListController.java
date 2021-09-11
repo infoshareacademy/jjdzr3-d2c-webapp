@@ -59,7 +59,7 @@ public class DrinkListController {
     ) {
         LOGGER.info("input: '{}', type: '{}', glassType: '{}', category: '{}'", item, type, glassType, category);
 
-        var modelAndView = new ModelAndView("search.html");
+        var modelAndView = new ModelAndView("search");
         int currentPage = page.orElse(1);
         int pageSize5 = size.orElse(5);
         List<Drink> drinks = drinkService.getDrinkListfromDB();
