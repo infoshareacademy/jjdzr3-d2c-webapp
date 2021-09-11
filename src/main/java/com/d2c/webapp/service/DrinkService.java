@@ -86,6 +86,7 @@ public class DrinkService {
         drink.setDrinkName(drinkEntity.getDrink_name());
         drink.setDrinkType(Type.valueOf(drinkEntity.getType()));
         drink.setDrinkCategory(Category.valueOf(drinkEntity.getDrink_category()));
+        drink.setPreparationInstruction(drinkEntity.getPreparation_instruction());
         drink.setGlassType(GlassType.valueOf(drinkEntity.getGlass_type()));
         return drink;
     }
@@ -149,6 +150,17 @@ public class DrinkService {
     public List<DrinkEntity> findByName(String name) {
         Iterable<DrinkEntity> drinkEntities = repositoryDrinkSQL.findByName(name);
         return (List<DrinkEntity>) drinkEntities;
+    }
+
+    public List<DrinkEntity> findByNameObjectToDelete(String name) {
+        List<DrinkEntity> drinkEntities = repositoryDrinkSQL.findByNameObjectToDelete(name);
+        if( drinkEntities.size()>1  ){
+          deleteByName(name);
+          LOGGER.info(drinkEntities.get(0));
+        } else{
+            System.out.println("Drink name was change. New drink was add to the drinks book");
+            }
+        return  drinkEntities;
     }
 
     public void deleteByName(String name) {

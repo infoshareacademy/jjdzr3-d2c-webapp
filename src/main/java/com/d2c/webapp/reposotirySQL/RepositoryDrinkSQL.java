@@ -2,6 +2,7 @@ package com.d2c.webapp.reposotirySQL;
 
 
 import com.d2c.webapp.entities.DrinkEntity;
+import com.infoshareademy.domain.Drink;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -24,11 +25,8 @@ public class RepositoryDrinkSQL {
 
     @Transactional
     public void update(DrinkEntity drinkEntity){
-
-        System.out.println(drinkEntity.getDrink_name() +" merge: " + drinkEntity.getDrinkid());
         entityManager.merge(drinkEntity);
         entityManager.flush();
-
     }
 
     public List<DrinkEntity> findAll(){
@@ -39,6 +37,12 @@ public class RepositoryDrinkSQL {
     public List<DrinkEntity> findByName(String name){
         String test = "SELECT o FROM DrinkEntity o where o.drink_name= " + "'"+name+"'"  ;
         final Query query = entityManager.createQuery(test, DrinkEntity.class);
+        return query.getResultList();
+    }
+    public List<DrinkEntity> findByNameObjectToDelete(String name){
+        String test = "SELECT o FROM DrinkEntity o where o.drink_name =:name ORDER BY o.drinkid asc"  ;
+        Query query = entityManager.createQuery(test, DrinkEntity.class);
+        query.setParameter("name", name);
         return query.getResultList();
     }
 

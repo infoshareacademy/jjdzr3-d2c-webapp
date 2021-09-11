@@ -23,7 +23,7 @@
             <label for="drinkName" class="form-label text-white">Drink name</label>
             <input th:type="text" th:class="form-control" id="drinkName" th:field="*{drinkName}">
 
-            <label for="drinkCategory" class="form-label">Drink category</label>
+            <label for="drinkCategory" class="form-label text-white">Drink category</label>
             <select name="drinkCategory" class="form-control" id="drinkCategory"  placeholder="Category to search...">
                 <option th:value="*{drinkCategory}" >Choose ...</option>
                 <option th:each="dCategory: ${T(com.infoshareademy.domain.Category).values()}" th:value="${dCategory}"
@@ -42,7 +42,7 @@
                 <input class="form-check form-check-inline" type="checkbox" id="inlineCheckbox5" name="nazwa"
                        value="wartość" placeholder="5"
                        onclick="document.getElementById('identyfikator5').style.display = this.checked ? 'block' : 'none'; this.form.elements['ingredientName1'].disabled =  this.form.elements['ingredientMeasure1'].disabled =  this.form.elements['ingredientName2'].disabled = this.form.elements['ingredientMeasure2'].disabled = this.form.elements['ingredientName3'].disabled =this.form.elements['ingredientMeasure3'].disabled =  this.form.elements['ingredientName4'].disabled =this.form.elements['ingredientMeasure4'].disabled =this.form.elements['ingredientName5'].disabled =   this.form.elements['ingredientMeasure5'].disabled=!this.checked">
-                <label class="form-check-label" for="inlineCheckbox5">Fill in ingredients</label>
+                <label class="form-check-label text-white" for="inlineCheckbox5">Fill in ingredients</label>
                 <table id="identyfikator5" style="display: none"  >
                     <!--                th:each="ingredients: ${ingredients}"-->
                     <tr th:each="ingredient, itemStat : *{ingredients}">
@@ -51,13 +51,14 @@
                     </tr>
                 </table>
             </div>
+         <div></div>
             <label class="form-check-label  text-white" for="drinkType">Drink type</label>
             <select name="drinkType" class="form-control" id="drinkType"  placeholder="Choose drink type...">
                 <option value="">Choose</option>
                 <option th:each="dType: ${T(com.infoshareademy.domain.Type).values()}" th:value="${dType}"
                         th:text="${dType.label}" th:selected="(${dType} == ${drink.getDrinkType()})"></option>
             </select>
-            <label for="drinkImg" class="form-label">Add drink image</label>
+            <label for="drinkImg" class="form-label text-white">Add drink image</label>
             <input type="text" class="form-control" id="drinkImg" placeholder="Enter drink img" th:field="*{drinkImg}">
     </tr>
     <button type="submit" value="Wyślij">Submit</button>

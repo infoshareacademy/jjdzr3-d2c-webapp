@@ -32,7 +32,6 @@ public class SubController {
         return "index";
     }
 
-
     @GetMapping(value = "/login")
     public String getLogin() {
         LOGGER.info("Received login");
@@ -44,7 +43,6 @@ public class SubController {
         LOGGER.info("Received login");
         return "managements/deleteSuccesfull";
     }
-
 
     @GetMapping(value = "/Sign-Up")
     public String getSignUp() {
@@ -83,7 +81,6 @@ public class SubController {
         return "managements/addDrink";
     }
 
-
     @PostMapping(value ={ "/addDrink"})
     public String  AddDrink(@ModelAttribute("managements/addDrink")  @Valid  Drink drink , BindingResult result , Model model) {
         List<Drink> drinks = new ArrayList<>();
@@ -94,14 +91,11 @@ public class SubController {
         if (drinks == null) {
             return ResponseEntity.notFound().build().toString();
         } else {
-
-
             model.addAttribute("name", drink.getDrinkName());
             model.addAttribute("listOfDrinks", drinks);
             model.addAttribute("drink", drinkService.findAll());
             drinkService.addDrink(drink);
-            // LOGGER.info(drink);
-
+            LOGGER.info(drink);
         }
         if (result.hasErrors()) {
             drinkService.addDrink(drink);
@@ -110,22 +104,19 @@ public class SubController {
        return "singleDrink";
     }
 
-
-
     @GetMapping ("/singleDrinkFromDB")
     public String showAllEntities(Model model){
         List<DrinkEntity> drinkEntities = drinkService.findLast();
         model.addAttribute("drinkEntities", drinkEntities);
       return "managements/singleDrinkFromDB";
     }
+
     @GetMapping(value ={ "/editDrink"})
     public String   EditDrink(Model model, @RequestParam ("name") String name) {
-
         List<DrinkEntity> drinkss = drinkService.findByName(name);
         List<Drink> drinks = new ArrayList<>();
         drinks.add(drinkService.changeDrinkEntityToDrink(drinkss.get(0)));
-
-        if (drinks == null) {
+          if (drinks == null) {
             return ResponseEntity.notFound().build().toString();
         } else {
             model.addAttribute("name", name);
@@ -134,22 +125,22 @@ public class SubController {
             return "managements/editDrink";
         }
     }
+
    @PostMapping(value ={"/editDrink"})
     public String  getEditedDrink(@Valid @ModelAttribute Drink drink, Model model) {
         List<DrinkEntity> drinkEntityList = new ArrayList<>();
         drinkEntityList.add(drinkService.changeDrinkToDrinkEntity(drink));
         drinkService.update(drinkEntityList.get(0));
         model.addAttribute("drinkEntities", drinkEntityList.get(0) );
+        drinkService.findByNameObjectToDelete(drinkEntityList.get(0).getDrink_name());
             return "managements/singleDrinkFromDB";
         }
 
     @GetMapping(value ={ "/deleteDrink"})
     public String deleteDrink(Model model, @RequestParam ("name") String name) {
-
         List<DrinkEntity> drinkss = drinkService.findByName(name);
         List<Drink> drinks = new ArrayList<>();
         drinks.add(drinkService.changeDrinkEntityToDrink(drinkss.get(0)));
-
         if (drinks == null) {
             return ResponseEntity.notFound().build().toString();
         } else {
