@@ -27,21 +27,21 @@
 <!--            Invalid drink name</p>-->
 
         <label for="drinkCategory" class="form-label">Choose drink category</label>
-        <select name="drinkCategory" class="form-control" id="drinkCategory"  placeholder="Category to search...">
+        <select name="drinkCategory" class="form-control" id="drinkCategory"  placeholder="Category to search..." required>
             <option value="">Choose</option>
             <option th:each="dCategory: ${T(com.infoshareademy.domain.Category).values()}" th:value="${dCategory}"
                     th:text="${dCategory.label}"></option>
         </select>
 
         <label for="glassType" class="form-label">Choose glass to drink</label>
-        <select name="glassType" class="form-control" id="glassType" placeholder="Glass type to search...">
+        <select name="glassType" class="form-control" id="glassType" placeholder="Glass type to search..." required>
             <option value="">Choose</option>
             <option th:each="dGlassType: ${T(com.infoshareademy.domain.GlassType).values()}" th:value="${dGlassType}"
                     th:text="${dGlassType.label}"></option>
         </select>
 
         <label for="recipe" class="form-label">Recipe</label>
-        <input class="form-control" id="recipe" rows="3" th:field="*{preparationInstruction}" placeholder="Recipe...">
+        <input class="form-control" id="recipe" rows="3" th:field="*{preparationInstruction}" placeholder="Recipe..." required>
 
         <!--        <label for="glassType" class="form-label">Choose how many ingredients would you want to add</label>-->
 
@@ -61,7 +61,7 @@
 
         <tr></tr>
         <br>   <label for="drinkType" class="form-label" >Drink type category</label>
-        <select name="drinkType" class="form-control" id="drinkType"  placeholder="Choose drink type...">
+        <select name="drinkType" class="form-control" id="drinkType"  placeholder="Choose drink type..." required>
             <option value="">Choose</option>
             <option th:each="dType: ${T(com.infoshareademy.domain.Type).values()}" th:value="${dType}"
                     th:text="${dType.label}"></option>

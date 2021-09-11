@@ -39,6 +39,7 @@ public class RepositoryDrinkSQL {
         final Query query = entityManager.createQuery(test, DrinkEntity.class);
         return query.getResultList();
     }
+    
     public List<DrinkEntity> findByNameObjectToDelete(String name){
         String test = "SELECT o FROM DrinkEntity o where o.drink_name =:name ORDER BY o.drinkid asc"  ;
         Query query = entityManager.createQuery(test, DrinkEntity.class);
