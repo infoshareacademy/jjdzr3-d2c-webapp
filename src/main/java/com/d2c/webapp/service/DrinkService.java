@@ -113,7 +113,7 @@ public class DrinkService {
     }
 
     public DrinkEntity update(DrinkEntity drinkEntity) {
-        Drink drink = new Drink();
+        drinkEntity.setDrinkid(drinkEntity.getDrinkid());
         drinkEntity.setDrink_name(drinkEntity.getDrink_name());
         drinkEntity.setPreparation_instruction(drinkEntity.getPreparation_instruction());
         drinkEntity.setDrink_category(drinkEntity.getDrink_category());

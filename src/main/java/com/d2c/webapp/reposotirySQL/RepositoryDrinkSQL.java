@@ -24,7 +24,11 @@ public class RepositoryDrinkSQL {
 
     @Transactional
     public void update(DrinkEntity drinkEntity){
+
+        System.out.println(drinkEntity.getDrink_name() +" merge: " + drinkEntity.getDrinkid());
         entityManager.merge(drinkEntity);
+        entityManager.flush();
+
     }
 
     public List<DrinkEntity> findAll(){

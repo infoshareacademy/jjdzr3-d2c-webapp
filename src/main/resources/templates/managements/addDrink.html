@@ -17,7 +17,7 @@
         style="background-position: center; background-repeat: no-repeat; background-color: lightblue; background-size: 1400px ">
     <h1 class="mb-3 h2" style="color: black">Create your new drink</h1>
 
-    <form th:action="@{/AddDrink}" th:object="${drink}" method="post">
+    <form th:action="@{/addDrink}" th:object="${drink}" method="post">
 
         <label for="drinkName" class="form-label">Drink name</label>
         <input type="text" class="form-control" id="drinkName" placeholder="Enter name" th:field="*{drinkName}" required>

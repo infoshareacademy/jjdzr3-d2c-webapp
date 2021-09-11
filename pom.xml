@@ -16,6 +16,9 @@
     <description>Drink2Code WebApplication</description>
     <properties>
         <java.version>14</java.version>
+        <property name="hibernate.show_sql" value="true"/>
+        <property name="hibernate.format_sql" value="true"/>
+        <property name="hibernate.hbm2ddl.auto" value="update"/>
     </properties>
 
     <repositories>
