@@ -53,8 +53,8 @@
             <table id="identyfikator5" style="display: none"  >
                 <!--                th:each="ingredients: ${ingredients}"-->
                 <tr th:each="ingredient, itemStat : *{ingredients}">
-                    <td><input type="text"  name="ingredientName1"  th:value ="${drink.getIngredients().get(0).getIngredientName}" th:field="*{ingredients[__${itemStat.index}__].ingredientName}" ></td>
-                    <td><input type="text"  name="ingredientMeasure1"   th:value ="${drink.getIngredients().get(0).getMeasure}" th:field="*{ingredients[__${itemStat.index}__].measure}" > </td>
+                    <td><input type="text"  name="ingredientName1"  th:value ="${drink.getIngredients().get(itemStat.index).getIngredientName}" th:field="*{ingredients[__${itemStat.index}__].ingredientName}" ></td>
+                    <td><input type="text"  name="ingredientMeasure1"   th:value ="${drink.getIngredients().get(itemStat.index).getMeasure}" th:field="*{ingredients[__${itemStat.index}__].measure}" > </td>
                 </tr>
             </table>
         </div>
