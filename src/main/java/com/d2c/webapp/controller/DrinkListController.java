@@ -76,6 +76,8 @@ public class DrinkListController {
         if (drinks.isEmpty()) {
             model.addAttribute("noDrinksFound", "No drinks found for given criteria: input too short or no drink available");
         }
+        model.addAttribute("listOfDrinks", drinks);
+
         drinkService.setDrinkList(drinks);
         GetDrinkPage(model, page, size, drinkService, modelAndView, currentPage, pageSize5);
         modelAndView.addObject("type", type);
