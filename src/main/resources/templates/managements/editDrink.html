@@ -27,7 +27,7 @@
             <select name="drinkCategory" class="form-control" id="drinkCategory"  placeholder="Category to search...">
                 <option th:value="*{drinkCategory}" >Choose ...</option>
                 <option th:each="dCategory: ${T(com.infoshareademy.domain.Category).values()}" th:value="${dCategory}"
-                        th:text="${dCategory.label}" th:selected="(${dCategory} == ${drink.getDrinkCategory().getLabel()})" ></option>
+                        th:text="${dCategory.label}" th:selected="(${dCategory} == ${drink.getDrinkCategory()})" ></option>
             </select>
             <label for="glassType" class="form-label text-white">Glass to drink</label>
             <select name="glassType" class="form-control" id="glassType" placeholder="Glass type to search...">
