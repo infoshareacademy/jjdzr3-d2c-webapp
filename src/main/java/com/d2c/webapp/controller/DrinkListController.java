@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -77,9 +76,6 @@ public class DrinkListController {
             }
             if (drinks.isEmpty()) {
                 model.addAttribute("noDrinksFound", "No drinks found for given criteria: input too short or no drink available");
-            }
-            {
-                model.addAttribute("listOfDrinks", drinks);
             }
         }
         drinkService.setDrinkList(drinks);
