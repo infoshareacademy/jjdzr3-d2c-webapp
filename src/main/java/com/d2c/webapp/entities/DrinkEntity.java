@@ -1,25 +1,36 @@
-package com.d2c.webapp.Entities;
+package com.d2c.webapp.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.validation.Valid;
+
+import org.hibernate.annotations.Type;
+
+import javax.persistence.*;
+import javax.transaction.Transactional;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 import javax.validation.executable.ValidateOnExecution;
 
-@Entity
+
+
+@Transactional
+@Entity(name = "DrinkEntity")
 public class DrinkEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long drinkid;
 
-    @NotNull(message = "Field can't be empty")
+
+   // @NotNull(message = "Field can't be empty")
+    @Size(min=2, max= 25, message = "Drink name must have at least 2 characters")
+    @Pattern(regexp = "[a-zA-Ząśćężźłóń0-9]", message= "Drink name cannot contain special characters")
     private String drink_name;
 
+    @Type(type="text")
     private String preparation_instruction;
+
     private String drink_category;
+
     private String glass_type;
     private String ingredient_name_1;
     private String measure_1;
@@ -34,6 +45,7 @@ public class DrinkEntity {
     private String type;
 
     @NotNull(message = "This field should have some picture")
+    @Column(columnDefinition = "varchar(512)")
     private String drinkImg;
 
     @ValidateOnExecution

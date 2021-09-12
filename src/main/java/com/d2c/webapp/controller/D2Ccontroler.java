@@ -1,6 +1,6 @@
-package com.d2c.webapp.Controller;
+package com.d2c.webapp.controller;
 
-import com.d2c.webapp.Service.DrinkService;
+import com.d2c.webapp.service.DrinkService;
 import com.infoshareademy.Menu;
 import com.infoshareademy.data.DrinkParser;
 import com.infoshareademy.domain.*;
@@ -11,9 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.*;
-import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/d2c")
@@ -39,7 +37,8 @@ public class D2Ccontroler {
     public String getSinDrink(Model model, @RequestParam("name") String name) {
         LOGGER.info("Read single drink of name: " + name);
 
-        List<Drink> drinks = drinkService.getDrinkByName(name);
+        List<Drink> drinks = new ArrayList<>();
+        drinks.add(drinkService.getDrinkByName(name).get(0));
         if (drinks == null) {
             LOGGER.info("No drink of name " + name + " found");
             return ResponseEntity.notFound().build().toString();
