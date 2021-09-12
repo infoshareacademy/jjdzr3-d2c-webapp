@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -30,7 +31,7 @@ public class DrinkService {
     private static final Logger LOGGER = LogManager.getLogger(DrinkService.class);
 
     public List<Drink> getDrinkList() {
-        this.drinkList = new ArrayList<>();
+        this.drinkList = new LinkedList<>();
         DrinkParser drinkParser = new DrinkParser();
         List<Drink> drinks = drinkParser.readFileIntoDrinkRepository().getDrinks();
         drinkList.addAll(drinks);
@@ -39,7 +40,9 @@ public class DrinkService {
     }
 
     public List<Drink> getDrinkListfromDB() {
+        if (!drinkList.isEmpty()){
         drinkList.removeAll(drinkList);
+        }
         for (DrinkEntity drink : repositoryDrinkSQL.findAll()) {
             drinkList.add(changeDrinkEntityToDrink(drink));
         }

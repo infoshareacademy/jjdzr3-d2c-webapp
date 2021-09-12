@@ -57,7 +57,7 @@ public class DrinkListController {
     ) {
         LOGGER.info("input: '{}', type: '{}', glassType: '{}', category: '{}'", item, type, glassType, category);
 
-        var modelAndView = new ModelAndView("search");
+        var modelAndView = new ModelAndView();
         int currentPage = page.orElse(1);
         int pageSize5 = size.orElse(5);
         List<Drink> drinks = drinkService.getDrinkListfromDB();
@@ -74,15 +74,19 @@ public class DrinkListController {
             drinks = Filter.filterByCategory(drinks, category);
         }
         if (drinks.isEmpty()) {
-            model.addAttribute("noDrinksFound", "No drinks found for given criteria: input too short or no drink available");
-        }
-        model.addAttribute("listOfDrinks", drinks);
+            modelAndView.setViewName("managements/noResult");
+            modelAndView.addObject("noDrinksFound", "No drinks found for given criteria: input too short or no drink available");
 
-        drinkService.setDrinkList(drinks);
-        GetDrinkPage(model, page, size, drinkService, modelAndView, currentPage, pageSize5);
-        modelAndView.addObject("type", type);
-        modelAndView.addObject("glassType", glassType);
-        modelAndView.addObject("category", category);
+        } else {
+            modelAndView.setViewName("search");
+            model.addAttribute("listOfDrinks", drinks);
+            drinkService.setDrinkList(drinks);
+            GetDrinkPage(model, page, size, drinkService, modelAndView, currentPage, pageSize5);
+            modelAndView.addObject("type", type);
+            modelAndView.addObject("glassType", glassType);
+            modelAndView.addObject("category", category);
+
+        }
         return modelAndView;
     }
 
