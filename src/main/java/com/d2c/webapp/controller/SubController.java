@@ -1,5 +1,4 @@
 package com.d2c.webapp.controller;
-
 import com.d2c.webapp.entities.DrinkEntity;
 import com.d2c.webapp.service.DrinkService;
 import com.infoshareademy.domain.Drink;
@@ -10,8 +9,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
-
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
@@ -81,8 +82,8 @@ public class SubController {
         return "managements/addDrink";
     }
 
-    @PostMapping(value ={ "/addDrink"})
-    public String  AddDrink(@ModelAttribute("managements/addDrink")  @Valid  Drink drink , BindingResult result , Model model) {
+    @PostMapping(value = {"/addDrink"})
+    public String AddDrink(@ModelAttribute("managements/addDrink") @Valid Drink drink, BindingResult result, Model model) {
         List<Drink> drinks = new ArrayList<>();
         drinks.add(drink);
         Random rand = new Random();
@@ -101,22 +102,22 @@ public class SubController {
             drinkService.addDrink(drink);
             return "managements/addDrink";
         }
-       return "singleDrink";
+        return "singleDrink";
     }
 
-    @GetMapping ("/singleDrinkFromDB")
-    public String showAllEntities(Model model){
+    @GetMapping("/singleDrinkFromDB")
+    public String showAllEntities(Model model) {
         List<DrinkEntity> drinkEntities = drinkService.findLast();
         model.addAttribute("drinkEntities", drinkEntities);
-      return "managements/singleDrinkFromDB";
+        return "managements/singleDrinkFromDB";
     }
 
-    @GetMapping(value ={ "/editDrink"})
-    public String   EditDrink(Model model, @RequestParam ("name") String name) {
+    @GetMapping(value = {"/editDrink"})
+    public String EditDrink(Model model, @RequestParam("name") String name) {
         List<DrinkEntity> drinkss = drinkService.findByName(name);
         List<Drink> drinks = new ArrayList<>();
         drinks.add(drinkService.changeDrinkEntityToDrink(drinkss.get(0)));
-          if (drinks == null) {
+        if (drinks == null) {
             return ResponseEntity.notFound().build().toString();
         } else {
             model.addAttribute("name", name);
@@ -126,18 +127,18 @@ public class SubController {
         }
     }
 
-   @PostMapping(value ={"/editDrink"})
-    public String  getEditedDrink(@Valid @ModelAttribute Drink drink, Model model) {
+    @PostMapping(value = {"/editDrink"})
+    public String getEditedDrink(@Valid @ModelAttribute Drink drink, Model model) {
         List<DrinkEntity> drinkEntityList = new ArrayList<>();
         drinkEntityList.add(drinkService.changeDrinkToDrinkEntity(drink));
         drinkService.update(drinkEntityList.get(0));
-        model.addAttribute("drinkEntities", drinkEntityList.get(0) );
+        model.addAttribute("drinkEntities", drinkEntityList.get(0));
         drinkService.findByNameObjectToDelete(drinkEntityList.get(0).getDrink_name());
-            return "managements/singleDrinkFromDB";
-        }
+        return "managements/singleDrinkFromDB";
+    }
 
-    @GetMapping(value ={ "/deleteDrink"})
-    public String deleteDrink(Model model, @RequestParam ("name") String name) {
+    @GetMapping(value = {"/deleteDrink"})
+    public String deleteDrink(Model model, @RequestParam("name") String name) {
         List<DrinkEntity> drinkss = drinkService.findByName(name);
         List<Drink> drinks = new ArrayList<>();
         drinks.add(drinkService.changeDrinkEntityToDrink(drinkss.get(0)));

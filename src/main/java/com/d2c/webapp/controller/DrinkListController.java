@@ -3,9 +3,10 @@ package com.d2c.webapp.controller;
 import com.d2c.webapp.domain.Pager;
 import com.d2c.webapp.service.DrinkService;
 import com.infoshareademy.Filter;
-import com.infoshareademy.Search;
-import com.infoshareademy.data.DrinkParser;
-import com.infoshareademy.domain.*;
+import com.infoshareademy.domain.Category;
+import com.infoshareademy.domain.Drink;
+import com.infoshareademy.domain.GlassType;
+import com.infoshareademy.domain.Type;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,8 +41,6 @@ public class DrinkListController {
             Model model, @RequestParam("page") Optional<Integer> page, @RequestParam("size") Optional<Integer> size) {
         var modelAndView = new ModelAndView("subSites/showAllDrinks");
         LOGGER.info("Getting list of all drinks");
-
-
         drinkService.findAll();
         drinkService.getDrinkListfromDB();
         int currentPage = page.orElse(1);
@@ -63,13 +62,9 @@ public class DrinkListController {
         int currentPage = page.orElse(1);
         int pageSize5 = size.orElse(5);
         List<Drink> drinks = drinkService.getDrinkListfromDB();
-        if (true) // filters
-        {
-
+        if (true) {
             if (item != null) {
-
-              drinks = drinkService.searchItemsForQuery(item);
-
+                drinks = drinkService.searchItemsForQuery(item);
             }
             if (type != null) {
                 drinks = Filter.filterByType(drinks, type);
@@ -80,8 +75,6 @@ public class DrinkListController {
             if (category != null) {
                 drinks = Filter.filterByCategory(drinks, category);
             }
-
-
             if (drinks.isEmpty()) {
                 model.addAttribute("noDrinksFound", "No drinks found for given criteria: input too short or no drink available");
             }

@@ -1,6 +1,5 @@
 package com.d2c.webapp.service;
 
-
 import com.d2c.webapp.entities.DrinkEntity;
 import com.d2c.webapp.reposotirySQL.RepositoryDrinkSQL;
 import com.infoshareademy.data.DrinkParser;
@@ -18,7 +17,6 @@ import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -39,16 +37,14 @@ public class DrinkService {
         LOGGER.debug("Received drink list" + drinks);
         return drinkList;
     }
+
     public List<Drink> getDrinkListfromDB() {
         drinkList.removeAll(drinkList);
-
-        for (DrinkEntity drink: repositoryDrinkSQL.findAll())
-        {
+        for (DrinkEntity drink : repositoryDrinkSQL.findAll()) {
             drinkList.add(changeDrinkEntityToDrink(drink));
         }
         return drinkList;
     }
-
 
     public Drink getIngredientsList() {
         Ingredient ingredient = new Ingredient();
@@ -64,10 +60,9 @@ public class DrinkService {
 
     @Valid
     public void addDrink(Drink drink) {
-        final DrinkEntity drinkEntity = changeDrinkToDrinkEntity(drink); // Może tak być Agu?
+        final DrinkEntity drinkEntity = changeDrinkToDrinkEntity(drink);
         LOGGER.debug("Recipe for a drink ready for saving to Data Base: " + drinkEntity);
         repositoryDrinkSQL.save(drinkEntity);
-
     }
 
     @Valid
@@ -79,7 +74,6 @@ public class DrinkService {
         ingredients.add(new Ingredient(drinkEntity.getIngredient_name_3(), drinkEntity.getMeasure_3()));
         ingredients.add(new Ingredient(drinkEntity.getIngredient_name_4(), drinkEntity.getMeasure_4()));
         ingredients.add(new Ingredient(drinkEntity.getIngredient_name_5(), drinkEntity.getMeasure_5()));
-
         drink.setDrinkId(drinkEntity.getDrinkid().intValue());
         drink.setIngredients(ingredients);
         drink.setDrinkImg(drinkEntity.getDrinkImg());
@@ -141,7 +135,6 @@ public class DrinkService {
         return (List<DrinkEntity>) drinkEntities;
     }
 
-
     public List<DrinkEntity> findLast() {
         Iterable<DrinkEntity> drinkEntities = repositoryDrinkSQL.findLast();
         return (List<DrinkEntity>) drinkEntities;
@@ -154,13 +147,13 @@ public class DrinkService {
 
     public List<DrinkEntity> findByNameObjectToDelete(String name) {
         List<DrinkEntity> drinkEntities = repositoryDrinkSQL.findByNameObjectToDelete(name);
-        if( drinkEntities.size()>1  ){
-          deleteByName(name);
-          LOGGER.info(drinkEntities.get(0));
-        } else{
+        if (drinkEntities.size() > 1) {
+            deleteByName(name);
+            LOGGER.info(drinkEntities.get(0));
+        } else {
             System.out.println("Drink name was change. New drink was add to the drinks book");
-            }
-        return  drinkEntities;
+        }
+        return drinkEntities;
     }
 
     public void deleteByName(String name) {
@@ -168,7 +161,6 @@ public class DrinkService {
         repositoryDrinkSQL.delete(drinkEntity);
         LOGGER.info(name + " Removed");
     }
-
 
     public void addDrinksToBB() {
         if (repositoryDrinkSQL.findAll().size() < 20) {
@@ -194,7 +186,7 @@ public class DrinkService {
 
                 return Collections.emptyList();
             } else {
-               return filteredDrinks;
+                return filteredDrinks;
             }
         }
     }
@@ -208,11 +200,6 @@ public class DrinkService {
         LOGGER.info("Filtered list of drinks: " + filteredDrinks);
         return filteredDrinks;
     }
-
-
-
-
-
 
     public Page<Drink> findPaginated(Pageable pageable) {
         int pageSize = pageable.getPageSize();
