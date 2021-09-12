@@ -61,22 +61,20 @@ public class DrinkListController {
         int currentPage = page.orElse(1);
         int pageSize5 = size.orElse(5);
         List<Drink> drinks = drinkService.getDrinkListfromDB();
-        if (true) {
-            if (item != null) {
-                drinks = drinkService.searchItemsForQuery(item);
-            }
-            if (type != null) {
-                drinks = Filter.filterByType(drinks, type);
-            }
-            if (glassType != null) {
-                drinks = Filter.filterByGlassType(drinks, glassType);
-            }
-            if (category != null) {
-                drinks = Filter.filterByCategory(drinks, category);
-            }
-            if (drinks.isEmpty()) {
-                model.addAttribute("noDrinksFound", "No drinks found for given criteria: input too short or no drink available");
-            }
+        if (item != null) {
+            drinks = drinkService.searchItemsForQuery(item);
+        }
+        if (type != null) {
+            drinks = Filter.filterByType(drinks, type);
+        }
+        if (glassType != null) {
+            drinks = Filter.filterByGlassType(drinks, glassType);
+        }
+        if (category != null) {
+            drinks = Filter.filterByCategory(drinks, category);
+        }
+        if (drinks.isEmpty()) {
+            model.addAttribute("noDrinksFound", "No drinks found for given criteria: input too short or no drink available");
         }
         drinkService.setDrinkList(drinks);
         GetDrinkPage(model, page, size, drinkService, modelAndView, currentPage, pageSize5);
