@@ -37,7 +37,7 @@ public class DrinkListController {
     private static final Logger LOGGER = LogManager.getLogger(DrinkListController.class);
 
     @GetMapping(value = "/showAllDrinks")
-    public ModelAndView getShowAllDrinks3(
+    public ModelAndView getShowAllDrinks(
             Model model, @RequestParam("page") Optional<Integer> page, @RequestParam("size") Optional<Integer> size) {
         var modelAndView = new ModelAndView("subSites/showAllDrinks");
         LOGGER.info("Getting list of all drinks");
